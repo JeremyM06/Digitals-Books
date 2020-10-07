@@ -1,28 +1,5 @@
 /*
-//ici mathieu
-let cards = {
-    template: `<div class="cards">
-    <img :src="myImg" title="image"></br>
-    <h3> Titre de ma Photo</h3></br>
-    <p>Description de l'image....rsgfohslugiuherisriufhsqeohfeueshviousdhifbsliugfhiuqehfmrdbhgiuherisriufhsqeohfeueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
-    </div>
-    `,
-    props: ['myImg'],
-};
 
-let toogle = {
-    template: `<div>
-        <button @click="isShow =! isShow">Toggle</button>
-        <cards v-show="isShow"></cards>
-            </div> `,
-
-    data: function () {
-        return ({
-            isShow: false,
-        })
-    },
-    components: { cards, }
-};
 let children = {
     template: `<p> OO Je suis un enfant component de text component OO</p>`,
 };
@@ -35,10 +12,10 @@ let textcomponent = {
         children,
     }
 };*/
-
+/*********************************ACCEUIL********************************************/
 var acceuil = {
   template: `
-  <div class="d-flex flex-column align-items-center container">
+  <div class="d-flex flex-column align-items-center">
   <!--Carousel-->    
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -80,7 +57,7 @@ var acceuil = {
   </div>
   <br>
   <!--Presentation jumbotron-->
-  <div class="jumbotron">
+  <div class="jumbotron mjjJumbo">
   <h1 class="display-4">Digital Books!</h1>
   <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
   <hr class="my-4">
@@ -118,16 +95,19 @@ var boutique = {
   template: `
   <div class="container">
   <h1>Nos livres</h1>
-    <div>
+    <div v-for="item in tab">
     <tooglecards 
-    
     my-img="./assets/images/foretDesOmbres.jpg"
-    my-titre="La foret des ombres"
+    my-titre="Le truc des ombres"
     ></tooglecards>
     </div>
   </div>`,
 
   components: { tooglecards },
+  data: function () {
+    return tab = [1, 2, 3, 4];
+
+  }
 }
 var panier = {
   template: ``,
@@ -163,14 +143,17 @@ var vm = new Vue({
         dateParution: "12/10/2009",
         prixHt: 12,
       }, {
-        name: "La forêt des ombres",
+        name: "Titre2",
         id: 1,
         image: "./assets/images/foretDesOmbres.jpg",
         categorie: "thriller",
         quantite: 5,
         dateParution: "12/10/2009",
         prixHt: 12,
-      }]
+      }],
+    panier: [],
+
+
 
   },
 
