@@ -2,13 +2,13 @@
     margin-top: 60px;
 }
 #app{
-    background-color: rgba(47, 79, 79, 0.754);
+    background-color: rgba(82, 40, 23, 0.754);
 }
 .mjj-nav{
-   background-color: gray;
-   color: black;
-   font-size: 1.2rem;
-   font-weight: 900;
+    background-color: rgb(75, 48, 48);
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 900;
 }
 .mjj-nav img{
     width: 5rem;
@@ -34,4 +34,9 @@ h1{
     width: 300px;
     word-wrap: break-word;
     border: solid black 2px;
+}
+.mjjJumbo{
+    background-image: url('../assets/images/librarie.jpg');
+    background-size: cover;
+    background-position: center;
 }

@@ -79,7 +79,7 @@ var acceuil = {
   </div>
   <br>
   <!--Presentation jumbotron-->
-  <div class="jumbotron">
+  <div class="jumbotron mjjJumbo">
   <h1 class="display-4">Digital Books!</h1>
   <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
   <hr class="my-4">
