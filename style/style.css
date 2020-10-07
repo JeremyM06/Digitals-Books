@@ -1,0 +1,37 @@
+.mjj-margin-page{
+    margin-top: 60px;
+}
+#app{
+    background-color: rgba(47, 79, 79, 0.754);
+}
+.mjj-nav{
+   background-color: gray;
+   color: black;
+   font-size: 1.2rem;
+   font-weight: 900;
+}
+.mjj-nav img{
+    width: 5rem;
+}
+
+.carousel{
+    margin-top: 60px;
+    width: 90%;
+}
+main{
+    margin-top: 40px;
+}
+h1{
+    padding-top: 60px;
+}
+.style {
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+}
+.cards {
+    text-align: center;
+    width: 300px;
+    word-wrap: break-word;
+    border: solid black 2px;
+}
