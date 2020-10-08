@@ -60,20 +60,21 @@ var acceuil = {
   <br>
   <!--Presentation jumbotron-->
   <div class="jumbotron mjjJumbo">    
-    <h1 class="display-4">Digital Books!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <h1 class="display-4"><b>Digital Books!<b></h1>
+    <p class="lead"><b>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.<b></p>
     <hr class="my-4">
     <transition name="jumboShow">
       <div v-show="jumboShow">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p><b>It uses utility classes for typography and spacing to space content out within the larger container.<b></p>
         <a @click="jumboShow =! jumboShow" class="btn btn-primary btn-lg" role="button">Qui sommes-nous?</a>
       </div>
     </transition>
   
     <transition name="jumboShow">
       <div v-show="!jumboShow" class="jumboShowInfo">
-      <p>On est</p>
-      <a @click="jumboShow =! jumboShow" class="btn btn-light btn-lg" role="button">Souhaitez-vous nous contacter</a>
+      <p><b>Nous sommes <b></p>
+      <a @click="jumboShow =! jumboShow" class="btn btn-light btn-lg" role="button"><router-link class="nav-link active" to="/Contacts"><b>Contactez-nous<b></router-link>
+      </a>
       </div>
     </transition>
     

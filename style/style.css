@@ -2,7 +2,7 @@
     margin-top: 60px;
 }
 #app{
-    min-height: 38rem;
+    min-height: 45rem;
     background-image: url('../assets/images/bookBackground.jpg');
     background-size: cover;
     background-position: center;
@@ -26,6 +26,7 @@
     border: 1px solid;
     box-shadow: 1px 1px 1px;
     border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0.294)
 }
 
 .carousel{
@@ -64,6 +65,7 @@ h1{
     background-image: url('../assets/images/libraryLuxe.jpg');
     background-size: cover;
     background-position: center;
+    color: white;
 }
 /****************PAGE CONTACT***************************/
 .mjjform{
@@ -89,9 +91,20 @@ h1{
     
 
 .mjj-livreOr{
-    background-image: url('https://cdn.pixabay.com/photo/2018/06/30/09/31/background-image-3507320__340.jpg');
+    background-image: url('../assets/images/livreOr.jpg');
     background-position: center;
     background-size: cover;
     min-width: 1000px;
     min-height: 1000px;
+    color: white;
+    text-align: center;
+}
+
+
+/*********************FOOTER*****************************/
+
+footer{
+    background-color: black;
+    color: white;
+    min-height: 2rem;
 }
