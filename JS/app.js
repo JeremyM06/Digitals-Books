@@ -59,34 +59,54 @@ var acceuil = {
   </div>
   <br>
   <!--Presentation jumbotron-->
-  <div class="jumbotron mjjJumbo">
-  <h1 class="display-4">Digital Books!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  <div class="jumbotron mjjJumbo">    
+    <h1 class="display-4"><b>Digital Books!<b></h1>
+    <p class="lead"><b>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.<b></p>
+    <hr class="my-4">
+    <transition name="jumboShow">
+      <div v-show="jumboShow">
+        <p><b>It uses utility classes for typography and spacing to space content out within the larger container.<b></p>
+        <a @click="jumboShow =! jumboShow" class="btn btn-primary btn-lg" role="button">Qui sommes-nous?</a>
+      </div>
+    </transition>
+  
+    <transition name="jumboShow">
+      <div v-show="!jumboShow" class="jumboShowInfo">
+      <p><b>Nous sommes <b></p>
+      <a @click="jumboShow =! jumboShow" class="btn btn-light btn-lg" role="button"><router-link class="nav-link active" to="/Contacts"><b>Contactez-nous<b></router-link>
+      </a>
+      </div>
+    </transition>
+    
   </div>
-</div>
-  `
-}
+  `,
 
+  data:
+    function () {
+      return ({
+        jumboShow: true,
+      })
+    },
+}
 /***************************BOUTIQUE COMPONENTS********************************************/
 
-
+/************ CARDS *************/
 var tooglecards = {
-  template: `
-  <div class="style">
-    <div class="cards ">
+  template: `  
+    <div class="cards">
         <img :src="myImg" title="image">
-                <h3> {{myTitre}} </h3>
-                <button @click="isShow =! isShow">Résumé</button>   
+        <h3> {{myTitre}} </h3>
+        <button @click="isShow =! isShow">Résumé</button>   
 
               <div v-show="isShow">
                 <p>Description de l'image....rsgfohslugueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
               </div> 
+              <div class="d-flex justify-content-around">
+                <span>prixHt: {{myPrix}}€</span>
+              </div>
     </div>               
-  </div>`,
-  props: ["myImg", "myTitre"],
+  `,
+  props: ["myImg", "myTitre", "myPrix"],
 
   data:
     function () {
@@ -95,17 +115,21 @@ var tooglecards = {
       })
     },
 }
+/********************  PANIER  ********************/
+
 
 var boutique = {
   template: `
   <div class="container">
   <h1>Nos livres</h1>
-    <div>
-    <tooglecards v-for="livre in livres"
-    :key="livre.id" :my-img="livre.image"
+    <div v-for="livre in livres"
+    :key="livre.id" >
+    <tooglecards  :my-img="livre.image"
     :my-titre="livre.name"
-    ></tooglecards>
+    :my-prix="livre.prixHt"> 
+    </tooglecards><button @click="addPanier()">Buy</button>    
     </div>
+    <h1 v-for="panier in paniers" :key="id"> </h1>
   </div>`,
 
   components: { tooglecards },
@@ -128,7 +152,11 @@ var boutique = {
           quantite: 5,
           dateParution: "12/10/2009",
           prixHt: 12,
-        },]
+        }],
+      paniers: [],
+      addPanier(index) {
+        this.panier.push()
+      },
     }
   }
 
@@ -165,6 +193,7 @@ var contacts = {
     <div class="form-group col-md-6">
     <label for="email">Email address</label>
     <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
+   
     </div>
     </div>
 
@@ -204,15 +233,6 @@ var contacts = {
 
     }
 }
-
-
-
-
-
-/**************************  PANIER  *********************************/
-var panier = {
-  template: ``,
-}
 var livreOr = {
   template: `
   <div class="container mjj-livreOr">
@@ -221,41 +241,22 @@ var livreOr = {
   `,
 }
 
+/******************ROUTES*******************/
 var routes = [
   { path: "/Acceuil", component: acceuil },
   { path: "/Boutique", component: boutique },
   { path: "/Contacts", component: contacts },
   { path: "/LivreOr", component: livreOr },
 ];
-
 const router = new VueRouter({
   routes: routes,
 });
-
+/***************************OBJET VUE*******************************************/
 var vm = new Vue({
   el: "#app",
 
   data: {
 
-    livres: [
-      {
-        id: 0,
-        name: "La forêt des ombres",
-        image: "./assets/images/foretDesOmbres.jpg",
-        categorie: "thriller",
-        quantite: 5,
-        dateParution: "12/10/2009",
-        prixHt: 12,
-      }, {
-        id: 1,
-        name: "Titre2",
-        image: "./assets/images/foretDesOmbres.jpg",
-        categorie: "thriller",
-        quantite: 5,
-        dateParution: "12/10/2009",
-        prixHt: 12,
-      }],
-    panier: [],
     name: "",
     firstName: "",
     mail: "",
