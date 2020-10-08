@@ -13,22 +13,23 @@
 <body>
     <div id="app">
         <header>
-            <ul class="nav justify-content-between fixed-top mjj-nav mjj-jumbo">
+            <ul class="nav justify-content-around fixed-top mjj-nav">
                 <div>
                     <li class="nav-item">
-                        <router-link class="nav-link active" to="/Acceuil"><img src="./assets/images/logo.png" alt="">
+                        <router-link class="nav-link active" to="/Acceuil"><img src="./assets/images/logo.jpg" alt="">
                         </router-link>
                     </li>
                 </div>
-                <div class="d-flex">
-                    <li class="nav-item">
+                <div class="d-flex align-items-center">
+                    <li class="nav-item mjj-nav-box">
                         <router-link class="nav-link active" to="/Boutique">Boutique</router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mjj-nav-box">
                         <router-link class="nav-link active" to="/LivreOr">Livre d'or</router-link>
                     </li>
-                    <router-link class="nav-link active" to="/Contacts">Contacts</router-link>
-
+                    <li class="nav-item mjj-nav-box">
+                        <router-link class="nav-link active" to="/Contacts">Contacts</router-link>
+                    </li>
                 </div>
             </ul>
         </header>
