@@ -55,6 +55,9 @@ h1{
     background-position: center;
     color: white;
 }
+.mjjJumboInfo{
+    background-color: chocolate;
+}
 .mjj-livreOr{
     background-image: url('https://cdn.pixabay.com/photo/2018/06/30/09/31/background-image-3507320__340.jpg');
     background-position: center;
