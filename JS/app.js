@@ -90,7 +90,7 @@ var acceuil = {
 }
 /***************************BOUTIQUE COMPONENTS********************************************/
 
-
+/************ CARDS *************/
 var tooglecards = {
   template: `  
     <div class="cards">
@@ -103,7 +103,6 @@ var tooglecards = {
               </div> 
               <div class="d-flex justify-content-around">
                 <span>prixHt: {{myPrix}}€</span>
-                <button @click="addPanier(livre.id)">Buy</button>
               </div>
     </div>               
   `,
@@ -113,24 +112,24 @@ var tooglecards = {
     function () {
       return ({
         isShow: false,
-        addPanier(id) {
-          this.panier.push(this.livre[id]);
-        },
       })
     },
 }
+/********************  PANIER  ********************/
+
 
 var boutique = {
   template: `
   <div class="container">
   <h1>Nos livres</h1>
-    <div>
-    <tooglecards v-for="livre in livres"
-    :key="livre.id" :my-img="livre.image"
+    <div v-for="livre in livres"
+    :key="livre.id" >
+    <tooglecards  :my-img="livre.image"
     :my-titre="livre.name"
-    :my-prix="livre.prixHt"
-    ></tooglecards>
+    :my-prix="livre.prixHt"> 
+    </tooglecards><button @click="addPanier()">Buy</button>    
     </div>
+    <h1 v-for="panier in paniers" :key="id"> </h1>
   </div>`,
 
   components: { tooglecards },
@@ -153,7 +152,11 @@ var boutique = {
           quantite: 5,
           dateParution: "12/10/2009",
           prixHt: 12,
-        },]
+        }],
+      paniers: [],
+      addPanier(index) {
+        this.panier.push()
+      },
     }
   }
 
@@ -230,20 +233,6 @@ var contacts = {
 
     }
 }
-
-/**************************  PANIER  *********************************/
-var panier = {
-  template: `<div>
-  <br>
-  <br>
-  <br><h1> {{panier[0]}} </h1> 
-  </div>`,
-  data: function () {
-    return ({
-      panier: [3, 4, 5],
-    })
-  }
-}
 var livreOr = {
   template: `
   <div class="container mjj-livreOr">
@@ -252,18 +241,17 @@ var livreOr = {
   `,
 }
 
+/******************ROUTES*******************/
 var routes = [
   { path: "/Acceuil", component: acceuil },
   { path: "/Boutique", component: boutique },
   { path: "/Contacts", component: contacts },
   { path: "/LivreOr", component: livreOr },
-  { path: "/Panier", component: panier },
 ];
-
 const router = new VueRouter({
   routes: routes,
 });
-
+/***************************OBJET VUE*******************************************/
 var vm = new Vue({
   el: "#app",
 
