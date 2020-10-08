@@ -1,3 +1,5 @@
+
+
 /*
 
 let children = {
@@ -69,17 +71,19 @@ var acceuil = {
 }
 
 /***************************BOUTIQUE COMPONENTS********************************************/
+
+
 var tooglecards = {
   template: `
   <div class="style">
-  <div class="cards">
-      <img :src="myImg" title="image"></br>
-          <button @click="isShow =! isShow">Toggle</button>   
-              <h3> {{myTitre}} </h3></br>
+    <div class="cards ">
+        <img :src="myImg" title="image">
+            <button @click="isShow =! isShow">Résumé</button>   
+                <h3> {{myTitre}} </h3>
               <div v-show="isShow">
-              <p>Description de l'image....rsgfohslugueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
-          </div> 
-          </div>               
+                <p>Description de l'image....rsgfohslugueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
+              </div> 
+    </div>               
   </div>`,
   props: ["myImg", "myTitre"],
 
@@ -95,20 +99,117 @@ var boutique = {
   template: `
   <div class="container">
   <h1>Nos livres</h1>
-    <div v-for="item in tab">
-    <tooglecards 
-    my-img="./assets/images/foretDesOmbres.jpg"
-    my-titre="Le truc des ombres"
+    <div 
+     >
+    <tooglecards v-for="livre in livres"
+    :key="livre.id" :my-img="livre.image"
+    :my-titre="livre.name"
     ></tooglecards>
     </div>
   </div>`,
 
   components: { tooglecards },
   data: function () {
-    return tab = [1, 2, 3, 4];
-
+    return {
+      livres: [
+        {
+          id: 0,
+          name: "La forêt des ombres",
+          image: "./assets/images/foretDesOmbres.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "12/10/2009",
+          prixHt: 12,
+        }, {
+          id: 1,
+          name: "Titre test",
+          image: "./assets/images/foretDesOmbres.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "12/10/2009",
+          prixHt: 12,
+        }]
+    }
   }
+
+};
+
+/**************************PAGE CONTACT***************************/
+var contacts = {
+  template: `<div class="container">
+    <h1>Vous souhaitez un renseignement ?</h1>
+    <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
+    <hr>
+    <transition name="fondu">
+    <div class="mjjFormValid" v-show="!show">
+    <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
+    </div>
+    </transition>
+    <transition name="fondu">
+
+    <form @submit.prevent="show =! show" v-show="show">
+    <div class="form-row">
+    <div class="form-group col-md-6">
+  <label for="firstName">Nom</label>
+  <input v-model="firstName" type="text" class="form-control" placeholder="Dupond" id="firsName">
+  </div></div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="name">Prénom</label>
+    <input v-model="name" type="text" class="form-control" id="name" placeholder="Michel">
+    </div>    
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="email">Email address</label>
+    <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="tel">Telephone</label>
+      <input v-model="this.tel" type="tel" class="form-control" id="tel">
+      
+    </div>
+  </div>
+  <button  type="submit" class="btn btn-primary" >Envoyer</button>
+</form>
+</transition>
+  </div>`,
+
+  methods: {
+    isAText(txt) {
+      if (isNaN(txt) && txt !== "null") {
+
+        return true;
+      } else {
+
+        return false;
+      }
+    }
+  },
+
+  data:
+    function () {
+      return ({
+        show: true,
+        name: "",
+        firstName: "",
+        mail: "",
+        tel: "",
+      })
+
+    }
 }
+
+
+
+
+
+/**************************  PANIER  *********************************/
 var panier = {
   template: ``,
 }
@@ -116,12 +217,10 @@ var livreOr = {
   template: ``,
 }
 
-
-
-
 var routes = [
   { path: "/Acceuil", component: acceuil },
   { path: "/Boutique", component: boutique },
+  { path: "/Contacts", component: contacts },
   // { path: "/Livre_d'Or", component: satisfaction },
 ];
 
@@ -133,18 +232,19 @@ var vm = new Vue({
   el: "#app",
 
   data: {
+
     livres: [
       {
-        name: "La forêt des ombres",
         id: 0,
+        name: "La forêt des ombres",
         image: "./assets/images/foretDesOmbres.jpg",
         categorie: "thriller",
         quantite: 5,
         dateParution: "12/10/2009",
         prixHt: 12,
       }, {
-        name: "Titre2",
         id: 1,
+        name: "Titre2",
         image: "./assets/images/foretDesOmbres.jpg",
         categorie: "thriller",
         quantite: 5,
@@ -152,13 +252,14 @@ var vm = new Vue({
         prixHt: 12,
       }],
     panier: [],
-
-
-
+    name: "",
+    firstName: "",
+    mail: "",
+    tel: "",
   },
 
   methods: {
-    suppr: function (index) {
+    suppr(index) {
       this.classe.splice(index, 1);
       this.notes.splice(index, 1);
     },
@@ -191,8 +292,6 @@ var vm = new Vue({
       }
     },
   },
-  components: {
 
-  },
   router: router,
 });

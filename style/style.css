@@ -2,13 +2,14 @@
     margin-top: 60px;
 }
 #app{
-    background-color: rgba(47, 79, 79, 0.754);
+    background-color: rgba(82, 40, 23, 0.754);
+    min-height: 38rem;
 }
 .mjj-nav{
-   background-color: gray;
-   color: black;
-   font-size: 1.2rem;
-   font-weight: 900;
+    background-color: rgb(75, 48, 48);
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 900;
 }
 .mjj-nav img{
     width: 5rem;
@@ -24,17 +25,52 @@ main{
 h1{
     padding-top: 60px;
 }
+/*******************CARDS*****************************/
 .style {
     display: flex;
-    max-width: 100%;
+    max-width: 250px;
     flex-wrap: wrap;
 }
 .cards {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 300px;
     word-wrap: break-word;
     border: solid black 2px;
 }
-.mjjJumbo{
-    background-image: url("../assets/images/bookLover.jpg");
+.cards img{
+    width: 200px;
+    height: auto;
 }
+.cards button{
+    border-radius: 100%;
+    background-color: rgba(80, 247, 135, 0.61);
+}
+/*************************************************/
+.mjjJumbo{
+    background-image: url('../assets/images/librarie.jpg');
+    background-size: cover;
+    background-position: center;
+}
+/****************PAGE CONTACT***************************/
+.mjjform{
+    width: 700px;
+}
+.mjjFormValid{
+    border: green 4px solid;
+    background-color: grey;
+    width: 800px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+.fondu-enter-active,
+    .fondu-leave-active {
+      transition: opacity 1s;
+    }
+.fondu-enter,
+.fondu-leave-to {
+      opacity: 0;
+    }
+    /**************************************************/
