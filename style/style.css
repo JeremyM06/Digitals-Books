@@ -1,8 +1,11 @@
+body{
+    background-color: indigo;
+}
 .mjj-margin-page{
     margin-top: 60px;
 }
 #app{
-    min-height: 38rem;
+    min-height: 45rem;
     background-image: url('../assets/images/bookBackground.jpg');
     background-size: cover;
     background-position: center;
@@ -40,26 +43,27 @@ h1{
     font-weight: bold;
 }
 /*******************CARDS*****************************/
-.style {   
-    display: flex; 
-    flex-wrap: wrap;
-    max-width: 100%;
-}
+
 .cards {
+    border-radius: 3px;
+    margin: 5px;
     text-align: center;
     width: 300px;
     word-wrap: break-word;
-    border: solid black 2px;   
+    border: solid black 2px; 
+    background-color: rgba(128, 0, 0, 0.63);
+  
 }
 .cards img{
-    width: 200px;
-    height: auto;
+    border-radius: 10%;
+    width: auto;
+    height: 300px;
 }
 .cards button{
     border-radius: 100%;
     background-color: rgba(80, 247, 135, 0.61);
 }
-/*************************************************/
+/*******************JUMBOTRON ACCEUIL******************************/
 .mjjJumbo{
     background-image: url('../assets/images/libraryLuxe.jpg');
     background-size: cover;

@@ -74,24 +74,30 @@ var acceuil = {
 
 
 var tooglecards = {
-  template: `
-  <div class="style">
-    <div class="cards ">
+  template: `  
+    <div class="cards">
         <img :src="myImg" title="image">
-                <h3> {{myTitre}} </h3>
-                <button @click="isShow =! isShow">Résumé</button>   
+        <h3> {{myTitre}} </h3>
+        <button @click="isShow =! isShow">Résumé</button>   
 
               <div v-show="isShow">
                 <p>Description de l'image....rsgfohslugueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
               </div> 
+              <div class="d-flex justify-content-around">
+                <span>prixHt: {{myPrix}}€</span>
+                <button @click="addPanier(livre.id)">Buy</button>
+              </div>
     </div>               
-  </div>`,
-  props: ["myImg", "myTitre"],
+  `,
+  props: ["myImg", "myTitre", "myPrix"],
 
   data:
     function () {
       return ({
         isShow: false,
+        addPanier(id) {
+          this.panier.push(this.livre[id]);
+        },
       })
     },
 }
@@ -104,6 +110,7 @@ var boutique = {
     <tooglecards v-for="livre in livres"
     :key="livre.id" :my-img="livre.image"
     :my-titre="livre.name"
+    :my-prix="livre.prixHt"
     ></tooglecards>
     </div>
   </div>`,
@@ -165,6 +172,7 @@ var contacts = {
     <div class="form-group col-md-6">
     <label for="email">Email address</label>
     <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
+   
     </div>
     </div>
 
@@ -205,13 +213,18 @@ var contacts = {
     }
 }
 
-
-
-
-
 /**************************  PANIER  *********************************/
 var panier = {
-  template: ``,
+  template: `<div>
+  <br>
+  <br>
+  <br><h1> {{panier[0]}} </h1> 
+  </div>`,
+  data: function () {
+    return ({
+      panier: [3, 4, 5],
+    })
+  }
 }
 var livreOr = {
   template: `
@@ -226,6 +239,7 @@ var routes = [
   { path: "/Boutique", component: boutique },
   { path: "/Contacts", component: contacts },
   { path: "/LivreOr", component: livreOr },
+  { path: "/Panier", component: panier },
 ];
 
 const router = new VueRouter({
@@ -237,25 +251,6 @@ var vm = new Vue({
 
   data: {
 
-    livres: [
-      {
-        id: 0,
-        name: "La forêt des ombres",
-        image: "./assets/images/foretDesOmbres.jpg",
-        categorie: "thriller",
-        quantite: 5,
-        dateParution: "12/10/2009",
-        prixHt: 12,
-      }, {
-        id: 1,
-        name: "Titre2",
-        image: "./assets/images/foretDesOmbres.jpg",
-        categorie: "thriller",
-        quantite: 5,
-        dateParution: "12/10/2009",
-        prixHt: 12,
-      }],
-    panier: [],
     name: "",
     firstName: "",
     mail: "",
