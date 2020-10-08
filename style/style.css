@@ -95,13 +95,14 @@ h1{
     
 
 .mjj-livreOr{
-    background-image: url('../assets/images/livreOr.jpg');
+    background-image: url('../assets/images/livreOr.png');
     background-position: center;
-    background-size: cover;
+    background-size: 80%;
+    background-repeat: no-repeat;
     min-width: 1000px;
     min-height: 1000px;
-    color: white;
-    text-align: center;
+    color: black;
+    font-family: 'Oleo Script', cursive;
 }
 
 
@@ -111,4 +112,6 @@ footer{
     background-color: black;
     color: white;
     min-height: 2rem;
+    text-align: center;
+    font-weight: bold;
 }

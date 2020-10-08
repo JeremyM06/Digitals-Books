@@ -175,16 +175,17 @@ var contacts = {
     <form @submit.prevent="show =! show" v-show="show">
     <div class="form-row">
     <div class="form-group col-md-6">
-  <label for="firstName">Nom</label>
-  <input v-model="firstName" type="text" class="form-control" placeholder="Dupond" id="firsName">
-  </div></div>
-
-  <div class="form-row">
-    <div class="form-group col-md-6">
-    <label for="name">Prénom</label>
-    <input v-model="name" type="text" class="form-control" id="name" placeholder="Michel">
+    <label for="name">Nom</label>
+    <input v-model="name" type="text" class="form-control" id="name" placeholder="Dupond">
     </div>    
-  </div>
+    </div>
+    
+    <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="firstName">Prénom</label>
+    <input v-model="firstName" type="text" class="form-control" placeholder="Michel" id="firsName">
+    </div>
+    </div>
 
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -231,6 +232,81 @@ var contacts = {
     }
 }
 
+/**************************LIVRE D'OR***************************/
+var livreOr = {
+  template: `
+  <div class="container mjj-livreOr">
+    <div class="text-center">
+    <h1>Le Livre d'Or</h1><br>
+    </div>
+    <br>
+    <transition name="fondu">
+    <div class="mjjFormValid" v-show="!show">
+    <h2>Merci pour votre feedback! À très vite 😉</h2>
+    </div>
+    </transition>
+
+    <transition name="fondu">
+    <form class="offset-lg-3" @submit.prevent="show =! show" v-show="show">
+    
+    <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="name"><b>Nom<b></label>
+    <input v-model="name" type="text" class="form-control" placeholder="Dupond" id="name">
+    </div>    
+  </div>
+    
+    <div class="form-row">
+    <div class="form-group col-md-6">
+  <label for="firstName"><b>Prénom<b></label>
+  <input v-model="firstName" type="text" class="form-control" placeholder="Michel" id="firsName">
+  </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="email"><b>Email address<b> (facultatif)</label>
+    <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
+    </div>
+  </div>
+  <br>
+
+  <div class="form-row">
+  <div class="form-group col-md-6">
+  <label for="exampleFormControlTextarea1"><b>Message<b></label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <br>
+  <button  type="submit" class="btn btn-dark" ><b><b>Envoyer<b><b></button>
+</form>
+</transition>
+</div>`,
+
+  methods: {
+    isAText(txt) {
+      if (isNaN(txt) && txt !== "null") {
+
+        return true;
+      } else {
+
+        return false;
+      }
+    }
+  },
+
+  data:
+    function () {
+      return ({
+        show: true,
+        name: "",
+        firstName: "",
+        mail: "",
+        tel: "",
+      })
+
+    }
+}
+
 /**************************  PANIER  *********************************/
 var panier = {
   template: `<div>
@@ -244,13 +320,7 @@ var panier = {
     })
   }
 }
-var livreOr = {
-  template: `
-  <div class="container mjj-livreOr">
-  <h1>Le Livre d'Or</h1>
-  </div>
-  `,
-}
+
 
 var routes = [
   { path: "/Acceuil", component: acceuil },
