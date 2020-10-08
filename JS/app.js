@@ -1,28 +1,7 @@
+
+
 /*
-//ici mathieu
-let cards = {
-    template: `<div class="cards">
-    <img :src="myImg" title="image"></br>
-    <h3> Titre de ma Photo</h3></br>
-    <p>Description de l'image....rsgfohslugiuherisriufhsqeohfeueshviousdhifbsliugfhiuqehfmrdbhgiuherisriufhsqeohfeueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
-    </div>
-    `,
-    props: ['myImg'],
-};
 
-let toogle = {
-    template: `<div>
-        <button @click="isShow =! isShow">Toggle</button>
-        <cards v-show="isShow"></cards>
-            </div> `,
-
-    data: function () {
-        return ({
-            isShow: false,
-        })
-    },
-    components: { cards, }
-};
 let children = {
     template: `<p> OO Je suis un enfant component de text component OO</p>`,
 };
@@ -35,10 +14,10 @@ let textcomponent = {
         children,
     }
 };*/
-
+/*********************************ACCEUIL********************************************/
 var acceuil = {
   template: `
-  <div class="d-flex flex-column align-items-center container">
+  <div class="d-flex flex-column align-items-center">
   <!--Carousel-->    
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -80,25 +59,26 @@ var acceuil = {
   </div>
   <br>
   <!--Presentation jumbotron-->
-<div class="jumbotron mjjJumbo">    
-  <h1 class="display-4">Digital Books!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <transition name="jumboShow">
-    <div v-show="jumboShow">
-      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-      <a @click="jumboShow =! jumboShow" class="btn btn-primary btn-lg" role="button">Qui sommes-nous?</a>
-    </div>
-  </transition>
-
-  <transition name="jumboShow">
-    <div v-show="!jumboShow" class="jumboShowInfo">
-    <p>On est</p>
-    <a @click="jumboShow =! jumboShow" class="btn btn-light btn-lg" role="button">Souhaitez-vous nous contacter</a>
-    </div>
-  </transition>
-</div>
-`,
+  <div class="jumbotron mjjJumbo">    
+    <h1 class="display-4">Digital Books!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <transition name="jumboShow">
+      <div v-show="jumboShow">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <a @click="jumboShow =! jumboShow" class="btn btn-primary btn-lg" role="button">Qui sommes-nous?</a>
+      </div>
+    </transition>
+  
+    <transition name="jumboShow">
+      <div v-show="!jumboShow" class="jumboShowInfo">
+      <p>On est</p>
+      <a @click="jumboShow =! jumboShow" class="btn btn-light btn-lg" role="button">Souhaitez-vous nous contacter</a>
+      </div>
+    </transition>
+    
+  </div>
+  `,
 
   data:
     function () {
@@ -107,19 +87,21 @@ var acceuil = {
       })
     },
 }
-
 /***************************BOUTIQUE COMPONENTS********************************************/
+
+
 var tooglecards = {
   template: `
   <div class="style">
-  <div class="cards">
-      <img :src="myImg" title="image"></br>
-          <button @click="isShow =! isShow">Toggle</button>   
-              <h3> {{myTitre}} </h3></br>
+    <div class="cards ">
+        <img :src="myImg" title="image">
+                <h3> {{myTitre}} </h3>
+                <button @click="isShow =! isShow">Résumé</button>   
+
               <div v-show="isShow">
-              <p>Description de l'image....rsgfohslugueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
-          </div> 
-          </div>               
+                <p>Description de l'image....rsgfohslugueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
+              </div> 
+    </div>               
   </div>`,
   props: ["myImg", "myTitre"],
 
@@ -136,16 +118,115 @@ var boutique = {
   <div class="container">
   <h1>Nos livres</h1>
     <div>
-    <tooglecards 
-    
-    my-img="./assets/images/foretDesOmbres.jpg"
-    my-titre="La foret des ombres"
+    <tooglecards v-for="livre in livres"
+    :key="livre.id" :my-img="livre.image"
+    :my-titre="livre.name"
     ></tooglecards>
     </div>
   </div>`,
 
   components: { tooglecards },
+  data: function () {
+    return {
+      livres: [
+        {
+          id: 0,
+          name: "La forêt des ombres",
+          image: "./assets/images/foretDesOmbres.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "12/10/2009",
+          prixHt: 12,
+        }, {
+          id: 1,
+          name: "Titre test",
+          image: "./assets/images/foretDesOmbres.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "12/10/2009",
+          prixHt: 12,
+        },]
+    }
+  }
+
+};
+
+/**************************PAGE CONTACT***************************/
+var contacts = {
+  template: `<div class="container">
+    <h1>Vous souhaitez un renseignement ?</h1>
+    <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
+    <hr>
+    <transition name="fondu">
+    <div class="mjjFormValid" v-show="!show">
+    <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
+    </div>
+    </transition>
+    <transition name="fondu">
+
+    <form @submit.prevent="show =! show" v-show="show">
+    <div class="form-row">
+    <div class="form-group col-md-6">
+  <label for="firstName">Nom</label>
+  <input v-model="firstName" type="text" class="form-control" placeholder="Dupond" id="firsName">
+  </div></div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="name">Prénom</label>
+    <input v-model="name" type="text" class="form-control" id="name" placeholder="Michel">
+    </div>    
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="email">Email address</label>
+    <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="tel">Telephone</label>
+      <input v-model="this.tel" type="tel" class="form-control" id="tel">
+      
+    </div>
+  </div>
+  <button  type="submit" class="btn btn-primary" >Envoyer</button>
+</form>
+</transition>
+  </div>`,
+
+  methods: {
+    isAText(txt) {
+      if (isNaN(txt) && txt !== "null") {
+
+        return true;
+      } else {
+
+        return false;
+      }
+    }
+  },
+
+  data:
+    function () {
+      return ({
+        show: true,
+        name: "",
+        firstName: "",
+        mail: "",
+        tel: "",
+      })
+
+    }
 }
+
+
+
+
+
+/**************************  PANIER  *********************************/
 var panier = {
   template: ``,
 }
@@ -157,12 +238,10 @@ var livreOr = {
   `,
 }
 
-
-
-
 var routes = [
   { path: "/Acceuil", component: acceuil },
   { path: "/Boutique", component: boutique },
+  { path: "/Contacts", component: contacts },
   { path: "/LivreOr", component: livreOr },
 ];
 
@@ -174,29 +253,34 @@ var vm = new Vue({
   el: "#app",
 
   data: {
+
     livres: [
       {
-        name: "La forêt des ombres",
         id: 0,
+        name: "La forêt des ombres",
         image: "./assets/images/foretDesOmbres.jpg",
         categorie: "thriller",
         quantite: 5,
         dateParution: "12/10/2009",
         prixHt: 12,
       }, {
-        name: "La forêt des ombres",
         id: 1,
+        name: "Titre2",
         image: "./assets/images/foretDesOmbres.jpg",
         categorie: "thriller",
         quantite: 5,
         dateParution: "12/10/2009",
         prixHt: 12,
-      }]
-
+      }],
+    panier: [],
+    name: "",
+    firstName: "",
+    mail: "",
+    tel: "",
   },
 
   methods: {
-    suppr: function (index) {
+    suppr(index) {
       this.classe.splice(index, 1);
       this.notes.splice(index, 1);
     },
@@ -229,8 +313,6 @@ var vm = new Vue({
       }
     },
   },
-  components: {
 
-  },
   router: router,
 });

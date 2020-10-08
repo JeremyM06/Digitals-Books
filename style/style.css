@@ -2,6 +2,7 @@
     margin-top: 60px;
 }
 #app{
+    min-height: 38rem;
     background-image: url('../assets/images/bookBackground.jpg');
     background-size: cover;
     background-position: center;
@@ -38,26 +39,55 @@ h1{
     padding-top: 60px;
     font-weight: bold;
 }
-.style {
-    display: flex;
-    max-width: 100%;
+/*******************CARDS*****************************/
+.style {   
+    display: flex; 
     flex-wrap: wrap;
+    max-width: 100%;
 }
 .cards {
     text-align: center;
     width: 300px;
     word-wrap: break-word;
-    border: solid black 2px;
+    border: solid black 2px;   
 }
+.cards img{
+    width: 200px;
+    height: auto;
+}
+.cards button{
+    border-radius: 100%;
+    background-color: rgba(80, 247, 135, 0.61);
+}
+/*************************************************/
 .mjjJumbo{
     background-image: url('../assets/images/libraryLuxe.jpg');
     background-size: cover;
     background-position: center;
-    color: white;
 }
-.mjjJumboInfo{
-    background-color: chocolate;
+/****************PAGE CONTACT***************************/
+.mjjform{
+    width: 700px;
 }
+.mjjFormValid{
+    border: green 4px solid;
+    background-color: grey;
+    width: 800px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+.fondu-enter-active,
+    .fondu-leave-active {
+      transition: opacity 1s;
+    }
+.fondu-enter,
+.fondu-leave-to {
+      opacity: 0;
+    }
+    /*********************LIVRE D'OR*****************************/
+    
+
 .mjj-livreOr{
     background-image: url('https://cdn.pixabay.com/photo/2018/06/30/09/31/background-image-3507320__340.jpg');
     background-position: center;
