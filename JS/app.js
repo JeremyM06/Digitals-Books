@@ -90,7 +90,7 @@ var acceuil = {
 }
 /***************************BOUTIQUE COMPONENTS********************************************/
 
-
+/************ CARDS *************/
 var tooglecards = {
   template: `  
     <div class="cards">
@@ -103,7 +103,6 @@ var tooglecards = {
               </div> 
               <div class="d-flex justify-content-around">
                 <span>prixHt: {{myPrix}}€</span>
-                <button @click="addPanier(livre.id)">Buy</button>
               </div>
     </div>               
   `,
@@ -113,25 +112,36 @@ var tooglecards = {
     function () {
       return ({
         isShow: false,
-        addPanier(id) {
-          this.panier.push(this.livre[id]);
-        },
       })
     },
 }
+/********************  BOUTIQUE  ********************/
+
 
 var boutique = {
-  template: `
+  template: ` 
   <div class="container">
-  <h1>Nos livres</h1>
-    <div>
-    <tooglecards v-for="livre in livres"
-    :key="livre.id" :my-img="livre.image"
-    :my-titre="livre.name"
-    :my-prix="livre.prixHt"
-    ></tooglecards>
+  
+    <h1>Nos livres</h1>
+    <div class="row">
+      <div class="col-sm-8 text-center">
+
+        <div v-for="livre in livres"
+          :key="livre.id">
+          <tooglecards  :my-img="livre.image"
+            :my-titre="livre.name"
+            :my-prix="livre.prixHt">             
+          </tooglecards>
+          <button @click="addPanier(livre.id)">Acheter</button> 
+        </div>
+
+      </div>
+      <div class="col-sm-4">
+          <h1 v-for="panier in paniers" :key="id"> {{panier.name}} </h1>
+        </div>
     </div>
-  </div>`,
+  </div> `,
+
 
   components: { tooglecards },
   data: function () {
@@ -153,7 +163,11 @@ var boutique = {
           quantite: 5,
           dateParution: "12/10/2009",
           prixHt: 12,
-        },]
+        }],
+      paniers: [],
+      addPanier(index) {
+        this.paniers.push(this.livres[index]);
+      },
     }
   }
 
@@ -277,7 +291,7 @@ var livreOr = {
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
   <br>
-  <button  type="submit" class="btn btn-dark" ><b><b>Envoyer<b><b></button>
+  <button  type="submit" class="btn btn-lg col-2 btn-outline-secondary btn-block"><b><b>Envoyer<b><b></button>
 </form>
 </transition>
 </div>`,
@@ -301,39 +315,24 @@ var livreOr = {
         name: "",
         firstName: "",
         mail: "",
-        tel: "",
       })
 
     }
 }
 
-/**************************  PANIER  *********************************/
-var panier = {
-  template: `<div>
-  <br>
-  <br>
-  <br><h1> {{panier[0]}} </h1> 
-  </div>`,
-  data: function () {
-    return ({
-      panier: [3, 4, 5],
-    })
-  }
-}
 
 
+/******************ROUTES*******************/
 var routes = [
   { path: "/Acceuil", component: acceuil },
   { path: "/Boutique", component: boutique },
   { path: "/Contacts", component: contacts },
   { path: "/LivreOr", component: livreOr },
-  { path: "/Panier", component: panier },
 ];
-
 const router = new VueRouter({
   routes: routes,
 });
-
+/***************************OBJET VUE*******************************************/
 var vm = new Vue({
   el: "#app",
 
