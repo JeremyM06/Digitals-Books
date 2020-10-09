@@ -49,6 +49,7 @@ h1{
 .cards {
     text-align: center;
     word-wrap: break-word;
+    
 
 }
 .cards img{
@@ -62,6 +63,10 @@ h1{
 
 .cards p,.cards span,h5 {
     color: white;
+}
+.cards p{
+    max-height: 200px;
+    overflow-y: scroll;
 }
 /*******************JUMBOTRON ACCEUIL******************************/
 .mjjJumbo{
@@ -141,7 +146,6 @@ footer{
     border: solid black 2px; 
     background-color: rgba(128, 0, 0, 0.63);
     border-radius: 3px;
-    margin: 5px;
-
+    margin: 5px;     
     
 }
