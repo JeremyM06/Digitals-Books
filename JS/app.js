@@ -162,8 +162,82 @@ var boutique = {
 
 };
 
-/**************************PAGE CONTACT***************************/
+/********************  FORMULAIRE  ********************/
+
 var contacts = {
+  template: `<div class="container">
+    <h1>Vous souhaitez un renseignement ?</h1>
+    <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
+    <hr>
+    <transition nom="fondu">
+    <div class="mjjFormValid" v-show="!show">
+    <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
+    </div>
+    </transition>
+    <transition nom="fondu">
+
+    <form @submit.prevent="show =! show" v-show="show">
+    <div class="form-row">
+    <div class="form-group col-md-6">
+  <label for="nom">nom</label>
+  <input v-model="nom" type="text" class="form-control" placeholder="Dupond" id="nom">
+  </div></div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="adresse">Prénom</label>
+    <input v-model="adresse" type="text" class="form-control" id="adresse" placeholder="Rue de fontaine">
+    </div>    
+  </div>
+
+    <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="cdpostal">0680</label>
+    <input v-model="cdpostal" type="text" class="form-control" id="cdpostal" placeholder="18">
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="ville">Nice</label>
+    <input v-model="ville" type="text" class="form-control" id="ville" placeholder="Nice">
+    </div>
+    </div>
+    
+  <button  type="submit" class="btn btn-primary" >Envoyer</button>
+</form>
+</transition>
+  </div>`,
+
+  methods: {
+    isAText(txt) {
+      if (isNaN(txt) && txt !== "null") {
+
+        return true;
+      } else {
+
+        return false;
+      }
+    }
+  },
+
+  data:
+    function () {
+      return ({
+        show: true,
+        name: "",
+        firstName: "",
+        mail: "",
+        tel: "",
+      })
+
+    }
+}
+
+
+
+/**************************PAGE CONTACT***************************/
+var contacts5 = {
   template: `<div class="container">
     <h1>Vous souhaitez un renseignement ?</h1>
     <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
