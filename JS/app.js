@@ -99,14 +99,14 @@ var tooglecards = {
         <button @click="isShow =! isShow">Résumé</button>   
 
               <div v-show="isShow">
-                <p>Description de l'image....rsgfohslugueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
+                <p> {{mySynopsis}} </p>
               </div> 
               <div class="d-flex justify-content-around">
                 <span>prixHt: {{myPrix}}€</span>
               </div>
     </div>               
   `,
-  props: ["myImg", "myTitre", "myPrix"],
+  props: ["myImg", "myTitre", "myPrix", "mySynopsis"],
 
   data:
     function () {
@@ -129,7 +129,8 @@ var boutique = {
           <div>
             <tooglecards :my-img="livre.image"
             :my-titre="livre.name"
-            :my-prix="livre.prixHt"
+            :my-prix="livre.prixht"
+            :my-synopsis="livre.synopsis"
             >             
             </tooglecards>
             <button @click="addPanier(livre.id)">Buy</button> 
@@ -147,12 +148,18 @@ var boutique = {
               <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
                   <img :src="panier.image" :title="panier.name" />    
                   <p> {{panier.name}} </p>
-                  <p>Prix: {{panier.prixHt}}€ H.T </p>
-                  <p> {{ panier.quantite }} </p>
+                  <p>Prix: {{panier.prixht}}€ H.T </p>
                   <button @click="suppr(index)">Suppr</button>
               </div>
-              <button @click="commandShow =! commandShow">🤗 Commander 🤗</button>
+              <div class="d-flex align-items-center justify-content-between mjjPanier">
+                  <h3>Total:</h3>
+                  <span>  H.T : {{ totalht }}€ </span>
+                  <span> TVA 20%: {{ tva }}€ </span>
+                  <span> {{ prixttc }} € TTC </span>
+              </div>
+                <button @click="commandShow =! commandShow">🤗 Commander 🤗</button>
             </div>
+
       </div>
   </div>
 </div>`,
@@ -168,7 +175,7 @@ var boutique = {
           categorie: "thriller",
           quantite: 5,
           dateParution: "12/10/2009",
-          prixHt: 12,
+          prixht: 9.99,
         }, {
           id: 1,
           name: "Titre test",
@@ -176,51 +183,44 @@ var boutique = {
           categorie: "thriller",
           quantite: 5,
           dateParution: "12/10/2009",
-          prixHt: 12,
-        }, {
-          id: 2,
-          name: "Titre test",
-          image: "./assets/images/foretDesOmbres.jpg",
-          categorie: "thriller",
-          quantite: 5,
-          dateParution: "12/10/2009",
-          prixHt: 12,
-        }, {
-          id: 3,
-          name: "Titre test",
-          image: "./assets/images/foretDesOmbres.jpg",
-          categorie: "thriller",
-          quantite: 5,
-          dateParution: "12/10/2009",
-          prixHt: 12,
+          prixht: 4.48,
         }],
+      prixttc: 0,
+      tva: 0,
+      somme: 0,
+      totalht: 0,
       show: false,
       commandShow: false,
       paniers: [],
-      somme: 0,
 
-      addPanier(index) {
-        this.livres[index].quantite--;
-        //if (this.paniers[index]) {
-        //this.paniers[index].quantite++;
-        // } else {
-        this.paniers.push(this.livres[index]);
-        // }
-        console.log(index);
-        //console.log(this.livres[index].quantite);
-      },
-      suppr(index) {
-        if (this.paniers[index].quantite > 1) {
-          this.paniers[index].quantite--;
-        } else {
-          this.paniers.splice(index, 1);
-        }
-        //console.log(this.livres);
-      },
     }
   },
+  methods: {
+    addPanier: function (index) {
+      this.livres[index].quantite--;
+      this.paniers.push(this.livres[index]);
+      console.log(this.paniers);
+      this.total();
+    },
 
+    suppr: function (index) {
+      this.paniers.splice(index, 1);
+      this.total();
+    },
+    total: function () {
+      this.prixttc = 0;
+      this.totalht = 0;
 
+      this.paniers.forEach(element => {
+        this.totalht += Number(Math.round(element.prixht * 100) / 100);
+        Math.round(this.totalht * 100) / 100;
+
+      });
+
+      this.prixttc = Number(Math.round((this.totalht * 1.2) * 100) / 100);
+      this.tva = Number(Math.round((this.prixttc - this.totalht) * 100) / 100);
+    },
+  },
 };
 
 /**************************PAGE CONTACT***************************/
