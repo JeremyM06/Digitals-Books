@@ -115,6 +115,104 @@ var tooglecards = {
       })
     },
 }
+
+/********************  FORMULAIRE  ********************/
+var Formulaire = {
+  template: `<div>
+  <h1>Vous souhaitez un renseignement ?</h1>
+  <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
+  <hr>
+  <transition nom="fondu">
+  <div class="mjjFormValid" v-show="!show">
+  <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
+  </div>
+  </transition>
+  <transition nom="fondu">  
+
+  <form @submit.prevent="show =! show" v-show="show">  
+  <div class="form-row">
+  <div class="form-group col-md-6">
+<label for="nom">nom</label>
+<input v-model="nom" type="text" class="form-control" placeholder="" id="nom">
+</div></div>
+
+<div class="form-row">
+  <div class="form-group col-md-6">
+  <label for="adresse">Prénom</label>
+  <input v-model="adresse" type="text" class="form-control" id="adresse" placeholder="">
+  </div>    
+</div>
+<div class="form-row">
+<div class="form-group col-md-6">
+<label for="cdpostal">0680</label>
+<input v-model="cdpostal" type="text" class="form-control" id="cdpostal" placeholder="18">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group col-md-6">
+<label for="ville">Nice</label>
+<input v-model="ville" type="text" class="form-control" id="ville" placeholder="Nice">
+</div>
+</div>
+
+<div>
+<button  type="submit" @click.prevent="createNewReferenceDe()" class="btn btn-primary" >Envoyer</button>
+<button  type="submit" class="btn btn-primary" >Envoyer</button>
+</div>
+
+</form>
+
+<h3> {{ errors.nom }} <br> {{ errors.adresse }}  </h3>
+
+</transition>
+</div>`,
+  methods: {
+    isAText: function (txt) {
+      if (isNaN(txt) && txt !== "null") {
+
+        return true;
+      } else {
+
+        return false;
+      }
+    },
+    createNewReferenceDe: function () {
+      //reinitialisation du tableau des erreurs
+      this.errors = {};
+      this.reference = "";
+
+      //Verifier si tous les champs nécessaires sont renseignés
+
+      if (this.nom == "") {
+        this.errors.nom = "Vous avez oublié le nom !!";
+        this.Indout = false;
+      }
+
+      if (this.adresse == "") {
+        this.errors.adresse = "Vous avez oublié l'adresse !!";
+        this.Indout = false;
+      }
+    },
+  },
+
+  data:
+    function () {
+      return ({
+        indout: true,
+        show: true,
+        nom: "",
+        adresse: "",
+        cdpostal: 0,
+        ville: "",
+        errors: "",
+        reference: null,
+      })
+
+    }
+};
+
+
 /********************  BOUTIQUE  ********************/
 
 
@@ -158,13 +256,14 @@ var boutique = {
                   <span> {{ prixttc }} € TTC </span>
               </div>
                 <button @click="commandShow =! commandShow">🤗 Commander 🤗</button>
+                <Formulaire v-show="commandShow"></Formulaire>
             </div>
 
       </div>
   </div>
 </div>`,
 
-  components: { tooglecards },
+  components: { tooglecards, Formulaire },
   data: function () {
     return {
       livres: [
@@ -223,82 +322,11 @@ var boutique = {
   },
 };
 
-/********************  FORMULAIRE  ********************/
-
-var contacts = {
-  template: `<div class="container">
-    <h1>Vous souhaitez un renseignement ?</h1>
-    <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
-    <hr>
-    <transition nom="fondu">
-    <div class="mjjFormValid" v-show="!show">
-    <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
-    </div>
-    </transition>
-    <transition nom="fondu">
-
-    <form @submit.prevent="show =! show" v-show="show">
-    <div class="form-row">
-    <div class="form-group col-md-6">
-  <label for="nom">nom</label>
-  <input v-model="nom" type="text" class="form-control" placeholder="Dupond" id="nom">
-  </div></div>
-
-  <div class="form-row">
-    <div class="form-group col-md-6">
-    <label for="adresse">Prénom</label>
-    <input v-model="adresse" type="text" class="form-control" id="adresse" placeholder="Rue de fontaine">
-    </div>    
-  </div>
-
-    <div class="form-row">
-    <div class="form-group col-md-6">
-    <label for="cdpostal">0680</label>
-    <input v-model="cdpostal" type="text" class="form-control" id="cdpostal" placeholder="18">
-    </div>
-    </div>
-
-    <div class="form-row">
-    <div class="form-group col-md-6">
-    <label for="ville">Nice</label>
-    <input v-model="ville" type="text" class="form-control" id="ville" placeholder="Nice">
-    </div>
-    </div>
-    
-  <button  type="submit" class="btn btn-primary" >Envoyer</button>
-</form>
-</transition>
-  </div>`,
-
-  methods: {
-    isAText(txt) {
-      if (isNaN(txt) && txt !== "null") {
-
-        return true;
-      } else {
-
-        return false;
-      }
-    }
-  },
-
-  data:
-    function () {
-      return ({
-        show: true,
-        name: "",
-        firstName: "",
-        mail: "",
-        tel: "",
-      })
-
-    }
-}
 
 
 
 /**************************PAGE CONTACT***************************/
-var contacts5 = {
+var contacts = {
   template: `<div class="container">
     <h1>Vous souhaitez un renseignement ?</h1>
     <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
