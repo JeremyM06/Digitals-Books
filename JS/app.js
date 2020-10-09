@@ -95,18 +95,18 @@ var tooglecards = {
   template: `  
     <div class="cards">
         <img :src="myImg" title="image">
-        <h3> {{myTitre}} </h3>
+        <h5> {{myTitre}} </h5>
         <button @click="isShow =! isShow">Résumé</button>   
 
               <div v-show="isShow">
-                <p>Description de l'image....rsgfohslugueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
+                <p> {{mySynopsis}} </p>
               </div> 
               <div class="d-flex justify-content-around">
                 <span>prixHt: {{myPrix}}€</span>
               </div>
     </div>               
   `,
-  props: ["myImg", "myTitre", "myPrix"],
+  props: ["myImg", "myTitre", "myPrix", "mySynopsis"],
 
   data:
     function () {
@@ -115,22 +115,54 @@ var tooglecards = {
       })
     },
 }
-/********************  PANIER  ********************/
+/********************  BOUTIQUE  ********************/
 
 
 var boutique = {
   template: `
-  <div class="container">
-  <h1>Nos livres</h1>
-    <div v-for="livre in livres"
-    :key="livre.id" >
-    <tooglecards  :my-img="livre.image"
-    :my-titre="livre.name"
-    :my-prix="livre.prixHt"> 
-    </tooglecards><button @click="addPanier()">Buy</button>    
-    </div>
-    <h1 v-for="panier in paniers" :key="id"> </h1>
-  </div>`,
+<div class="container-fluid">
+  <h1 class="text-center"><u>Nos livres</u></h1>
+  <div class="row">
+      <div class="col-sm-8 text-center d-flex flex-wrap">
+        <div class="mjjCardsBuy" v-for="livre in livres"
+        :key="livre.id">
+          <div>
+            <tooglecards :my-img="livre.image"
+            :my-titre="livre.name"
+            :my-prix="livre.prixht"
+            :my-synopsis="livre.synopsis"
+            >             
+            </tooglecards>
+            <button @click="addPanier(livre.id)">Buy</button> 
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4 text-center">
+        
+            <div>
+              <img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/>
+              <span class="panierLgt"> {{paniers.length}} </span>
+            </div>  
+            <div  v-show="show">
+              <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
+                  <img :src="panier.image" :title="panier.name" />    
+                  <p> {{panier.name}} </p>
+                  <p>Prix: {{panier.prixht}}€ H.T </p>
+                  <button @click="suppr(index)">Suppr</button>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mjjPanier">
+                  <h3>Total:</h3>
+                  <span>  H.T : {{ totalht }}€ </span>
+                  <span> TVA 20%: {{ tva }}€ </span>
+                  <span> {{ prixttc }} € TTC </span>
+              </div>
+                <button @click="commandShow =! commandShow">🤗 Commander 🤗</button>
+            </div>
+
+      </div>
+  </div>
+</div>`,
 
   components: { tooglecards },
   data: function () {
@@ -143,7 +175,7 @@ var boutique = {
           categorie: "thriller",
           quantite: 5,
           dateParution: "12/10/2009",
-          prixHt: 12,
+          prixht: 9.99,
         }, {
           id: 1,
           name: "Titre test",
@@ -151,15 +183,44 @@ var boutique = {
           categorie: "thriller",
           quantite: 5,
           dateParution: "12/10/2009",
-          prixHt: 12,
+          prixht: 4.48,
         }],
+      prixttc: 0,
+      tva: 0,
+      somme: 0,
+      totalht: 0,
+      show: false,
+      commandShow: false,
       paniers: [],
-      addPanier(index) {
-        this.panier.push()
-      },
-    }
-  }
 
+    }
+  },
+  methods: {
+    addPanier: function (index) {
+      this.livres[index].quantite--;
+      this.paniers.push(this.livres[index]);
+      console.log(this.paniers);
+      this.total();
+    },
+
+    suppr: function (index) {
+      this.paniers.splice(index, 1);
+      this.total();
+    },
+    total: function () {
+      this.prixttc = 0;
+      this.totalht = 0;
+
+      this.paniers.forEach(element => {
+        this.totalht += Number(Math.round(element.prixht * 100) / 100);
+        Math.round(this.totalht * 100) / 100;
+
+      });
+
+      this.prixttc = Number(Math.round((this.totalht * 1.2) * 100) / 100);
+      this.tva = Number(Math.round((this.prixttc - this.totalht) * 100) / 100);
+    },
+  },
 };
 
 /********************  FORMULAIRE  ********************/
@@ -252,16 +313,17 @@ var contacts5 = {
     <form @submit.prevent="show =! show" v-show="show">
     <div class="form-row">
     <div class="form-group col-md-6">
-  <label for="firstName">Nom</label>
-  <input v-model="firstName" type="text" class="form-control" placeholder="Dupond" id="firsName">
-  </div></div>
-
-  <div class="form-row">
-    <div class="form-group col-md-6">
-    <label for="name">Prénom</label>
-    <input v-model="name" type="text" class="form-control" id="name" placeholder="Michel">
+    <label for="name">Nom</label>
+    <input v-model="name" type="text" class="form-control" id="name" placeholder="Dupond">
     </div>    
-  </div>
+    </div>
+    
+    <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="firstName">Prénom</label>
+    <input v-model="firstName" type="text" class="form-control" placeholder="Michel" id="firsName">
+    </div>
+    </div>
 
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -307,13 +369,82 @@ var contacts5 = {
 
     }
 }
+
+/**************************LIVRE D'OR***************************/
 var livreOr = {
   template: `
   <div class="container mjj-livreOr">
-  <h1>Le Livre d'Or</h1>
+    <div class="text-center">
+    <h1>Le Livre d'Or</h1><br>
+    </div>
+    <br>
+    <transition name="fondu">
+    <div class="mjjFormValid" v-show="!show">
+    <h2>Merci pour votre feedback! À très vite 😉</h2>
+    </div>
+    </transition>
+
+    <transition name="fondu">
+    <form class="offset-lg-3" @submit.prevent="show =! show" v-show="show">
+    
+    <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="name"><b>Nom<b></label>
+    <input v-model="name" type="text" class="form-control" placeholder="Dupond" id="name">
+    </div>    
   </div>
-  `,
+    
+    <div class="form-row">
+    <div class="form-group col-md-6">
+  <label for="firstName"><b>Prénom<b></label>
+  <input v-model="firstName" type="text" class="form-control" placeholder="Michel" id="firsName">
+  </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="email"><b>Email address<b> (facultatif)</label>
+    <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
+    </div>
+  </div>
+  <br>
+
+  <div class="form-row">
+  <div class="form-group col-md-6">
+  <label for="exampleFormControlTextarea1"><b>Message<b></label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <br>
+  <button  type="submit" class="btn btn-lg col-2 btn-outline-secondary btn-block"><b><b>Envoyer<b><b></button>
+</form>
+</transition>
+</div>`,
+
+  methods: {
+    isAText(txt) {
+      if (isNaN(txt) && txt !== "null") {
+
+        return true;
+      } else {
+
+        return false;
+      }
+    }
+  },
+
+  data:
+    function () {
+      return ({
+        show: true,
+        name: "",
+        firstName: "",
+        mail: "",
+      })
+
+    }
 }
+
+
 
 /******************ROUTES*******************/
 var routes = [
@@ -330,7 +461,6 @@ var vm = new Vue({
   el: "#app",
 
   data: {
-
     name: "",
     firstName: "",
     mail: "",
@@ -338,10 +468,7 @@ var vm = new Vue({
   },
 
   methods: {
-    suppr(index) {
-      this.classe.splice(index, 1);
-      this.notes.splice(index, 1);
-    },
+
     addBook() {
       if (this.isAText(this.currentName) && this.isANumber(this.currentNote)) {
         this.classe.push({ name: this.currentName, note: this.currentNote });
