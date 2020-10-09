@@ -99,14 +99,14 @@ var tooglecards = {
         <button @click="isShow =! isShow">Résumé</button>   
 
               <div v-show="isShow">
-                <p>Description de l'image....rsgfohslugueshviousdhifbsliugfhiuqehfmrdbhgiuherqehfmrdbhgiuheroufhuerhguooerhuogfhoeqjgpinvhseoihgfodrgsr...bla blab blaaaa</p>
+                <p>{{mySynopsis}}</p>
               </div> 
               <div class="d-flex justify-content-around">
                 <span>prixHt: {{myPrix}}€</span>
               </div>
     </div>               
   `,
-  props: ["myImg", "myTitre", "myPrix"],
+  props: ["myImg", "myTitre", "myPrix", "mySynopsis"],
 
   data:
     function () {
@@ -130,6 +130,7 @@ var boutique = {
             <tooglecards :my-img="livre.image"
             :my-titre="livre.name"
             :my-prix="livre.prixHt"
+            :my-synopsis="livre.synopsis"
             >             
             </tooglecards>
             <button @click="addPanier(livre.id)">Buy</button> 
@@ -167,32 +168,99 @@ var boutique = {
           image: "./assets/images/foretDesOmbres.jpg",
           categorie: "thriller",
           quantite: 5,
-          dateParution: "12/10/2009",
-          prixHt: 12,
+          dateParution: "23/08/2007",
+          mySynopsis: "Paris, hiver 2006. Arthur Doffre, milliardaire énigmatique, est sur le point de réaliser un rêve vieux de vingt-cinq ans : ressusciter un tueur en série, le Bourreau 125, dans un livre. Un thriller que David Miller, embaumeur de profession et auteur d'un premier roman remarqué, a un mois pour écrire contre une forte somme d'argent. Reclus dans un chalet en pleine Forêt-Noire, accompagné de sa femme et de sa fille, de Doffre et de sa jeune compagne, David se met aussitôt au travail. Mais il est des fantômes que l'on ne doit pas rappeler, et la psychose saisit un à un tous les occupants de la ténébreuse demeure cernée par la neige...",
+          prixht: 12.99,
         }, {
           id: 1,
-          name: "Titre test",
-          image: "./assets/images/foretDesOmbres.jpg",
+          name: "Code Game",
+          image: "./assets/images/CodeGame.jpg",
           categorie: "thriller",
           quantite: 5,
-          dateParution: "12/10/2009",
-          prixHt: 12,
+          dateParution: "19/02/2016",
+          mySynopsis: "David Archer est de retour avec une vengeance avec son nouveau héros, Noah Wolf. Après que les fans ont déliré au sujet de sa première série, The Sam Prichard Novels, Archer est maintenant sur le point de revenir encore plus fort. Les gens jettent déjà des noms comme Mitch Rapp et Alex Cross, mais ne me croisez pas sur parole. Son nom devient connu parmis tous les habitants!",
+          prixht: 11.99,
         }, {
           id: 2,
-          name: "Titre test",
-          image: "./assets/images/foretDesOmbres.jpg",
+          name: "Darkest Before The Dawn (The Second Dark Ages #3)",
+          image: "./assets/images/DarkestDayBeforeDawn.jpg",
           categorie: "thriller",
           quantite: 5,
-          dateParution: "12/10/2009",
-          prixHt: 12,
+          dateParution: "06/10/2017",
+          mySynopsis: "Michael continue de travailler pour tenir la promesse de son amour, mais le monde n'est pas comme auparavant. Maintenant, il ya une erreur qu’il a fait des siècles dans le passé en marchant autour, il a besoin de rectifier. Pour compliquer les choses, un groupe hors de l’Angleterre croit que le sang de Michael sera exactement ce dont ils ont besoin pour leur entreprise. Alors qu’ils font sortir les vampires de la rue en même temps. De plus, les efforts déployés pour rassembler les pièces de navires du Clan Sacré commencent à se rassembler. Malheureusement, personne ne souhaite aider Michael et sa nouvelle famille."
+          prixht: 12.99,
         }, {
           id: 3,
-          name: "Titre test",
-          image: "./assets/images/foretDesOmbres.jpg",
+          name: "After Shocks",
+          image: "./assets/images/AfterShocks.jpg",
           categorie: "thriller",
           quantite: 5,
-          dateParution: "12/10/2009",
-          prixHt: 12,
+          dateParution: "29/09/2020",
+          mySynopsis: "Lorsqu'un tremblement de terre de magnitude 7,8 frappe la Californie, Ruby est piégée dans une laverie automatique avec Charlie, un garçon avec qui elle a eu sa première conversation quelques instants auparavant. Elle ne peut rien voir au-delà des décombres sous lesquels elle est piégée, mais elle est sûre que quelqu'un viendra bientôt les sauver.",
+          prixht: 13.99,
+        }, {
+          id: 4,
+          name: "Les Dents de la Mer",
+          image: "./assets/images/Jaws.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "06/04/2016",
+          mySynopsis: "Été 1975, sur l'île d'Amity, peu avant le début de la période estivale. Un soir, une jeune femme un peu éméchée abandonne son petit ami qui s'est assoupi sur la plage pour aller se baigner.Mais, après quelques brasses, elle se fait happer par un grand requin blanc venu des profondeurs. Son cadavre mutilé sera retrouvé le lendemain matin sur la grève.Début de la psychose... D'autant qu'un enfant disparaît peu de temps après, qu'un homme est dévoré vivant par le squale...Faut-il interdire l'accès à la plage ? Les autorités sont partagées. Seul consensus : il faut éliminer le monstre. Quint, le pêcheur, Brody, le chef de la police, et Hooper, le jeune océanographe expert en requins – et en femmes – vont alors engager une lutte sans merci contre le monstre mangeur d'hommes.",
+          prixht: 7.99,
+        }, {
+          id: 5,
+          name: "Hunger Games: La Balade du Serpent et de l'Oiseau Chanteur",
+          image: "./assets/images/HungerGames.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "20/05/2020",
+          mySynopsis: "Dévoré d'ambition, Poussé par la compétition, Il va découvrir que la soif de pouvoir a un prix, C'est le matin de la Moisson qui doit ouvrir la dixième édition annuelle des Hunger Games. Au Capitole, Coriolanus Snow, dix-huit ans, se prépare à devenir pour la première fois mentor aux Jeux. L'avenir de la maison Snow, qui a connu des jours meilleurs, est désormais suspendu aux maigres chances de Coriolanus. Il devra faire preuve de charme, d'astuce et d'inventivité pour faire gagner sa candidate. Mais le sort s'acharne. Honte suprême, on lui a confié le plus misérable des tributs : une fille du district Douze. Leurs destins sont désormais liés. Chaque décision peut les conduire à la réussite ou à l'échec, au triomphe ou à la ruine. Dans l'arène, ce sera un combat à mort.",
+          prixht: 19.99,
+        }, {
+          id: 6,
+          name: "Lone Wolf",
+          image: "./assets/images/LoneWolf.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "13/07/2016",
+          mySynopsis: "David Archer est de retour avec une vengeance avec son nouveau héros, Noah Wolf. Après que les fans ont déliré au sujet de sa première série, The Sam Prichard Novels, Archer est maintenant sur le point de revenir encore plus fort. Les gens jettent déjà des noms comme Mitch Rapp et Alex Cross, mais ne me croisez pas sur parole. Le nom de Archer devienra un nom familier! USA TODAY BESTSELLING SERIES Noah Wolf est l’un des assassins les plus meurtriers du monde, complètement dépourvu d’émotion et de conscience. Ces facteurs, que d’autres considéreraient comme des handicaps, lui permettent d’évaluer la situation instantanément, et d’un point de vue purement logique. Ses décisions et ses actions ne sont jamais entachées d’émotions ou de sentiments, ce qui le libère de tout risque de peur ou de culpabilité.",
+          prixht: 11.99,
+        }, {
+          id: 7,
+          name: "Rogue Avenger",
+          image: "./assets/images/RogueAvenger.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "22/08/2005",
+          mySynopsis: "Ils ont volé son avenir. Il a volé leur sous-marin. Maintenant, il doit faire une chose ...... et il peut se faire tuer. Quand Jake s’est réveillé à bord du sous-marin de missiles balistiques, l’USS Colorado, dans une flaque de son propre sang. La blessure était grave, mais ce n’est pas ce qui a ruiné sa carrière. L’effort de sauvetage l’a fait. Son prochain coup est peut-être le seul qui reste. Jeté aux loups pour couvrir le secret d’un officier, Jake ne sera pas leur agneau sacrificiel. Quand un marchand d’armes international le recrute pour voler le Colorado et vendre ses ogives nucléaires, le patriotisme et la vengeance s’affrontent dans le cœur de Jake. Est-ce qu’il sera d’accord ? Est-ce qu’il peut s’en sortir ? Aveuglé par la rage et incertain de son avenir, il se retrouve au centre d’un complot perfide. En qui peut-il avoir confiance ? Sa soif de vengeance le détruira-t-elle ? Vous allez adorer ce thriller militaire, parce que tout le monde aime la lutte pour la vérité.",
+          prixht: 11.99,
+        }, {
+          id: 8,
+          name: "Rogue Hunter",
+          image: "./assets/images/RogueHunter.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "01/03/2016",
+          mySynopsis: "UNE NATION ASSIÉGÉE... Cela fait plus de quatre ans que l’annexion de la Crimée et l’ONU a décidé de prendre des mesures militaires secrètes pour desserrer l’emprise des envahisseurs russes. Les cibles sont un pont stratégique et des pipelines sous-marins qui alimentent la péninsule occupée en gaz naturel, en électricité et en télécommunications en provenance de Russie continentale. Si ces lignes de vie critiques peuvent être coupées, les résistants ukrainiens pourraient avoir une chance de reconquérir l’indépendance. Pour que cela soit possible, l’ancien officier de marine américain Jake Slate et le marchand d’armes international Pierre Renard doivent mener une guerre clandestine contre la marine russe. Leurs ennemis sont aidés par des dauphins armés, qui connaissent l’environnement océanique bien mieux que n’importe quel humain peut. Si ce n’est pas une mission suicide, c’est assez sacrément proche...",
+          prixht: 12.99,
+        }, {
+          id: 9,
+          name: "The Bourne Identity",
+          image: "./assets/images/TheBourneIdentity.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "19/06/1986",
+          mySynopsis: "Un homme est retrouvé grièvement blessé au large de Marseille. Soigné par un médecin, il se révèle amnésique, mais son corps montre des traces de chirurgie esthétique. Il décide de découvrir son identité en partant des indications trouvées dans un micro-film implanté sous sa peau. Bourne découvre peu à peu ses talents: il connaît plusieurs langues étrangères, sait se battre et possède une grande capacité à se travestir et assumer des rôles. À Zurich, il se rend dans une banque où il a accès à un compte en banque très bien fourni. Poursuivi par de mystérieux tueurs à la solde de Carlos, un tueur à gages mondialement réputé, il rencontre la femme qui …",
+          prixht: 4.99,
+        }, {
+          id: 10,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
         }],
       show: false,
       commandShow: false,
