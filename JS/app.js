@@ -95,7 +95,7 @@ var tooglecards = {
   template: `  
     <div class="cards">
         <img :src="myImg" title="image">
-        <h3> {{myTitre}} </h3>
+        <h5> {{myTitre}} </h5>
         <button @click="isShow =! isShow">Résumé</button>   
 
               <div v-show="isShow">
@@ -120,17 +120,42 @@ var tooglecards = {
 
 var boutique = {
   template: `
-  <div class="container">
-  <h1>Nos livres</h1>
-    <div v-for="livre in livres"
-    :key="livre.id" >
-    <tooglecards  :my-img="livre.image"
-    :my-titre="livre.name"
-    :my-prix="livre.prixHt"> 
-    </tooglecards><button @click="addPanier()">Buy</button>    
-    </div>
-    <h1 v-for="panier in paniers" :key="id"> </h1>
-  </div>`,
+<div class="container-fluid">
+  <h1 class="text-center"><u>Nos livres</u></h1>
+  <div class="row">
+      <div class="col-sm-8 text-center d-flex flex-wrap">
+        <div class="mjjCardsBuy" v-for="livre in livres"
+        :key="livre.id">
+          <div>
+            <tooglecards :my-img="livre.image"
+            :my-titre="livre.name"
+            :my-prix="livre.prixHt"
+            >             
+            </tooglecards>
+            <button @click="addPanier(livre.id)">Buy</button> 
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4 text-center">
+        
+            <div>
+              <img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/>
+              <span class="panierLgt"> {{paniers.length}} </span>
+            </div>  
+            <div  v-show="show">
+              <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
+                  <img :src="panier.image" :title="panier.name" />    
+                  <p> {{panier.name}} </p>
+                  <p>Prix: {{panier.prixHt}}€ H.T </p>
+                  <p> {{ panier.quantite }} </p>
+                  <button @click="suppr(index)">Suppr</button>
+              </div>
+              <button @click="commandShow =! commandShow">🤗 Commander 🤗</button>
+            </div>
+      </div>
+  </div>
+</div>`,
 
   components: { tooglecards },
   data: function () {
@@ -152,13 +177,49 @@ var boutique = {
           quantite: 5,
           dateParution: "12/10/2009",
           prixHt: 12,
+        }, {
+          id: 2,
+          name: "Titre test",
+          image: "./assets/images/foretDesOmbres.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "12/10/2009",
+          prixHt: 12,
+        }, {
+          id: 3,
+          name: "Titre test",
+          image: "./assets/images/foretDesOmbres.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "12/10/2009",
+          prixHt: 12,
         }],
+      show: false,
+      commandShow: false,
       paniers: [],
+      somme: 0,
+
       addPanier(index) {
-        this.panier.push()
+        this.livres[index].quantite--;
+        //if (this.paniers[index]) {
+        //this.paniers[index].quantite++;
+        // } else {
+        this.paniers.push(this.livres[index]);
+        // }
+        console.log(index);
+        //console.log(this.livres[index].quantite);
+      },
+      suppr(index) {
+        if (this.paniers[index].quantite > 1) {
+          this.paniers[index].quantite--;
+        } else {
+          this.paniers.splice(index, 1);
+        }
+        //console.log(this.livres);
       },
     }
-  }
+  },
+
 
 };
 
@@ -256,7 +317,6 @@ var vm = new Vue({
   el: "#app",
 
   data: {
-
     name: "",
     firstName: "",
     mail: "",
@@ -264,10 +324,7 @@ var vm = new Vue({
   },
 
   methods: {
-    suppr(index) {
-      this.classe.splice(index, 1);
-      this.notes.splice(index, 1);
-    },
+
     addBook() {
       if (this.isAText(this.currentName) && this.isANumber(this.currentNote)) {
         this.classe.push({ name: this.currentName, note: this.currentNote });
