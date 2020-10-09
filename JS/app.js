@@ -1,19 +1,3 @@
-
-
-/*
-
-let children = {
-    template: `<p> OO Je suis un enfant component de text component OO</p>`,
-};
-
-let textcomponent = {
-    template: `<div>
-    Je suis un Component parent <children></children>
-    </div>`,
-    components: {
-        children,
-    }
-};*/
 /*********************************ACCEUIL********************************************/
 var acceuil = {
   template: `
@@ -57,27 +41,29 @@ var acceuil = {
       <span class="sr-only">Next</span>
     </a>
   </div>
+
   <br>
   <!--Presentation jumbotron-->
   <div class="jumbotron mjjJumbo">    
-    <h1 class="display-4"><b>Digital Books!<b></h1>
-    <p class="lead"><b>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.<b></p>
+    <h1 class="display-4"><b>Digital Books!</b></h1>
+    <p class="lead"><b>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</b></p>
     <hr class="my-4">
     <transition name="jumboShow">
       <div v-show="jumboShow">
-        <p><b>It uses utility classes for typography and spacing to space content out within the larger container.<b></p>
+        <p><b>It uses utility classes for typography and spacing to space content out within the larger container.</b></p>
         <a @click="jumboShow =! jumboShow" class="btn btn-primary btn-lg" role="button">Qui sommes-nous?</a>
       </div>
     </transition>
   
     <transition name="jumboShow">
       <div v-show="!jumboShow" class="jumboShowInfo">
-      <p><b>Nous sommes <b></p>
-      <a @click="jumboShow =! jumboShow" class="btn btn-light btn-lg" role="button"><router-link class="nav-link active" to="/Contacts"><b>Contactez-nous<b></router-link>
+      <p><b>Nous sommes </b></p>
+      <a @click="jumboShow =! jumboShow" class="btn btn-light btn-lg" role="button"><router-link class="nav-link active" to="/Contacts"><b>Contactez-nous</b></router-link>
       </a>
       </div>
     </transition>
     
+  </div>
   </div>
   `,
 
@@ -425,7 +411,7 @@ var contacts = {
     <div class="form-row">
     <div class="form-group col-md-6">
     <label for="name">Nom</label>
-    <input v-model="name" type="text" class="form-control" id="name" placeholder="Dupond">
+    <input v-model="name" type="text" class="form-control" :class="{mjjalertmail : nameShow}" id="name" placeholder="Dupond">
     </div>    
     </div>
     
@@ -436,10 +422,10 @@ var contacts = {
     </div>
     </div>
 
-  <div class="form-row">
-    <div class="form-group col-md-6">
+  <div class="form-row" >
+    <div class="form-group col-md-6" >
     <label for="email">Email address</label>
-    <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
+    <input v-model="mail" type="email"  class="form-control" :class="{mjjalertmail : mailShow}" id="email" placeholder="lecteur...@mail.com">
    
     </div>
     </div>
@@ -447,7 +433,7 @@ var contacts = {
     <div class="form-row">
     <div class="form-group col-md-6">
       <label for="tel">Telephone</label>
-      <input v-model="this.tel" type="tel" class="form-control" id="tel">
+      <input v-model="tel"  type="tel" class="form-control" id="tel">
       
     </div>
   </div>
@@ -457,12 +443,10 @@ var contacts = {
   </div>`,
 
   methods: {
-    isAText(txt) {
+    isAText: function (txt) {
       if (isNaN(txt) && txt !== "null") {
-
         return true;
       } else {
-
         return false;
       }
     }
@@ -471,14 +455,26 @@ var contacts = {
   data:
     function () {
       return ({
+        mailShow: true,
+        nameShow: true,
+        firstNameShow: true,
+        telShow: true,
         show: true,
         name: "",
         firstName: "",
         mail: "",
         tel: "",
       })
-
+    },
+  computed: {
+    verifForm: function () {
+      if (isAText(this.mail)) {
+        this.mailShow = false;
+      } else {
+        this.mailShow = true;
+      }
     }
+  },
 }
 
 /**************************LIVRE D'OR***************************/
@@ -554,9 +550,6 @@ var livreOr = {
 
     }
 }
-
-
-
 /******************ROUTES*******************/
 var routes = [
   { path: "/Acceuil", component: acceuil },
@@ -572,10 +565,7 @@ var vm = new Vue({
   el: "#app",
 
   data: {
-    name: "",
-    firstName: "",
-    mail: "",
-    tel: "",
+
   },
 
   methods: {
