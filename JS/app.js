@@ -99,7 +99,7 @@ var tooglecards = {
         <button @click="isShow =! isShow">Résumé</button>   
 
               <div v-show="isShow">
-                <p>{{mySynopsis}}</p>
+                <p> {{mySynopsis}} </p>
               </div> 
               <div class="d-flex justify-content-around">
                 <span>prixHt: {{myPrix}}€</span>
@@ -129,8 +129,8 @@ var boutique = {
           <div>
             <tooglecards :my-img="livre.image"
             :my-titre="livre.name"
-            :my-prix="livre.prixHt"
-            :my-synopsis="livre.synopsis"
+            :my-prix="livre.prixht"
+            :my-synopsis="livre.mySynopsis"
             >             
             </tooglecards>
             <button @click="addPanier(livre.id)">Buy</button> 
@@ -148,12 +148,18 @@ var boutique = {
               <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
                   <img :src="panier.image" :title="panier.name" />    
                   <p> {{panier.name}} </p>
-                  <p>Prix: {{panier.prixHt}}€ H.T </p>
-                  <p> {{ panier.quantite }} </p>
+                  <p>Prix: {{panier.prixht}}€ H.T </p>
                   <button @click="suppr(index)">Suppr</button>
               </div>
-              <button @click="commandShow =! commandShow">🤗 Commander 🤗</button>
+              <div class="d-flex align-items-center justify-content-between mjjPanier">
+                  <h3>Total:</h3>
+                  <span>  H.T : {{ totalht }}€ </span>
+                  <span> TVA 20%: {{ tva }}€ </span>
+                  <span> {{ prixttc }} € TTC </span>
+              </div>
+                <button @click="commandShow =! commandShow">🤗 Commander 🤗</button>
             </div>
+
       </div>
   </div>
 </div>`,
@@ -183,11 +189,11 @@ var boutique = {
         }, {
           id: 2,
           name: "Darkest Before The Dawn (The Second Dark Ages #3)",
-          image: "./assets/images/DarkestDayBeforeDawn.jpg",
+          image: "./assets/images/DarkestBeforeDawn.jpg",
           categorie: "thriller",
           quantite: 5,
           dateParution: "06/10/2017",
-          mySynopsis: "Michael continue de travailler pour tenir la promesse de son amour, mais le monde n'est pas comme auparavant. Maintenant, il ya une erreur qu’il a fait des siècles dans le passé en marchant autour, il a besoin de rectifier. Pour compliquer les choses, un groupe hors de l’Angleterre croit que le sang de Michael sera exactement ce dont ils ont besoin pour leur entreprise. Alors qu’ils font sortir les vampires de la rue en même temps. De plus, les efforts déployés pour rassembler les pièces de navires du Clan Sacré commencent à se rassembler. Malheureusement, personne ne souhaite aider Michael et sa nouvelle famille."
+          mySynopsis: "Michael continue de travailler pour tenir la promesse de son amour, mais le monde n'est pas comme auparavant. Maintenant, il ya une erreur qu’il a fait des siècles dans le passé en marchant autour, il a besoin de rectifier. Pour compliquer les choses, un groupe hors de l’Angleterre croit que le sang de Michael sera exactement ce dont ils ont besoin pour leur entreprise. Alors qu’ils font sortir les vampires de la rue en même temps. De plus, les efforts déployés pour rassembler les pièces de navires du Clan Sacré commencent à se rassembler. Malheureusement, personne ne souhaite aider Michael et sa nouvelle famille.",
           prixht: 12.99,
         }, {
           id: 3,
@@ -262,33 +268,42 @@ var boutique = {
           mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
           prixht: 24.99,
         }],
+      prixttc: 0,
+      tva: 0,
+      somme: 0,
+      totalht: 0,
       show: false,
       commandShow: false,
       paniers: [],
-      somme: 0,
 
-      addPanier(index) {
-        this.livres[index].quantite--;
-        //if (this.paniers[index]) {
-        //this.paniers[index].quantite++;
-        // } else {
-        this.paniers.push(this.livres[index]);
-        // }
-        console.log(index);
-        //console.log(this.livres[index].quantite);
-      },
-      suppr(index) {
-        if (this.paniers[index].quantite > 1) {
-          this.paniers[index].quantite--;
-        } else {
-          this.paniers.splice(index, 1);
-        }
-        //console.log(this.livres);
-      },
     }
   },
+  methods: {
+    addPanier: function (index) {
+      this.livres[index].quantite--;
+      this.paniers.push(this.livres[index]);
+      console.log(this.paniers);
+      this.total();
+    },
 
+    suppr: function (index) {
+      this.paniers.splice(index, 1);
+      this.total();
+    },
+    total: function () {
+      this.prixttc = 0;
+      this.totalht = 0;
 
+      this.paniers.forEach(element => {
+        this.totalht += Number(Math.round(element.prixht * 100) / 100);
+        Math.round(this.totalht * 100) / 100;
+
+      });
+
+      this.prixttc = Number(Math.round((this.totalht * 1.2) * 100) / 100);
+      this.tva = Number(Math.round((this.prixttc - this.totalht) * 100) / 100);
+    },
+  },
 };
 
 /**************************PAGE CONTACT***************************/
