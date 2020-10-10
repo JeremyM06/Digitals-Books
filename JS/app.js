@@ -82,14 +82,14 @@ var tooglecards = {
     <div class="cards">
         <img :src="myImg" title="image">
         <h5> {{myTitre}} </h5>
-        <button @click="isShow =! isShow">Résumé</button>   
-
+        <button @click="isShow =! isShow" class="btnCards">Résumé</button>  
               <div v-show="isShow">
                 <p> {{mySynopsis}} </p>
               </div> 
               <div class="d-flex justify-content-around">
                 <span>prixHt: {{myPrix}}€</span>
               </div>
+
     </div>               
   `,
   props: ["myImg", "myTitre", "myPrix", "mySynopsis"],
@@ -204,12 +204,13 @@ var Formulaire = {
 
 var boutique = {
   template: `
-<div class="container-fluid">
+<div class="container-fluid boutique">
   <h1 class="text-center"><u>Nos livres</u></h1>
   <div class="row">
-      <div class="col-sm-8 text-center d-flex flex-wrap">
-        <div class="mjjCardsBuy" v-for="livre in livres"
-        :key="livre.id">
+      <div class="col-sm text-center d-flex justify-content-center flex-wrap ">
+        <div class="mjjCardsBuy"  v-for="livre in livres"
+        :key="livre.id"
+        :class="[livre.categorie]">
           <div>
             <tooglecards :my-img="livre.image"
             :my-titre="livre.name"
@@ -217,35 +218,36 @@ var boutique = {
             :my-synopsis="livre.mySynopsis"
             >             
             </tooglecards>
-            <button @click="addPanier(livre.id)">Buy</button> 
+            <button @click="addPanier(livre.id)" class="btnAchat">Buy</button> 
           </div>
         </div>
       </div>
-
-      <div class="col-sm-4 text-center">
-        
-            <div>
-              <img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/>
-              <span class="panierLgt"> {{paniers.length}} </span>
-            </div>  
-            <div  v-show="show">
+      
+      
+      <div v-show="show" class="col-sm-4 text-center">        
+            <div >
+              <h3>Mon Panier</h3>
               <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
                   <img :src="panier.image" :title="panier.name" />    
                   <p> {{panier.name}} </p>
                   <p>Prix: {{panier.prixht}}€ H.T </p>
                   <button @click="suppr(index)">Suppr</button>
               </div>
-              <div class="d-flex align-items-center justify-content-between mjjPanier">
-                  <h3>Total:</h3>
+              <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
+                  <h4>Total:</h4>
                   <span>  H.T : {{ totalht }}€ </span>
                   <span> TVA 20%: {{ tva }}€ </span>
                   <span> {{ prixttc }} € TTC </span>
               </div>
-                <button @click="commandShow =! commandShow">🤗 Commander 🤗</button>
+                <button class="btn btn-success" @click="commandShow =! commandShow" >🤗 Commander 🤗</button>
                 <Formulaire v-show="commandShow"></Formulaire>
             </div>
-
       </div>
+      <div class="mjjBlockPanier">
+        <a href="#mjjancre"><img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/></a>
+        <span class="panierLgt"> {{paniers.length}} </span>
+      </div>  
+
   </div>
 </div>`,
 
@@ -273,7 +275,7 @@ var boutique = {
           prixht: 11.99,
         }, {
           id: 2,
-          name: "Darkest Before The Dawn (The Second Dark Ages #3)",
+          name: "Darkest Before The Dawn",
           image: "./assets/images/DarkestBeforeDawn.jpg",
           categorie: "thriller",
           quantite: 5,
@@ -352,10 +354,191 @@ var boutique = {
           dateParution: "29/09/2020",
           mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
           prixht: 24.99,
+        }, {
+          id: 11,
+          name: "Demon Slayer ",
+          image: "./assets/images/Demon-Slayer-manga.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "14/09/2020",
+          mySynopsis: "Pour la première fois depuis 113 ans, un démon de la lune supérieure a été battu. Hors de lui, Muzan convoque les autres démons de la lune supérieure afin de leur ordonner d’intensifier l’attaque contre les pourfendeurs. Lors de la bataille contre Dahi et Gyutaro, le sabre de Tanjiro a été brisé. Tandis qu’il est à la recherche d’un nouveau sabre, Tanjiro visite le village caché des forgerons où se trouve Haganezuka. ...",
+          prixht: 6.99,
+        }, {
+          id: 12,
+          name: "Dragon Ball Super",
+          image: "./assets/images/Dragon-Ball-Super-manga.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "04/10/2020",
+          mySynopsis: "Le criminel Moro et les évadés de la prison galactique qui sont maintenant à son service sillonnent l’univers à la recherche de planètes riches en énergie vitale !! C’est ainsi que débarquent sur Terre une bande de bandits galactiques, dont Seven-Three qui possède le pouvoir de copier les aptitudes de ses adversaires. En l’absence de Goku, Piccolo et les autres doivent y faire face ! ",
+          prixht: 6.90,
+        }, {
+          id: 13,
+          name: "My Hero Academia",
+          image: "./assets/images/My-Hero-Academia-manga.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "09/06/2016",
+          mySynopsis: "Confronté au test d'aptitudes d'Eraserhead, Deku échappe de justesse au renvoi en réussissant à concentrer le One for All dans un seul doigt au moment crucial ! Dernier du classement avec une seule performance surhumaine à son actif, il compte bien...",
+          prixht: 6.60,
+        }, {
+          id: 14,
+          name: "One piece",
+          image: "./assets/images/One-Piece-manga.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "07/10/2020",
+          mySynopsis: "Au cours de son périple aux côtés de Barbe Blanche, Oden fait la connaissance d’un homme que le destin semble avoir placé sur sa route : le grand Roger ! Qu’apportera donc au monde la rencontre de ces deux hommes ?! Pendant ce temps, dans le pays des Wa, Orochi profite de l’absence d’Oden pour manœuvrer en coulisses…",
+          prixht: 6.90,
+        }, {
+          id: 15,
+          name: "one punch man",
+          image: "./assets/images/One-Punch-Man-manga.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "10/09/2020",
+          mySynopsis: "Saitama est trop puissant ; tellement puissant qu'il élimine tous les monstres les plus farouches avec un simple coup de poing. Découvrez l'histoire du plus puissant des super-héros dans ce manga qui va vous mettre K.O. !! Le combat décisif de l...",
+          prixht: 6.90,
+        }, {
+          id: 16,
+          name: "Samurai 8 - la légende de Hachimaru",
+          image: "./assets/images/Samurai-8-la-legende-de-Hachimaru-manga.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "24/09/2020",
+          mySynopsis: "LE RETOUR DE MASASHI KISHIMOTO, L'AUTEUR DE NARUTO !",
+          prixht: 6.85,
+        }, {
+          id: 17,
+          name: "The Legend of Zelda - Twilight Princess",
+          image: "./assets/images/The-Legend-of-Zelda-Twilight-Prince-manga.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "14/08/2019",
+          mySynopsis: "Après un an et demi passé dans le paisible village de Toal, le jeune Link peut être fier de lui : sa gentillesse, son courage et sa dévotion lui ont permis d'être totalement intégré dans cette communauté. Mais Link a peur que les villageois finissent par découvrir le terrible secret de son passé, au point qu'il n'en dort plus la nuit ! Et si ses cauchemars annonçaient le retour imminent des êtres maléfiques du monde de la pénombre ? Comment faire pour les empêcher de semer à nouveau le chaos ?",
+          prixht: 7.99,
+        }, {
+          id: 18,
+          name: "Hunter X Hunter",
+          image: "./assets/images/Hunter-X-Hunter.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "10/03/2020",
+          mySynopsis: "Le départ. Gon, le héros de notre histoire, décide de quitter son village natal pour aller passer le difficile examen qui l'autorisera à devenir un hunter et à marcher sur les traces de son père. En chemin, il fait la connaissance de Léolio et Kurapika qui vont rapidement devenir ses amis et compagnons de route. Tous trois parviennent sur le lieu de la première épreuve et doivent faire leurs preuves au milieu d'une horde de participants très motivés.C'est la rencontre essentielle de Gon, Léolio et Kurapika. Gon fait...",
+          prixht: 6.85,
+        }, {
+          id: 19,
+          name: "L'Attaque des Titans",
+          image: "./assets/images/L-Attaque-des-Titans.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "25/11/2020",
+          mySynopsis: "Désormais détenteur du pouvoir de l’Originel, Eren décide, pour le bien de l’île du Paradis, d’exterminer tout le reste de l’humanité,  et se met en marche à la tête d’une gigantesque meute de Titans. Incapables de déterminer s’il faut les considérer comme une bénédiction ou au contraire comme une calamité, Mikasa, Armin et les autres  choisissent de faire tout leur possible pour sauver le monde...",
+          prixht: 6.95,
+        }, {
+          id: 20,
+          name: "Détective Conan",
+          image: "./assets/images/Detective-Conan.jpg",
+          categorie: "manga",
+          quantite: 5,
+          dateParution: "23/10/2020",
+          mySynopsis: "Victime d'une mystérieuse organisation d'hommes en noir qui l'ont empoisonné et l'ont ainsi fait redevenir un enfant, cet adolescent se retrouve contraint de retourner à l'école primaire et, tout en veillant à ce que le secret de sa nouvelle identité soit préservé, il mène des enquêtes et résout des affaires ténébreuses et...",
+          prixht: 6.85,
+        }, {
+          id: 21,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "blue",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
+        }, {
+          id: 22,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "blue",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
+        }, {
+          id: 23,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "blue",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
+        }, {
+          id: 24,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "blue",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
+        }, {
+          id: 25,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "blue",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
+        }, {
+          id: 26,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "blue",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
+        }, {
+          id: 27,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
+        }, {
+          id: 28,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
+        }, {
+          id: 29,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
+        }, {
+          id: 30,
+          name: "The Loop",
+          image: "./assets/images/TheLoop.jpg",
+          categorie: "thriller",
+          quantite: 5,
+          dateParution: "29/09/2020",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          prixht: 24.99,
         }],
+      couleur: "",
+      couleur1: "",
       prixttc: 0,
       tva: 0,
-      somme: 0,
       totalht: 0,
       show: false,
       commandShow: false,
@@ -380,14 +563,22 @@ var boutique = {
       this.totalht = 0;
 
       this.paniers.forEach(element => {
-        this.totalht += Number(Math.round(element.prixht * 100) / 100);
-        Math.round(this.totalht * 100) / 100;
-
+        Math.round((this.totalht += element.prixht) * 100) / 100;
       });
-
       this.prixttc = Number(Math.round((this.totalht * 1.2) * 100) / 100);
       this.tva = Number(Math.round((this.prixttc - this.totalht) * 100) / 100);
     },
+    /*bkgColor: function () {
+      this.livres.forEach(element => {
+        if (element.categorie == "manga") {
+          this.couleur1 = "green";
+        } else if (element.categorie == "thriller") {
+          this.couleur = "red";
+        } else {
+          this.couleur = "blue";
+        }
+      });
+    },*/
   },
 };
 
@@ -396,87 +587,145 @@ var boutique = {
 
 /**************************PAGE CONTACT***************************/
 var contacts = {
-  template: `<div class="container">
+  template: `<div class="container-fluid contacts">
     <h1>Vous souhaitez un renseignement ?</h1>
     <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
     <hr>
-    <transition name="fondu">
-    <div class="mjjFormValid" v-show="!show">
+    <transition name="fondu" class="row">    
+    <div class=" offset-sm-2 mjjFormValid" v-show="!show">
     <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
+    <button @click="show =! show"  type="button" class="btn btn-primary" >Retour</button>
+
     </div>
     </transition>
-    <transition name="fondu">
 
-    <form @submit.prevent="show =! show" v-show="show">
+    <transition name="fondu" class="row">
+
+    <form class ="offset-sm-4" @submit.prevent="show =! show, clear()" v-show="show">
     <div class="form-row">
     <div class="form-group col-md-6">
     <label for="name">Nom</label>
-    <input v-model="name" type="text" class="form-control" :class="{mjjalertmail : nameShow}" id="name" placeholder="Dupond">
+    <input v-model="name" @keyup="isAName(name)" type="text" class="form-control" :class="{mjjalertform : nameShow}" id="name" placeholder="Dupond">
+    <span class="textFormAlert" v-show="nameShow">Le nom n'est pas conforme</span>
     </div>    
     </div>
     
     <div class="form-row">
     <div class="form-group col-md-6">
     <label for="firstName">Prénom</label>
-    <input v-model="firstName" type="text" class="form-control" placeholder="Michel" id="firsName">
+    <input v-model="firstName" @keyup="isAFirstName(firstName)" type="text" class="form-control" :class="{mjjalertform :firstNameShow}" placeholder="Michel" id="firsName">
+    <span class="textFormAlert" v-show="firstNameShow">Le prénom n'est pas conforme</span>
     </div>
     </div>
 
   <div class="form-row" >
     <div class="form-group col-md-6" >
     <label for="email">Email address</label>
-    <input v-model="mail" type="email"  class="form-control" :class="{mjjalertmail : mailShow}" id="email" placeholder="lecteur...@mail.com">
-   
+    <input v-model="mail"  type="text" @keyup="isAMail(mail)" class="form-control" :class="{mjjalertform : mailShow}" id="email" placeholder="lecteur...@mail.com">
+    <span class="textFormAlert" v-show="mailShow">Le mail n'est pas conforme</span>
     </div>
     </div>
-
     <div class="form-row">
     <div class="form-group col-md-6">
       <label for="tel">Telephone</label>
-      <input v-model="tel"  type="tel" class="form-control" id="tel">
-      
-    </div>
+      <input v-model="tel" type="text" @keyup="isATel(tel)" placeholder="tel" class="form-control" :class="{mjjalertform : telShow}" id="tel">
+      <span class="textFormAlert" v-show="telShow">Le téléphone n'est pas conforme</span>
+
+      </div>
   </div>
-  <button  type="submit" class="btn btn-primary" >Envoyer</button>
+  <button  type="submit" class="btn btn-primary" :disabled="isDisabled" >Envoyer</button>
 </form>
 </transition>
   </div>`,
 
   methods: {
-    isAText: function (txt) {
+    clear: function () {
+      this.name = "";
+      this.firstName = "";
+      this.mail = "";
+      this.tel = "";
+    },
+    isAName: function (txt) {
       if (isNaN(txt) && txt !== "null") {
-        return true;
+        this.nameShow = false;
+        this.nameOk = true;
       } else {
-        return false;
+        this.nameShow = true;
+        this.nameOk = false;
       }
-    }
+      this.verifForm();
+    },
+    isAFirstName: function (txt) {
+      if (isNaN(txt) && txt !== "null") {
+        this.firstNameShow = false;
+        this.firstNameOk = true;
+      } else {
+        this.firstNameShow = true;
+        this.firstNameOk = false;
+      }
+      this.verifForm();
+
+    },
+    isAMail: function (mail) {
+      if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail) && mail != "") {
+        this.mailShow = false;
+        this.mailOk = true;
+      } else {
+        this.mailShow = true;
+        this.mailOk = false;
+      }
+      this.verifForm();
+
+    },
+    isATel: function (tel) {
+
+      if (/^(\+33|0|0033)[1-9]\d{8}$/.test(tel) && tel != "") {
+        this.telShow = false;
+        this.telOk = true;
+
+      } else {
+        this.telShow = true;
+        this.telOk = false;
+
+      }
+      this.verifForm();
+
+    },
+    verifForm: function () {
+      if (this.nameOk && this.firstNameOk && this.mailOk && this.telOk) {
+        console.log("retour ok");
+        this.isDisabled = false;
+      } else {
+        console.log("retour nul");
+        this.isDisabled = true;
+      }
+
+
+    },
   },
 
   data:
     function () {
       return ({
-        mailShow: true,
-        nameShow: true,
-        firstNameShow: true,
-        telShow: true,
+        isDisabled: true,
+        mailShow: false,
+        nameShow: false,
+        firstNameShow: false,
+        telShow: false,
         show: true,
         name: "",
         firstName: "",
         mail: "",
         tel: "",
+        nameOk: false,
+        firstNameOk: false,
+        mailOk: false,
+        telOk: false,
+
       })
     },
-  computed: {
-    verifForm: function () {
-      if (isAText(this.mail)) {
-        this.mailShow = false;
-      } else {
-        this.mailShow = true;
-      }
-    }
-  },
-}
 
+}
 /**************************LIVRE D'OR***************************/
 var livreOr = {
   template: `
@@ -485,14 +734,14 @@ var livreOr = {
     <h1>Le Livre d'Or</h1><br>
     </div>
     <br>
-    <transition name="fondu">
-    <div class="mjjFormValid" v-show="!show">
+    <transition class="row" name="fondu">
+    <div class="col-sm mjjFormValid" v-show="!show">
     <h2>Merci pour votre feedback! À très vite 😉</h2>
     </div>
     </transition>
 
-    <transition name="fondu">
-    <form class="offset-lg-3" @submit.prevent="show =! show" v-show="show">
+    <transition class="row" name="fondu">
+    <form class="offset-lg-3 col-sm" @submit.prevent="show =! show" v-show="show">
     
     <div class="form-row">
     <div class="form-group col-md-6">
