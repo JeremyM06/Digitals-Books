@@ -1,24 +1,22 @@
-body{
-    background-color: indigo;
-}
+
 .mjj-margin-page{
     margin-top: 60px;
 }
 #app{
     min-height: 45rem;
-    background-image: url('../assets/images/bookBackground.jpg');
+    background: url('../assets/images/bookBackground.jpg') no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: center center;
 }
 .mjj-nav{
-    background-image: url('../assets/images/header-modifié.jpg');
-    background-size: cover;
+    background: url('../assets/images/book-background-3.png');
     background-position: bottom;
-    color: black;
+    background-size: auto;
+    background-color: black;
     font-size: 1.2rem;
     font-weight: 900;
-    border: 2px solid;
-    box-shadow: 2px 2px 2px;
+    border: 3px solid black;
+    box-shadow: 2px 2px 2px black;
 }
 .mjj-nav img{
     width: 5rem;
@@ -27,41 +25,49 @@ body{
     border-radius: 100%;
 }
 .mjj-nav-box{
-    border: 1px solid;
+    margin: 0 10px;
+    border: 1px solid chartreuse;
     box-shadow: 1px 1px 1px;
     border-radius: 100%;
-    background-color: rgba(0, 0, 0, 0.294)
+    background-color: rgba(0, 0, 0, 0.452);
+}
+.colorRouter{
+    color: chartreuse !important;
 }
 
 .carousel{
     margin-top: 60px;
-    width: 90%;
+    width: 80%;
+    
 }
 main{
     margin-top: 40px;
 }
 h1{
+    font-family: 'Oleo Script', cursive;
     padding-top: 60px;
     font-weight: bold;
-    color: white;
+    color: rgb(252, 225, 107);
+    text-shadow: 3px 3px 3px grey;
 }
 /*******************CARDS*****************************/
-
 .cards {
     text-align: center;
     word-wrap: break-word;
-    
-
 }
 .cards img{
     border-radius: 10%;
     height: 250px;
 }
-.cards button{
+.btnCards{
     border-radius: 100%;
-    background-color: rgba(80, 247, 135, 0.61);
-}
+    background-color: rgba(0, 245, 82, 0.61);
 
+}
+.btnCards:hover{
+    background-color: rgb(81, 250, 137);
+
+}
 .cards p,.cards span,h5 {
     color: white;
 }
@@ -75,10 +81,20 @@ h1{
     background-size: cover;
     background-position: center;
     color: white;
+    box-shadow: 1px 0px 15px rgb(208, 255, 0);
+}
+.mjjJumbo p{
+    background-color: rgba(0, 0, 0, 0.829);
+    width: auto;
 }
 /****************PAGE CONTACT***************************/
 .mjjalertform{
-    border: red solid 5px !important; 
+    border: red solid 3px !important; 
+}
+.textFormAlert{
+    color:red;
+    font-size: 20px;
+    font-weight: bold;
 }
 .mjjform{
     width: 700px;
@@ -99,14 +115,24 @@ h1{
 .fondu-leave-to {
       opacity: 0;
     }
+.contacts p{
+    color: rgb(240, 203, 196);
+} 
+.contacts label{
+    color: tomato;
+}
+.contacts h1,
+.contacts p{
+    text-align: center;
+}
     /*********************LIVRE D'OR*****************************/
 .mjj-livreOr{
     background-image: url('../assets/images/livreOr.png');
-    background-position: center;
+    background-position: center center;
     background-size: 80%;
     background-repeat: no-repeat;
-    min-width: 1000px;
-    min-height: 1000px;
+   /* min-width: 1000px;
+    min-height: 1000px;*/
     color: black;
     font-family: 'Oleo Script', cursive;
 }
@@ -115,6 +141,7 @@ h1{
 /*********************FOOTER*****************************/
 
 footer{
+    
     background-color: black;
     color: white;
     min-height: 2rem;
@@ -122,6 +149,10 @@ footer{
     font-weight: bold;
 }
 /*****************BOUTIQUE********************/
+.boutique h3{
+    color: rgb(12, 206, 6);
+    font-weight: bolder;
+}
 .mjjPanier{
     background-color: rgba(128, 128, 128, 0.904);
     border: solid black 1px;
@@ -142,11 +173,57 @@ footer{
 }
 .mjjCardsBuy{
     display: flex;
-    flex-direction: column;
+    flex-direction: column;     
     width: 200px;
     border: solid black 2px; 
-    background-color: rgba(128, 0, 0, 0.63);
     border-radius: 3px;
-    margin: 5px;     
-    
+    margin: 5px;       
+}
+.mjjBlockPanier{
+    position: fixed;    
+    top: 110px;
+    right: 15px;
+}
+.btnAchat{
+    border-radius: 10%;
+    background-color: rgb(66, 62, 250);
+}
+.btnAchat:hover{
+    border-radius: 10%;
+    background-color: rgb(4, 0, 255);
+}
+.blue{
+    background-color: rgba(57, 199, 255, 0.63);
+}
+.thriller{
+    background-color: rgba(128, 0, 0, 0.63);
+}
+.manga{
+    background-color: rgba(116, 255, 74, 0.63);
+}
+
+
+/*******************************************************************/
+/***************************RESPONSIVE*******************************/
+
+
+
+@media (max-width: 768px){
+    .mjj-margin-page{
+        margin-top: 100px;
+    }     
+    .mjjCardsBuy{
+        
+        width: 80%;
+    }  
+    .cards img{
+        width: 70%;
+        height: auto;
+    }
+    .mjjBlockPanier{
+        position: fixed;    
+        top: 150px;
+        right: 15px;
+    }
+
 }
