@@ -200,8 +200,11 @@ var Formulaire = {
 var boutique = {
   template: `
 <div class="container-fluid boutique" v-on:mousemove.once="getLs(),total()">
-  <h1 class="text-center"><u>Nos livres</u></h1>
-  <input v-model="search" placeholder="Rechercher">
+    <h1 class="text-center"><u>Nos livres</u></h1>
+  <div class="d-flex flex-column col-3 mjjsearchBar">
+    <label class="text-white " for="recherche"><b>manga - thriller - </b></label>
+    <input v-model="search" placeholder="Rechercher" id="recherche">
+  </div>
   <div class="row">
       <div class="col-sm text-center d-flex justify-content-center flex-wrap ">
         <div class="mjjCardsBuy"  v-for="livre in livres"
@@ -351,15 +354,6 @@ var boutique = {
           dateParution: "29/09/2020",
           mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
           prixht: 24.99,
-        }, {
-          id: 11,
-          name: "Demon Slayer",
-          image: "./assets/images/Demon-Slayer-manga.jpg",
-          categorie: "manga",
-          quantite: 5,
-          dateParution: "14/09/2020",
-          mySynopsis: "Pour la première fois depuis 113 ans, un démon de la lune supérieure a été battu. Hors de lui, Muzan convoque les autres démons de la lune supérieure afin de leur ordonner d’intensifier l’attaque contre les pourfendeurs. Lors de la bataille contre Dahi et Gyutaro, le sabre de Tanjiro a été brisé. Tandis qu’il est à la recherche d’un nouveau sabre, Tanjiro visite le village caché des forgerons où se trouve Haganezuka. ...",
-          prixht: 6.99,
         }, {
           id: 12,
           name: "Dragon Ball Super",
@@ -870,12 +864,229 @@ var livreOr = {
       })
     },
 }
+/************ CARDS2 *************/
+var tooglecards2 = {
+  template: `  
+    <div class="cards">
+        <img :src="myImg" title="image">
+        <h5> {{myTitre}} </h5>
+              <div class="d-flex justify-content-around">
+                <span>prixHt: {{myPrix}}€</span>
+              </div>
+
+    </div>               
+  `,
+  props: ["myImg", "myTitre", "myPrix"],
+
+  data:
+    function () {
+      return ({
+        isShow: false,
+      })
+    },
+}
+/******************ANNEXE***********************/
+var annexe = {
+  template: `
+<div class="container-fluid boutique" v-on:mousemove.once="getLs(),total()">
+  <h1 class="text-center"><u>Nous n'avons rien vu...</u></h1>
+  <div class="row">
+      <div class="col-sm text-center d-flex justify-content-center flex-wrap ">
+        <div class="mjjCardsBuy"  v-for="livre in livres"
+        :key="livre.id"
+        :class="[livre.categorie]">
+          <div>
+            <tooglecards2 :my-img="livre.image"
+            :my-titre="livre.name"
+            :my-prix="livre.prixht"
+            >             
+            </tooglecards2>
+            <button @click="addPanier(livre.id)" class="btnAchat">Buy</button> 
+          </div>
+        </div>
+      </div>
+      
+      
+      <div v-show="show" class="col-sm-4 text-center">        
+            <div >
+              <h3>Mon Panier</h3>
+              <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
+                  <img :src="panier.image" :title="panier.name" />    
+                  <p> {{panier.name}} </p>
+                  <p>Prix: {{panier.prixht}}€ H.T </p>
+                  <button @click="suppr(index)">Suppr</button>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
+                  <h4>Total:</h4>
+                  <span>  H.T : {{ totalht }}€ </span>
+                  <span> TVA 20%: {{ tva }}€ </span>
+                  <span> {{ prixttc }} € TTC </span>
+              </div>
+                <button class="btn btn-success" @click="commandShow =! commandShow" >🤗 Commander 🤗</button>
+                <Formulaire v-show="commandShow"></Formulaire>
+            </div>
+      </div>
+      <div class="mjjBlockPanier">
+        <a href="#"><img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/></a>
+        <span class="panierLgt"> {{paniers.length}} </span>
+      </div>  
+
+  </div>
+</div>`,
+
+  components: { tooglecards2, Formulaire },
+  data: function () {
+    return {
+      livres: [
+        {
+          id: 0,
+          name: "Baisers de sirène",
+          image: "./assets/images/arrBoutique/mangaxbaisersdesirene.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "23/08/2007",
+          prixht: 27.40,
+        }, {
+          id: 1,
+          name: "Quand un ange s'invite",
+          image: "./assets/images/arrBoutique/mangax03_39295.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 11.99,
+        }, {
+          id: 2,
+          name: "Nami S.O.S.!",
+          image: "./assets/images/arrBoutique/mangax05_77372.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 17.45,
+        }, {
+          id: 3,
+          name: "Le baiser du diable",
+          image: "./assets/images/arrBoutique/mangax06_47802.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 15.60,
+        }, {
+          id: 4,
+          name: "Lunes et petites cerises",
+          image: "./assets/images/arrBoutique/mangaxlunesetpetitescerises.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 23.00,
+        }, {
+          id: 5,
+          name: "La Vie Ordinaire de Nagi-Chan",
+          image: "./assets/images/arrBoutique/mangaxlavieordinairedenagichan.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 12.90,
+        }, {
+          id: 6,
+          name: "Le coffret de Jade",
+          image: "./assets/images/arrBoutique/mangax05_77372.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 45.00,
+        }, {
+          id: 7,
+          name: "Essayez-moi",
+          image: "./assets/images/arrBoutique/mangax10_47801.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 23.00,
+        }, {
+          id: 8,
+          name: "Kiss me kiss you",
+          image: "./assets/images/arrBoutique/mangax11_42687.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 23.00,
+        }, {
+          id: 9,
+          name: "Les copines du club de natation",
+          image: "./assets/images/arrBoutique/mangax14_47799.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 52.00,
+        }, {
+          id: 10,
+          name: "Dark Wirbel : Conflit",
+          image: "./assets/images/arrBoutique/mangax15_47798.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 12.50,
+        },],
+
+      couleur: "",
+      couleur1: "",
+      prixttc: 0,
+      tva: 0,
+      totalht: 0,
+      show: false,
+      commandShow: false,
+      paniers: [],
+
+
+    }
+  },
+  methods: {
+    addPanier: function (index) {
+      this.livres[index].quantite--;
+      this.paniers.push(this.livres[index]);
+      console.log(this.paniers);
+      this.total();
+      this.saveLs();
+    },
+
+    suppr: function (index) {
+      this.paniers.splice(index, 1);
+      this.total();
+      this.saveLs();
+
+    },
+    total: function () {
+      this.prixttc = 0;
+      this.totalht = 0;
+      this.paniers.forEach(element => {
+        Math.round((this.totalht += element.prixht) * 100) / 100;
+      });
+      this.prixttc = Number(Math.round((this.totalht * 1.2) * 100) / 100);
+      this.tva = Number(Math.round((this.prixttc - this.totalht) * 100) / 100);
+    },
+    /**Recupere en local storage */
+    getLs: function () {
+      if (!window.localStorage.paniers) {
+        window.localStorage.setItem("paniers", "");
+      } else {
+        this.paniers = JSON.parse(window.localStorage.getItem('paniers'));
+      }
+    },
+    /**Enregistre en local storage */
+    saveLs: function () {
+      window.localStorage.setItem('paniers', JSON.stringify(this.paniers));
+    },
+
+  },
+};
+
 /******************ROUTES*******************/
 var routes = [
   { path: "/Acceuil", component: acceuil },
   { path: "/Boutique", component: boutique },
   { path: "/Contacts", component: contacts },
   { path: "/LivreOr", component: livreOr },
+  { path: "/ArrBoutique", component: annexe },
 ];
 const router = new VueRouter({
   routes: routes,
@@ -885,39 +1096,8 @@ var vm = new Vue({
   el: "#app",
 
   data: {
-
-  },
-
-  methods: {
-
-    addBook() {
-      if (this.isAText(this.currentName) && this.isANumber(this.currentNote)) {
-        this.classe.push({ name: this.currentName, note: this.currentNote });
-        this.notes.push(this.currentNote);
-      }
-    },
-    isAText(txt) {
-      if (isNaN(txt) && txt !== "null") {
-        this.plcHolderName = "Nom";
-        this.bool1 = false;
-        return true;
-      } else {
-        this.plcHolderName = "Entrez un nom valide";
-        this.bool1 = true;
-        return false;
-      }
-    },
-    isANumber(nb) {
-      if (!isNaN(nb) && nb >= 0 && nb <= 20 && nb !== "") {
-        this.plcHolderNote = "Note";
-        this.bool2 = false;
-        return true;
-      } else {
-        this.plcHolderNote = "Entrez votre age";
-        this.bool2 = true;
-        return false;
-      }
-    },
+    validShow: true,
+    darkBoutique: false,
   },
 
   router: router,

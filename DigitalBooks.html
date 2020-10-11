@@ -23,7 +23,7 @@
                         </router-link>
                     </li>
                 </div>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center ">
                     <li class="nav-item mjj-nav-box">
                         <router-link class="nav-link active colorRouter" to="/Boutique">Boutique</router-link>
                     </li>
@@ -33,10 +33,25 @@
                     <li class="nav-item mjj-nav-box">
                         <router-link class="nav-link active colorRouter" to="/Contacts">Contacts</router-link>
                     </li>
+                    <li class="nav-item mjj-nav-box pinkBorder" v-show="darkBoutique">
+                        <router-link class="nav-link active colorRouterPink" to="/ArrBoutique">Private
+                        </router-link>
+                    </li>
                 </div>
             </ul>
         </header>
         <main class="container-fluid">
+            <div class=" mjjVerifAcceuil" v-show="validShow">
+                <h1 class="text-center">Nous devons vérifier votre âge pour<br>certaines categories...</h1>
+                <router-link class="nav-link active" to="/Acceuil"><button
+                        @click="validShow = false, darkBoutique=true">Je suis Majeur
+                    </button>
+                </router-link>
+
+                <router-link class="nav-link active" to="/Acceuil">
+                    <button @click="validShow = false">Je suis Mineur</button>
+                </router-link>
+            </div>
 
             <router-view class="mjj-margin-page">
             </router-view>
