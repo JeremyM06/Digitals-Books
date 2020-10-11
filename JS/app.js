@@ -1,4 +1,4 @@
-/*********************************ACCEUIL********************************************/
+/*****************************ACCEUIL*****************************/
 var acceuil = {
   template: `
   <div class="d-flex flex-column align-items-center">
@@ -102,7 +102,7 @@ var tooglecards = {
     },
 }
 
-/********************  FORMULAIRE  ********************/
+/********  FORMULAIRE  *********/
 var Formulaire = {
   template: `<div>
   <h1>Vous souhaitez un renseignement ?</h1>
@@ -197,20 +197,18 @@ var Formulaire = {
 
     }
 };
-
-
 /********************  BOUTIQUE  ********************/
-
-
 var boutique = {
   template: `
-<div class="container-fluid boutique">
+<div class="container-fluid boutique" v-on:mousemove.once="getLs(),melange()">
   <h1 class="text-center"><u>Nos livres</u></h1>
+  <input v-model="search" placeholder="Rechercher">
   <div class="row">
       <div class="col-sm text-center d-flex justify-content-center flex-wrap ">
         <div class="mjjCardsBuy"  v-for="livre in livres"
         :key="livre.id"
-        :class="[livre.categorie]">
+        :class="[livre.categorie]"
+        v-if=' search==livre.categorie || search=="" || search==livre.name'>
           <div>
             <tooglecards :my-img="livre.image"
             :my-titre="livre.name"
@@ -356,7 +354,7 @@ var boutique = {
           prixht: 24.99,
         }, {
           id: 11,
-          name: "Demon Slayer ",
+          name: "Demon Slayer",
           image: "./assets/images/Demon-Slayer-manga.jpg",
           categorie: "manga",
           quantite: 5,
@@ -392,7 +390,7 @@ var boutique = {
           prixht: 6.90,
         }, {
           id: 15,
-          name: "one punch man",
+          name: "One Punch Man",
           image: "./assets/images/One-Punch-Man-manga.jpg",
           categorie: "manga",
           quantite: 5,
@@ -535,6 +533,7 @@ var boutique = {
           mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
           prixht: 24.99,
         }],
+      search: "",
       couleur: "",
       couleur1: "",
       prixttc: 0,
@@ -552,40 +551,41 @@ var boutique = {
       this.paniers.push(this.livres[index]);
       console.log(this.paniers);
       this.total();
+      this.saveLs();
     },
 
     suppr: function (index) {
       this.paniers.splice(index, 1);
       this.total();
+      this.saveLs();
+
     },
     total: function () {
       this.prixttc = 0;
       this.totalht = 0;
-
       this.paniers.forEach(element => {
         Math.round((this.totalht += element.prixht) * 100) / 100;
       });
       this.prixttc = Number(Math.round((this.totalht * 1.2) * 100) / 100);
       this.tva = Number(Math.round((this.prixttc - this.totalht) * 100) / 100);
     },
-    /*bkgColor: function () {
-      this.livres.forEach(element => {
-        if (element.categorie == "manga") {
-          this.couleur1 = "green";
-        } else if (element.categorie == "thriller") {
-          this.couleur = "red";
-        } else {
-          this.couleur = "blue";
-        }
-      });
-    },*/
+    /**Recupere en local storage */
+    getLs: function () {
+      if (!window.localStorage.paniers) {
+        window.localStorage.setItem("paniers", "");
+      } else {
+        this.paniers = JSON.parse(window.localStorage.getItem('paniers'));
+      }
+    },
+    /**Enregistre en local storage */
+    saveLs: function () {
+      window.localStorage.setItem('paniers', JSON.stringify(this.paniers));
+    },
+
   },
 };
 
-
-
-
-/**************************PAGE CONTACT***************************/
+/****************************************PAGE CONTACT**************************************/
 var contacts = {
   template: `<div class="container-fluid contacts">
     <h1>Vous souhaitez un renseignement ?</h1>
@@ -745,21 +745,21 @@ var livreOr = {
     
     <div class="form-row">
     <div class="form-group col-md-6">
-    <label for="name"><b>Nom<b></label>
+    <label for="name"><b>Nom</b></label>
     <input v-model="name" type="text" class="form-control" placeholder="Dupond" id="name">
     </div>    
   </div>
     
     <div class="form-row">
     <div class="form-group col-md-6">
-  <label for="firstName"><b>Prénom<b></label>
+  <label for="firstName"><b>Prénom</b></label>
   <input v-model="firstName" type="text" class="form-control" placeholder="Michel" id="firsName">
   </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col-md-6">
-    <label for="email"><b>Email address<b> (facultatif)</label>
+    <label for="email"><b>Email address</b> (facultatif)</label>
     <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
     </div>
   </div>
@@ -767,11 +767,11 @@ var livreOr = {
 
   <div class="form-row">
   <div class="form-group col-md-6">
-  <label for="exampleFormControlTextarea1"><b>Message<b></label>
+  <label for="exampleFormControlTextarea1"><b>Message</b></label>
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
   <br>
-  <button  type="submit" class="btn btn-lg col-2 btn-outline-secondary btn-block"><b><b>Envoyer<b><b></button>
+  <button  type="submit" class="btn btn-lg col-2 btn-outline-secondary btn-block"><b><b>Envoyer</b></b></button>
 </form>
 </transition>
 </div>`,
