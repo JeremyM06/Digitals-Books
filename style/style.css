@@ -31,8 +31,14 @@
     border-radius: 100%;
     background-color: rgba(0, 0, 0, 0.452);
 }
+.mjj-nav-box:hover{
+    box-shadow: 0px 0px 10px rgb(229, 255, 0);;
+}
 .colorRouter{
-    color: chartreuse !important;
+    color: rgb(128, 238, 18) !important;
+}
+.colorRouter:hover{
+    text-shadow: 0px 0px 10px rgb(229, 255, 0);
 }
 
 .carousel{
@@ -117,9 +123,12 @@ h1{
     }
 .contacts p{
     color: rgb(240, 203, 196);
+    font-size: 20px;
 } 
 .contacts label{
-    color: tomato;
+    color: rgb(255, 212, 71);
+    font-weight: 900;
+    text-shadow: 0 0 3px black;
 }
 .contacts h1,
 .contacts p{
@@ -160,6 +169,7 @@ footer{
 .mjjPanier img{
     width: 60px;
     height: auto;
+    
 }
 .iconePanier{
     width: 50px;
