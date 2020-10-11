@@ -2,6 +2,7 @@
 .mjj-margin-page{
     margin-top: 60px;
 }
+
 #app{
     min-height: 45rem;
     background: url('../assets/images/bookBackground.jpg') no-repeat;

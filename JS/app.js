@@ -199,7 +199,7 @@ var Formulaire = {
 /********************  BOUTIQUE  ********************/
 var boutique = {
   template: `
-<div class="container-fluid boutique" v-on:mousemove.once="getLs(),melange()">
+<div class="container-fluid boutique" v-on:mousemove.once="getLs(),total()">
   <h1 class="text-center"><u>Nos livres</u></h1>
   <input v-model="search" placeholder="Rechercher">
   <div class="row">
@@ -207,7 +207,7 @@ var boutique = {
         <div class="mjjCardsBuy"  v-for="livre in livres"
         :key="livre.id"
         :class="[livre.categorie]"
-        v-if=' search==livre.categorie || search=="" || search==livre.name'>
+        v-if='search==livre.categorie || search=="" || search==livre.name'>
           <div>
             <tooglecards :my-img="livre.image"
             :my-titre="livre.name"
@@ -241,7 +241,7 @@ var boutique = {
             </div>
       </div>
       <div class="mjjBlockPanier">
-        <a href="#mjjancre"><img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/></a>
+        <a href="#"><img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/></a>
         <span class="panierLgt"> {{paniers.length}} </span>
       </div>  
 
@@ -743,60 +743,132 @@ var livreOr = {
     <form class="offset-lg-3 col-sm" @submit.prevent="show =! show" v-show="show">
     
     <div class="form-row">
-    <div class="form-group col-md-6">
-    <label for="name"><b>Nom</b></label>
-    <input v-model="name" type="text" class="form-control" placeholder="Dupond" id="name">
-    </div>    
-  </div>
+      <div class="form-group col-md-6">
+        <label for="name"><b>Nom</b></label>
+        <input v-model="name" type="text" class="form-control" @keyup="isAName(name)" :class="{mjjalertform : nameShow}" placeholder="Dupond" id="name">
+      </div>    
+    </div>
     
     <div class="form-row">
-    <div class="form-group col-md-6">
-  <label for="firstName"><b>Prénom</b></label>
-  <input v-model="firstName" type="text" class="form-control" placeholder="Michel" id="firsName">
-  </div>
-  </div>
+      <div class="form-group col-md-6">
+        <label for="firstName"><b>Prénom</b></label>
+        <input v-model="firstName" type="text" class="form-control" @keyup="isAFirstName(firstName)" :class="{mjjalertform : firstNameShow}" placeholder="Michel" id="firsName">
+      </div>
+    </div>
 
   <div class="form-row">
     <div class="form-group col-md-6">
-    <label for="email"><b>Email address</b> (facultatif)</label>
-    <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
+      <label for="email"><b>Email address</b> (facultatif)</label>
+      <input v-model="mail" @keyup="isAMail(mail)" :class="{mjjalertform : mailShow}" class="form-control" id="email" placeholder="lecteur...@mail.com">
     </div>
   </div>
   <br>
 
   <div class="form-row">
-  <div class="form-group col-md-6">
-  <label for="exampleFormControlTextarea1"><b>Message</b></label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <div class="form-group col-md-6">
+      <label for="exampleFormControlTextarea1"><b>Message</b></label>
+      <textarea v-model="text" class="form-control" @keyup="isAText(text)" :class="{mjjalertform : textShow}" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
   </div>
   <br>
-  <button  type="submit" class="btn btn-lg col-2 btn-outline-secondary btn-block"><b><b>Envoyer</b></b></button>
+  <button  type="submit" class="btn btn-lg col-2 btn-outline-secondary btn-block" :disabled="isDisabled"><b><b>Envoyer</b></b></button>
 </form>
 </transition>
 </div>`,
 
   methods: {
+    clear: function () {
+      this.name = "";
+      this.firstName = "";
+      this.mail = "";
+      this.text = "";
+    },
     isAText(txt) {
       if (isNaN(txt) && txt !== "null") {
+        this.textShow = false;
+        this.textOk = true;
 
-        return true;
       } else {
-
-        return false;
+        this.textShow = true;
+        this.textOk = false;
       }
-    }
+      this.verifForm();
+
+    },
+
+    isAName: function (txt) {
+      if (isNaN(txt) && txt !== "null") {
+        this.nameShow = false;
+        this.nameOk = true;
+      } else {
+        this.nameShow = true;
+        this.nameOk = false;
+      }
+      this.verifForm();
+    },
+    isAFirstName: function (txt) {
+      if (isNaN(txt) && txt !== "null") {
+        this.firstNameShow = false;
+        this.firstNameOk = true;
+      } else {
+        this.firstNameShow = true;
+        this.firstNameOk = false;
+      }
+      this.verifForm();
+
+    },
+    isAMail: function (mail) {
+      if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail) && mail != "") {
+        this.mailShow = false;
+        this.mailOk = true;
+      } else {
+        this.mailShow = true;
+        this.mailOk = false;
+      }
+      this.verifForm();
+
+    },
+    isATel: function (tel) {
+
+      if (/^(\+33|0|0033)[1-9]\d{8}$/.test(tel) && tel != "") {
+        this.telShow = false;
+        this.telOk = true;
+
+      } else {
+        this.telShow = true;
+        this.telOk = false;
+
+      }
+      this.verifForm();
+
+    },
+    verifForm: function () {
+      if (this.nameOk && this.firstNameOk && this.textOk) {
+        this.isDisabled = false;
+      } else {
+        this.isDisabled = true;
+      }
+    },
   },
 
   data:
     function () {
       return ({
+        isDisabled: true,
+        mailShow: false,
+        nameShow: false,
+        firstNameShow: false,
+        textShow: false,
         show: true,
         name: "",
         firstName: "",
         mail: "",
+        nameOk: false,
+        firstNameOk: false,
+        mailOk: false,
+        textOk: false,
       })
-
-    }
+    },
 }
 /******************ROUTES*******************/
 var routes = [
