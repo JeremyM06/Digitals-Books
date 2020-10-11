@@ -11,7 +11,8 @@ body{
     background-position: center;
 }
 .mjj-nav{
-    background-image: url('../assets/images/book-background-2.png');
+    background-image: url('../assets/images/header-modifié.jpg');
+    background-size: cover;
     background-position: bottom;
     color: black;
     font-size: 1.2rem;

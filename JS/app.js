@@ -8,13 +8,12 @@ var acceuil = {
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
       <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="assets/images/digitalLibrary.jpg" class="d-block w-100" alt="...">
+        <img src="assets/images/dix-livres.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </div>
       </div>
       <div class="carousel-item">
@@ -46,18 +45,18 @@ var acceuil = {
   <!--Presentation jumbotron-->
   <div class="jumbotron mjjJumbo">    
     <h1 class="display-4"><b>Digital Books!</b></h1>
-    <p class="lead"><b>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</b></p>
+    <p class="lead"><b>Un service prêt-porter</b></p>
     <hr class="my-4">
     <transition name="jumboShow">
       <div v-show="jumboShow">
-        <p><b>It uses utility classes for typography and spacing to space content out within the larger container.</b></p>
+        <p><b>Nous vous apportons un service prêts-à-porter avec nos livraisons dans les 48 heures!</b></p>
         <a @click="jumboShow =! jumboShow" class="btn btn-primary btn-lg" role="button">Qui sommes-nous?</a>
       </div>
     </transition>
   
     <transition name="jumboShow">
       <div v-show="!jumboShow" class="jumboShowInfo">
-      <p><b>Nous sommes </b></p>
+      <p><b>Nous sommes un start-up offrant à nos clients les meilleurs qualités de service de confiance. On vous offre un promo de livraison dès le premier achat.</b></p>
       <a @click="jumboShow =! jumboShow" class="btn btn-light btn-lg" role="button"><router-link class="nav-link active" to="/Contacts"><b>Contactez-nous</b></router-link>
       </a>
       </div>
@@ -273,7 +272,7 @@ var boutique = {
           prixht: 11.99,
         }, {
           id: 2,
-          name: "Darkest Before The Dawn (The Second Dark Ages #3)",
+          name: "Darkest Before The Dawn :The Second Dark Ages #3",
           image: "./assets/images/DarkestBeforeDawn.jpg",
           categorie: "thriller",
           quantite: 5,
