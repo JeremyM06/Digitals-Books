@@ -282,8 +282,8 @@ var boutique = {
   </div>
   <div class="row">
       <div class="col-sm text-center d-flex justify-content-center flex-wrap ">
-        <div class="mjjCardsBuy"  v-for="livre in livres"
-        :key="livre.id"
+        <div class="mjjCardsBuy"  v-for="(livre,index) in livres"
+        :key="index"
         :class="[livre.categorie]"
         v-if='search==livre.categorie || search=="" || search==livre.name'>
           <div>
@@ -294,13 +294,12 @@ var boutique = {
             :my-quantite="livre.quantite"
             >             
             </tooglecards>
-            <button v-if="livre.quantite >0" @click="addPanier(livre.id)" class="btnAchat">Buy</button> 
+            <button v-if="livre.quantite > 0" @click="addPanier(index)" class="btnAchat">Buy</button> 
             <h5 v-else>Rupture de stock</h5>
           </div>
         </div>
       </div>
-      
-      
+
       <div v-show="show" class="col-sm-4 text-center">        
             <div >
               <h3>Mon Panier</h3>
@@ -710,6 +709,7 @@ var boutique = {
   methods: {
     addPanier: function (index) {
       this.livres[index].quantite--;
+      console.log(index);
       this.paniers.push(this.livres[index]);
       console.log(this.paniers);
       this.total();
@@ -1108,9 +1108,11 @@ var annexe = {
             :my-prix="livre.prixht"
             :my-quantite="livre.quantite"
             >             
-            </tooglecards2>
-            <button @click="addPanier(livre.id)" class="btnAchat">Buy</button> 
-          </div>
+            </tooglecards2>     
+      
+            <button v-if="livre.quantite > 0" @click="addPanier(livre.id)" class="btnAchat">Buy</button> 
+            <h5 v-else>Rupture de stock</h5>
+            </div>
         </div>
       </div>
       
@@ -1594,8 +1596,6 @@ var annexe = {
       window.localStorage.setItem('livres', JSON.stringify(this.livres));
       window.localStorage.setItem('livres2', JSON.stringify(this.livres2));
     },
-
-
   },
 };
 
