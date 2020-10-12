@@ -305,15 +305,15 @@ var boutique = {
               <h3>Mon Panier</h3>
               <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
                   <img :src="panier.image" :title="panier.name" />    
-                  <p> {{panier.name}} </p>
-                  <p>Prix: {{panier.prixht}}€ H.T </p>
+                  <p class="fontForm"> {{panier.name}} </p>
+                  <p class="fontForm">Prix: {{panier.prixht}}€ H.T </p>
                   <img @click=suppr(index) src="./assets/images/x_en_3D.png">
               </div>
               <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
-                  <h4>Total:</h4>
-                  <span>  H.T : {{ totalht }}€ </span>
-                  <span> TVA 20%: {{ tva }}€ </span>
-                  <span> {{ prixttc }} € TTC </span>
+                  <h4 class="fontForm">TOTAL:</h4>
+                  <span class="fontForm">  H.T : {{ totalht }}€ </span>
+                  <span class="fontForm"> TVA 20%: {{ tva }}€ </span>
+                  <span class="fontForm"> {{ prixttc }} € TTC </span>
               </div>
                 <button class="btn btn-success" @click="commandShow =! commandShow" >🤗 Commander 🤗</button>
                 <Formulaire v-show="commandShow"></Formulaire>
@@ -934,7 +934,8 @@ var livreOr = {
     <br>
     <transition class="row" name="fondu">
     <div class="col-sm mjjFormValid" v-show="!show">
-    <h2>Merci pour votre feedback! À très vite 😉</h2>
+    <h2>Merci pour votre feedback! À bientôt 😉</h2>
+    <button @click="show =! show"  type="button" class="btn btn-primary" >Retour</button>
     </div>
     </transition>
 
@@ -1120,15 +1121,15 @@ var annexe = {
               <h3>Mon Panier</h3>
               <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
                   <img :src="panier.image" :title="panier.name" />    
-                  <p> {{panier.name}} </p>
-                  <p>Prix: {{panier.prixht}}€ H.T </p>
+                  <p class="fontForm"> {{panier.name}} </p>
+                  <p class="fontForm">Prix: {{panier.prixht}}€ H.T </p>
                   <img @click=suppr(index) src="./assets/images/x_en_3D.png">
               </div>
               <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
-                  <h4>Total:</h4>
-                  <span>  H.T : {{ totalht }}€ </span>
-                  <span> TVA 20%: {{ tva }}€ </span>
-                  <span> {{ prixttc }} € TTC </span>
+                  <h4 class="fontForm">TOTAL:</h4>
+                  <span class="fontForm">  H.T : {{ totalht }}€ </span>
+                  <span class="fontForm"> TVA 20%: {{ tva }}€ </span>
+                  <span class="fontForm"> {{ prixttc }} € TTC </span>
               </div>
                 <button class="btn btn-success" @click="commandShow =! commandShow" >🤗 Commander 🤗</button>
                 <Formulaire v-show="commandShow"></Formulaire>
