@@ -111,7 +111,9 @@ var Formulaire = {
   <hr>
   <transition name="fondu" class="row">
   <div class="col mjjFormValid" v-show="!show">
-  <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
+  <h2>Votre commande a bien été prise en compte. Merci 📚 😊 📚</h2>
+  <button @click="show =! show"  type="button" class="btn btn-primary" >Retour</button>
+
   </div>
   </transition>
 
@@ -162,7 +164,7 @@ var Formulaire = {
 
 <!--MG-D09-->
 <div >                
- <button type="submit" class="btn btn-primary":disabled="isDisabled">Envoyer</button> 
+ <button type="submit" @click="totalAfterBuy()" class="btn btn-primary":disabled="isDisabled">Envoyer</button> 
 </div>
 <!--MG-F09-->
 </form>
@@ -242,7 +244,31 @@ var Formulaire = {
         this.isDisabled = false;
         console.log(this.nameOk, this.adressOk, this.postalOk, this.villeOk)
       }
-    }
+    },
+    /**Recupere en local storage */
+    getLsPanier: function () {
+      if (!window.localStorage.paniers) {
+        window.localStorage.setItem("paniers", "");
+      } else {
+        this.paniers = JSON.parse(window.localStorage.getItem('paniers'));
+      }
+    },
+
+    /**Suppression panier après achat*/
+    totalAfterBuy: function () {
+      this.getLsPanier();
+      this.paniers.forEach(element => {
+        this.paniers.splice(element, 1);
+      });
+      this.prixttc = 0;
+      this.totalht = 0;
+      this.tva = 0;
+      this.saveLsPanier();
+    },
+    /**Enregistre en local storage */
+    saveLsPanier: function () {
+      window.localStorage.setItem('paniers', JSON.stringify(this.paniers));
+    },
   },
 
   data: function () {
@@ -252,6 +278,7 @@ var Formulaire = {
         { id: 1, ville: "Cagnes sur mer", cdpostal: '06800', },
         { id: 2, ville: "Antibes", cdpostal: '06600', },
       ],
+      paniers: [],
       btnOut: true,
       nameOk: false,
       adressOk: false,
