@@ -293,7 +293,8 @@ var boutique = {
             :my-quantite="livre.quantite"
             >             
             </tooglecards>
-            <button @click="addPanier(livre.id)" class="btnAchat">Buy</button> 
+            <button v-if="livre.quantite >0" @click="addPanier(livre.id)" class="btnAchat">Buy</button> 
+            <h5 v-else>Rupture de stock</h5>
           </div>
         </div>
       </div>

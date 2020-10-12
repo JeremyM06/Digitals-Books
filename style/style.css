@@ -5,6 +5,7 @@
 /*Verif age utilisateur acceuil*/
 .mjjVerifAcceuil{
     background-color: rgba(0, 0, 0, 0.966);
+    left: 0;
     position: fixed;
     height: 100rem;
     width: 100%;
@@ -120,8 +121,15 @@ h1{
     box-shadow: 1px 0px 15px rgb(208, 255, 0);
 }
 .mjjJumbo p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
     background-color: rgba(0, 0, 0, 0.829);
     width: auto;
+}
+.lead{
+    width: 250px !important;
 }
 /****************PAGE CONTACT***************************/
 .mjjalertform{
