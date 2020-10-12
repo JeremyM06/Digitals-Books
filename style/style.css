@@ -5,6 +5,7 @@
 /*Verif age utilisateur acceuil*/
 .mjjVerifAcceuil{
     background-color: rgba(0, 0, 0, 0.966);
+    left: 0;
     position: fixed;
     height: 100rem;
     width: 100%;
@@ -39,10 +40,8 @@
     box-shadow: 2px 2px 2px black;
 }
 .mjj-nav img{
-    width: 5rem;
-    border-radius: 100%;
-    box-shadow: 1px 1px 1px brown;
-    border-radius: 100%;
+    width: 20rem;
+    border-radius: 10%;
 }
 .mjj-nav-box{
     margin: 0 10px;
@@ -77,7 +76,6 @@
 .carousel{
     margin-top: 60px;
     width: 80%;
-    
 }
 main{
     margin-top: 40px;
@@ -93,11 +91,10 @@ p, span{
     font-family: 'Oleo Script', cursive;
     padding-top: 60px;
     font-weight: bold;
-    text-shadow: 3px 3px 3px grey;
     text-align: center;
 }
 p{
-    color: rgb(240, 203, 196);
+    color: white;
     font-size: 20px;
 } 
 /*******************CARDS*****************************/
@@ -135,8 +132,15 @@ p{
 }
 .mjjJumbo p{
     background-color: rgba(0, 0, 0, 0.829);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
     width: auto;
-    background-position: center;
+}
+.lead{
+    width: 250px !important;
 }
 /****************PAGE CONTACT***************************/
 .mjjalertform{
@@ -273,8 +277,7 @@ footer{
     .mjj-margin-page{
         margin-top: 100px;
     }     
-    .mjjCardsBuy{
-        
+    .mjjCardsBuy{        
         width: 80%;
     }  
     .cards img{
@@ -286,5 +289,26 @@ footer{
         top: 150px;
         right: 15px;
     }
-
+    .colorRouter{
+        color: rgb(128, 238, 18) !important;
+        font-size: 0.7rem;
+        padding: 1px;
+    }
+    
+    .mjj-nav-box{
+        border: 1px solid chartreuse;
+        border-radius: 100%;
+        background-color: rgba(0, 0, 0, 0.795);
+        padding: 1px;
+    }
+    .mjj-nav-box:hover{
+        box-shadow: 0px 0px 10px rgb(229, 255, 0);;
+    }
+    .colorRouterPink{
+        color: rgb(255, 45, 244) !important;
+        font-size: 0.7rem;
+    }
+    .pinkBorder{
+        border: solid 3px rgb(255, 45, 244) ;
+    }
 }
