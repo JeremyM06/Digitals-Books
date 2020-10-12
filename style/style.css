@@ -89,6 +89,17 @@ h1{
     color: rgb(252, 225, 107);
     text-shadow: 3px 3px 3px grey;
 }
+p, span{
+    font-family: 'Oleo Script', cursive;
+    padding-top: 60px;
+    font-weight: bold;
+    text-shadow: 3px 3px 3px grey;
+    text-align: center;
+}
+p{
+    color: rgb(240, 203, 196);
+    font-size: 20px;
+} 
 /*******************CARDS*****************************/
 .cards {
     text-align: center;
@@ -125,6 +136,7 @@ h1{
 .mjjJumbo p{
     background-color: rgba(0, 0, 0, 0.829);
     width: auto;
+    background-position: center;
 }
 /****************PAGE CONTACT***************************/
 .mjjalertform{

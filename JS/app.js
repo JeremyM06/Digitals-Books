@@ -14,22 +14,22 @@ var acceuil = {
       <div class="carousel-item active">
         <img src="assets/images/dix-livres.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <router-link to="/boutique"><a class="btn btn-lg btn-dark" role="button">Plus d'info</a>
+          <router-link to="/boutique"><a class="btn btn-lg btn-dark" role="button">Accéder à la boutique</a>
           </router-link>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="assets/images/digitalBooks1.jpg" class="d-block w-100" alt="...">
+        <img src="assets/images/Commandez.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <router-link to="/boutique"><a class="btn btn-lg btn-light" role="button">Commandez maintenant!</a>
+        </router-link>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="assets/images/digitalBooks.jpg" class="d-block w-100" alt="...">
+        <img src="assets/images/livreOr.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        <router-link to="/LivreOr"><a class="btn btn-lg btn-warning" role="button">Livre d'Or</a>
+        </router-link>
         </div>
       </div>
     </div>
@@ -106,8 +106,8 @@ var tooglecards = {
 /********  FORMULAIRE  *********/
 var Formulaire = {
   template: `<div>
-  <h1>Vous souhaitez un renseignement ?</h1>
-  <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
+  <h1>Votre commande a été bien prise en compte</h1>
+  <p>Veuillez saisir vos coordonnées ci-dessous</p>
   <hr>
   <transition nom="fondu" class="row">
   <div class="col mjjFormValid" v-show="!show">
@@ -256,6 +256,7 @@ var Formulaire = {
       rechers: [
         { id: 0, ville: "Nice", cdpostal: '06000', },
         { id: 1, ville: "Cagnes sur mer", cdpostal: '06800', },
+        { id: 2, ville: "Antibes", cdpostal: '06600', },
       ],
       btnOut: true,
       nameOk: false,
