@@ -108,8 +108,8 @@ var Formulaire = {
   <h1>Vous souhaitez un renseignement ?</h1>
   <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
   <hr>
-  <transition nom="fondu">
-  <div class="mjjFormValid" v-show="!show">
+  <transition nom="fondu" class="row">
+  <div class="col mjjFormValid" v-show="!show">
   <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
   </div>
   </transition>
@@ -118,38 +118,58 @@ var Formulaire = {
   <form @submit.prevent="show =! show" v-show="show">  
   <div class="form-row">
   <div class="form-group col-md-6">
-<label for="nom">nom</label>
-<input v-model="nom" type="text" class="form-control" placeholder="" id="nom">
+<input v-model="nom" type="text" class="form-control" @keyup="createNewReferenceDe(),verifForm()" placeholder="nom" id="nom">
+<p v-if="errors.nom" class="alert alert-danger">      
+  {{ errors.nom }}</p>                                
 </div></div>
+
 
 <div class="form-row">
   <div class="form-group col-md-6">
-  <label for="adresse">Prénom</label>
-  <input v-model="adresse" type="text" class="form-control" id="adresse" placeholder="">
+  <input v-model="adresse" type="text" @keyup="createNewReferenceDe(),verifForm()" class="form-control" id="adresse" placeholder="Adresse">
+  <p v-if="errors.adresse" class="alert alert-danger">      
+  {{ errors.adresse }}</p>                              
   </div>    
 </div>
-<div class="form-row">
+
+<div class="form-row" @click="createNewReferenceDe(),verifForm()">
+  <div class="form-group col-md-6">
+  <select class="form-control" v-model="cdpostal">
+    <option value="">x-- SELECTIONNER CODE POSTALE --x</option>
+    <option v-for="recher in rechers" :key="recher.id">
+    {{ recher.cdpostal }}
+    </option>
+  </select>
+  <p v-if="errors.cdpostal" class="alert alert-danger">      
+  {{ errors.cdpostal }}</p>                                  
+  </div>
+  </div>
+
+
+<div class="form-row"  @click="createNewReferenceDe(),verifForm()">
 <div class="form-group col-md-6">
-<label for="cdpostal">0680</label>
-<input v-model="cdpostal" type="text" class="form-control" id="cdpostal" placeholder="18">
+<select class="form-control" v-model="ville">
+      <option value="">x-- SELECTIONNER UNE VILLE --x</option>
+      <option v-for="recher in rechers" :key="recher.id">
+      {{ recher.ville }}
+      </option>
+  </select>
+<p v-if="errors.ville" class="alert alert-danger">      
+{{ errors.ville }}</p>                                  
 </div>
 </div>
 
-<div class="form-row">
-<div class="form-group col-md-6">
-<label for="ville">Nice</label>
-<input v-model="ville" type="text" class="form-control" id="ville" placeholder="Nice">
+<!--MG-D09-->
+<div >                
+ <button type="submit" class="btn btn-primary":disabled="isDisabled">Envoyer</button> 
 </div>
-</div>
-
-<div>
-<button  type="submit" @click.prevent="createNewReferenceDe()" class="btn btn-primary" >Envoyer</button>
-<button  type="submit" class="btn btn-primary" >Envoyer</button>
-</div>
+<!--MG-F09-->
 
 </form>
 
-<h3> {{ errors.nom }} <br> {{ errors.adresse }}  </h3>
+   
+
+
 
 </transition>
 </div>`,
@@ -163,39 +183,96 @@ var Formulaire = {
         return false;
       }
     },
-    createNewReferenceDe: function () {
+    createNewReferenceDe() {
       //reinitialisation du tableau des erreurs
       this.errors = {};
       this.reference = "";
+      this.Indout = true;   //MG 09
 
       //Verifier si tous les champs nécessaires sont renseignés
 
-      if (this.nom == "") {
-        this.errors.nom = "Vous avez oublié le nom !!";
-        this.Indout = false;
+      if (this.nom == "") {                                   //MG 09
+        this.errors.nom = "Nom: obligatoire !!";
+        this.Indout = false;   //MG 11
+
+      } else if ((!isNaN(this.nom))) {
+        this.errors.nom = "Nom: Erreur de saisi !!";
+        this.Indout = false;   //MG 11
+      } else {
+        this.nameOk = true;
       }
 
-      if (this.adresse == "") {
-        this.errors.adresse = "Vous avez oublié l'adresse !!";
-        this.Indout = false;
+      if (this.adresse == "") {                                   //MG 09
+        this.errors.adresse = "Adresse: obligatoire !!";
+        this.Indout = false;   //MG 11
+      } else if ((!isNaN(this.adresse))) {
+        this.errors.adresse = "adresse: Erreur de saisi !!";
+        this.Indout = false;   //MG 11
+      } else {
+        this.adressOk = true;
       }
+
+      if (this.cdpostal === null) {
+        this.errors.cdpostal = "code postale: obligatoire !!";
+        this.Indout = false;   //MG 11
+
+      } else if ((isNaN(this.cdpostal))) {
+        this.errors.cdpostal = "code postale: Erreur de saisi !!";
+        this.Indout = false;   //MG 11
+      } else {
+        this.postalOk = true;
+      }
+
+
+      if (this.ville == "") {                                   //MG 09
+        this.errors.ville = "ville: obligatoire !!";
+        this.Indout = false;   //MG 11
+
+      } else if ((!isNaN(this.ville))) {
+        this.errors.ville = "ville: Erreur de saisi !! !!";
+        this.Indout = false;   //MG 11
+      } else {
+        this.villeOk = true;
+
+      }
+
+
+
+
+      console.log(this.errors);  //MG 09
+      console.log(this.Indout);  //MG 09
     },
+    verifForm: function () {
+      if (this.nameOk && this.adressOk && this.postalOk && this.villeOk) {
+        this.isDisabled = false;
+        console.log(this.nameOk, this.adressOk, this.postalOk, this.villeOk)
+      }
+    }
   },
 
-  data:
-    function () {
-      return ({
-        indout: true,
-        show: true,
-        nom: "",
-        adresse: "",
-        cdpostal: 0,
-        ville: "",
-        errors: "",
-        reference: null,
-      })
-
+  data: function () {
+    return {
+      rechers: [
+        { id: 0, ville: "Nice", cdpostal: '06000', },
+        { id: 1, ville: "Cagnes sur mer", cdpostal: '06800', },
+      ],
+      btnOut: true,
+      nameOk: false,
+      adressOk: false,
+      postalOk: false,
+      villeOk: false,
+      Indout: false,
+      isDisabled: true,
+      show: true,
+      nom: "",
+      adresse: "",
+      cdpostal: null,
+      ville: "",
+      errors: "",
+      reference: null,
     }
+
+  }
 };
 /********************  BOUTIQUE  ********************/
 var boutique = {
@@ -422,7 +499,7 @@ var boutique = {
         }, {
           id: 19,
           name: "L'Attaque des Titans",
-          image: "./assets/images/L-Attaque-des-Titans.jpg",
+          image: "./assets/images/L-attaque-des-titans-tome-1.jpg",
           categorie: "manga",
           quantite: 5,
           dateParution: "25/11/2020",
@@ -439,94 +516,94 @@ var boutique = {
           prixht: 6.85,
         }, {
           id: 21,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "A La Croisée des Mondes",
+          image: "./assets/images/A_la_croisee_des_mondes.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          dateParution: "05/12/2007",
+          mySynopsis: "Rebecca, 12 ans, est une orpheline rebelle qui vit à Jordan College, un établissement de l'Université d'Oxford, dans un monde parallèle qui ressemble au nôtre mais qui a évolué de façon un peu différente. Elle a pour compagnon Pantalaimon, son dæmon, un être capable de prendre de nombreuses formes animales.",
           prixht: 24.99,
         }, {
           id: 22,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "Eragon: Le Cycle de l'Héritage",
+          image: "./assets/images/Eragon_Le_Cycle_de_l_heritage_tome_1.png",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "04/03/2010",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...Eragon n'a que quinze ans, mais le destin de l'Empire eEragon n'a que quinze ans, mais le destin de l'Empire est désormais entre ses mains !C'est en poursuivant une biche dans la montagne que le jeune Eragon, quinze ans, tombe sur une magnifique pierre bleue, qui s'avère être... un oeuf de dragon !",
+          prixht: 12.99,
         }, {
           id: 23,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "Harry Potter",
+          image: "./assets/images/Harry_Potter.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          dateParution: "07/02/2019",
+          mySynopsis: "Une rentrée fracassante en voiture volante, une étrange malédiction qui s’abat sur les élèves, cette deuxième année à l’école des sorciers ne s’annonce pas de tout repos! Entre les cours de potions magiques, les matches de Quidditch et les combats de mauvais sorts, Harry et ses amis Ron et Hermione trouveront-ils le temps de percer le mystère de la Chambre des Secrets?",
           prixht: 24.99,
         }, {
           id: 24,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "Twilight",
+          image: "./assets/images/Twilight.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "02/11/2006",
+          mySynopsis: "Rejetée par celui qu'elle aime passionnément, Bella ne s'en relève pas. Fascinée par un vampire, comment pourrait-elle retrouver goût à la pâle existence humaine ? Pourtant il faut vivre. Mais Bella n'a de goût pour rien, sinon le danger : alors elle entend la voix d'Edward, et éprouve l'illusion de sa présence. Comme s'il ne l'avait pas abandonnée, comme s'il tenait encore à elle. Bella échappera-t-elle à cette obsession amoureuse qui la hante ? A quel prix ?",
+          prixht: 19.99,
         }, {
           id: 25,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "L'arbre de l'été",
+          image: "./assets/images/L_Arbre_de_l_ete_La_Tapisserie_de_Fionavar_tome_1.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "22/05/2006",
+          mySynopsis: "Ils sont cinq, femmes et hommes, tous vivant à Toronto au Canada ; ils sont jeunes, étudiants ou déjà dans la vie active, tous rationnels. Or, les voici projetés dans Fionavar, le Grand Univers dont le nôtre n'est qu'une ombre bien pâle! Malgré la protection offerte par Mantel d'Argent le magicien, ils sont aussitôt pris dans les premières escarmouches de la guerre qui oppose les forces des Lumières à celles des Ténèbres.",
+          prixht: 21.99,
         }, {
           id: 26,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "L'Homme Rune: Le Cycle des Démons",
+          image: "./assets/images/L_Homme_Rune_Le_Cycle_des_demons_tome_1.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "02/11/2009",
+          mySynopsis: "Parfois, il existe de très bonnes raisons d'avoir peur du noir... Arlen a onze ans et vit avec ses parents dans leur petite ferme. Lorsque la nuit tombe sur le monde d'Arlen, une brume étrange s'élève du sol ; une brume qui promet la mort aux idiots qui osent affronter les ténèbres, car des démons affamés émergent de ces vapeurs pour se nourrir des vivants.",
+          prixht: 18.99,
         }, {
           id: 27,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "thriller",
+          name: "Le Codex de Paris",
+          image: "./assets/images/Le_codex_de_Paris.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "10/01/2020",
+          mySynopsis: "l fait profil bas pour ne pas attirer l’attention de la police ou de n’importe quel humain. Mais quand une femme en détresse vient le supplier de retrouver son époux, Germain accepte. Il ne se doute pas que cette affaire va le mettre sur la piste d’un dangereux codex et du démon qui a un jour transformé Germain en vampire.",
+          prixht: 11.99,
         }, {
           id: 28,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "thriller",
+          name: "Le Seigneur des Anneaux",
+          image: "./assets/images/Le_Seigneur_des_anneaux_Integrale.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "22/11/2012",
+          mySynopsis: "Une contrée paisible où vivent les Hobbits. Un anneau magique à la puissance infinie. Sauron, son créateur, prêt à dévaster le monde entier pour récupérer son bien. Frodon, jeune Hobbit, détenteur de l'Anneau malgré lui. Gandalf, le Magicien, venu avertir Frodon du danger. Et voilà déjà les Cavaliers Noirs qui approchent...",
+          prixht: 17.99,
         }, {
           id: 29,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "thriller",
+          name: "Le Monde de Narnia",
+          image: "./assets/images/Le_Monde_de_Narnia.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          dateParution: "09/11/2010",
+          mySynopsis: "C'est une histoire qui s'est passée il y a très longtemps, à l'époque où votre grand-père était un petit garçon. Une histoire très importante, car c'est elle qui permet de comprendre comment les échanges entre notre monde et le pays de Narnia ont commencé. A cette époque, Sherlock Holmes vivait encore à Baker Street.",
           prixht: 24.99,
         }, {
           id: 30,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "thriller",
+          name: "Le Prisme Noir Le Porteur de Lumière",
+          image: "./assets/images/Le_Prisme_noir_Le_Porteur_de_lumiere_tome_1.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "21/10/2011",
+          mySynopsis: "Plus la lumière est vive, plus l'ombre est profonde. Gavin Guile est le Prisme, l'homme le plus puissant du monde. Empereur et magicien, il est le gardien d'une paix bien fragile. Et d'un terrible secret. Les Prismes ne vivent jamais vieux, et Gavin sait exactement combien de temps il lui reste : cinq ans... et cinq missions impossibles à accomplir.",
+          prixht: 25.00,
         }],
       indexTempo: "",
       nameTempo: "",
