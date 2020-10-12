@@ -199,7 +199,7 @@ var Formulaire = {
 /********************  BOUTIQUE  ********************/
 var boutique = {
   template: `
-<div class="container-fluid boutique" v-on:mousemove.once="getLs(),melange()">
+<div class="container-fluid boutique" v-on:mousemove.once="getLs(), total()">
   <h1 class="text-center"><u>Nos livres</u></h1>
   <input v-model="search" placeholder="Rechercher">
   <div class="row">
