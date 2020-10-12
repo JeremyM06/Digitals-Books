@@ -210,6 +210,10 @@ footer{
 .boutique h3{
     color: rgb(12, 206, 6);
     font-weight: bolder;
+    width: 250px !important;
+    font-family: 'Oleo Script', cursive;
+    padding-top: 60px;
+    font-weight: bold;
 }
 .mjjmj{
     margin-right: 5px;

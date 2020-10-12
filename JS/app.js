@@ -8,7 +8,6 @@ var acceuil = {
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
       <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-      <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -306,15 +305,15 @@ var boutique = {
               <h3>Mon Panier</h3>
               <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
                   <img :src="panier.image" :title="panier.name" />    
-                  <p> {{panier.name}} </p>
-                  <p>Prix: {{panier.prixht}}€ H.T </p>
+                  <p class="fontForm"> {{panier.name}} </p>
+                  <p class="fontForm">Prix: {{panier.prixht}}€ H.T </p>
                   <img @click=suppr(index) src="./assets/images/x_en_3D.png">
               </div>
               <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
-                  <h4>Total:</h4>
-                  <span>  H.T : {{ totalht }}€ </span>
-                  <span> TVA 20%: {{ tva }}€ </span>
-                  <span> {{ prixttc }} € TTC </span>
+                  <h4 class="fontForm">TOTAL:</h4>
+                  <span class="fontForm">  H.T : {{ totalht }}€ </span>
+                  <span class="fontForm"> TVA 20%: {{ tva }}€ </span>
+                  <span class="fontForm"> {{ prixttc }} € TTC </span>
               </div>
                 <button class="btn btn-success" @click="commandShow =! commandShow" >🤗 Commander 🤗</button>
                 <Formulaire v-show="commandShow"></Formulaire>
@@ -931,12 +930,13 @@ var livreOr = {
   <div class="container mjj-livreOr">
     <div class="text-center">
     <h1>Le Livre d'Or</h1><br>
-    <p class="fontForm">Veuillez laisser un appreciation ci-dessous</p>
+    <p class="fontForm text-dark">Veuillez laisser un appreciation ci-dessous</p>
     </div>
     <br>
     <transition class="row" name="fondu">
     <div class="col-sm mjjFormValid" v-show="!show">
     <h2>Merci pour votre feedback! À bientôt 😉</h2>
+    <button @click="show =! show"  type="button" class="btn btn-primary" >Retour</button>
     </div>
     </transition>
 
@@ -972,7 +972,7 @@ var livreOr = {
     </div>
   </div>
   <br>
-  <button  type="submit" class="btn btn-lg col-2 btn-outline-secondary btn-block" :disabled="isDisabled"><b><b>Envoyer</b></b></button>
+  <button  type="submit" @click="clear()"class="btn btn-lg col-2 btn-outline-secondary btn-block" :disabled="isDisabled"><b><b>Envoyer</b></b></button>
 </form>
 </transition>
 </div>`,
@@ -1125,15 +1125,15 @@ var annexe = {
               <h3>Mon Panier</h3>
               <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
                   <img :src="panier.image" :title="panier.name" />    
-                  <p> {{panier.name}} </p>
-                  <p>Prix: {{panier.prixht}}€ H.T </p>
+                  <p class="fontForm"> {{panier.name}} </p>
+                  <p class="fontForm">Prix: {{panier.prixht}}€ H.T </p>
                   <img @click=suppr(index) src="./assets/images/x_en_3D.png">
               </div>
               <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
-                  <h4>Total:</h4>
-                  <span>  H.T : {{ totalht }}€ </span>
-                  <span> TVA 20%: {{ tva }}€ </span>
-                  <span> {{ prixttc }} € TTC </span>
+                  <h4 class="fontForm">TOTAL:</h4>
+                  <span class="fontForm">  H.T : {{ totalht }}€ </span>
+                  <span class="fontForm"> TVA 20%: {{ tva }}€ </span>
+                  <span class="fontForm"> {{ prixttc }} € TTC </span>
               </div>
                 <button class="btn btn-success" @click="commandShow =! commandShow" >🤗 Commander 🤗</button>
                 <Formulaire v-show="commandShow"></Formulaire>
