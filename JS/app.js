@@ -107,7 +107,7 @@ var tooglecards = {
 var Formulaire = {
   template: `<div>
   <h1>Votre commande a été bien prise en compte</h1>
-  <p>Veuillez saisir vos coordonnées ci-dessous</p>
+  <p class="fontForm">Veuillez saisir vos coordonnées ci-dessous</p>
   <hr>
   <transition nom="fondu" class="row">
   <div class="col mjjFormValid" v-show="!show">
@@ -817,21 +817,21 @@ var livreOr = {
     <form class="offset-lg-3 col-sm" @submit.prevent="show =! show" v-show="show">
     
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="name"><b>Nom</b></label>
         <input v-model="name" type="text" class="form-control" @keyup="isAName(name)" :class="{mjjalertform : nameShow}" placeholder="Dupond" id="name">
       </div>    
     </div>
     
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="firstName"><b>Prénom</b></label>
         <input v-model="firstName" type="text" class="form-control" @keyup="isAFirstName(firstName)" :class="{mjjalertform : firstNameShow}" placeholder="Michel" id="firsName">
       </div>
     </div>
 
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <label for="email"><b>Email address</b> (facultatif)</label>
       <input v-model="mail" @keyup="isAMail(mail)" :class="{mjjalertform : mailShow}" class="form-control" id="email" placeholder="lecteur...@mail.com">
     </div>
@@ -839,7 +839,7 @@ var livreOr = {
   <br>
 
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <label for="exampleFormControlTextarea1"><b>Message</b></label>
       <textarea v-model="text" class="form-control" @keyup="isAText(text)" :class="{mjjalertform : textShow}" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
