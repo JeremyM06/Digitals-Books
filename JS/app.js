@@ -277,7 +277,7 @@ var boutique = {
 <div class="container-fluid boutique" v-on:mousemove.once="getLsPanier(),getLsBooks(),getLsBooks2(),total()">
     <h1 class="text-center"><u>Nos livres</u></h1>
   <div class="d-flex flex-column col-3 mjjsearchBar">
-    <label class="text-white " for="recherche"><b>manga - thriller - fantastique</b></label>
+    <label class="text-white " for="recherche"><button class="manga mjjmj" @click="search='manga'"><b>manga</b></button>  <button class="thriller mjjmj" @click="search='thriller'"><b>thriller</b></button>  <button class="fantastique mjjmj" @click="search='fantastique'"><b>fantastique</b></button></label>
     <input v-model="search" placeholder="Rechercher" id="recherche">
   </div>
   <div class="row">

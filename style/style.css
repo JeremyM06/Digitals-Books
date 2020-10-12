@@ -87,16 +87,7 @@ h1{
     color: rgb(252, 225, 107);
     text-shadow: 3px 3px 3px grey;
 }
-p, span{
-    font-family: 'Oleo Script', cursive;
-    padding-top: 60px;
-    font-weight: bold;
-    text-align: center;
-}
-p{
-    color: white;
-    font-size: 20px;
-} 
+
 /*******************CARDS*****************************/
 .cards {
     text-align: center;
@@ -138,9 +129,14 @@ p{
     justify-content: center;
     padding: 10px;
     width: auto;
+    font-family: 'Oleo Script', cursive;
+    font-weight: bold;
 }
 .lead{
     width: 250px !important;
+    font-family: 'Oleo Script', cursive;
+    padding-top: 60px;
+    font-weight: bold;
 }
 /****************PAGE CONTACT***************************/
 .mjjalertform{
@@ -211,8 +207,18 @@ footer{
     color: rgb(12, 206, 6);
     font-weight: bolder;
 }
+.mjjmj{
+    margin-right: 30px;
+}
 .mjjsearchBar{
     margin-bottom: 30px;
+}
+.fontForm{
+    font-family: 'Oleo Script', cursive;
+    padding-top: 60px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 3px 3px 3px grey;
 }
 .mjjPanier{
     background-color: rgba(128, 128, 128, 0.904);
