@@ -47,7 +47,7 @@ var acceuil = {
   <!--Presentation jumbotron-->
   <div class="jumbotron mjjJumbo">    
     <h1 class="display-4"><b>Digital Books!</b></h1>
-    <p class="lead"><b>Un service de qualité</b></p>
+    <p class="lead" v-show="jumboShow"><b>Un service de qualité</b></p>
     <hr class="my-4">
     <transition name="jumboShow">
       <div v-show="jumboShow">
@@ -58,7 +58,7 @@ var acceuil = {
   
     <transition name="jumboShow">
       <div v-show="!jumboShow" class="jumboShowInfo">
-      <p><b>Nous sommes un start-up offrant à nos clients les meilleurs qualités de service de confiance. On vous offre un promo de livraison dès le premier achat.</b></p>
+      <p><b>Nous sommes une start-up offrant à nos clients les meilleures qualités de service de confiance. Commande rapide et premier frais de livraison offert!</b></p>
       <a @click="jumboShow =! jumboShow" class="btn btn-light btn-lg" role="button"><router-link class="nav-link active" to="/Contacts"><b>Contactez-nous</b></router-link>
       </a>
       </div>
@@ -277,7 +277,7 @@ var boutique = {
 <div class="container-fluid boutique" v-on:mousemove.once="getLsPanier(),getLsBooks(),getLsBooks2(),total()">
     <h1 class="text-center"><u>Nos livres</u></h1>
   <div class="d-flex flex-column col-3 mjjsearchBar">
-    <label class="text-white " for="recherche"><b>manga - thriller - fantastique</b></label>
+    <label class="text-white " for="recherche"><button class="mjjmj" @click="search=''"><b>Tous</b></button> <button class="manga mjjmj" @click="search='manga'"><b>manga</b></button>  <button class="thriller mjjmj" @click="search='thriller'"><b>thriller</b></button>  <button class="fantastique mjjmj" @click="search='fantastique'"><b>fantastique</b></button></label>
     <input v-model="search" placeholder="Rechercher" id="recherche">
   </div>
   <div class="row">
@@ -296,6 +296,7 @@ var boutique = {
             </tooglecards>
             <button v-if="livre.quantite > 0" @click="addPanier(index)" class="btnAchat">Buy</button> 
             <h5 v-else>Rupture de stock</h5>
+            <p ><u class="parule">Paru le {{livre.dateParution}}</u></p>
           </div>
         </div>
       </div>
@@ -431,7 +432,7 @@ var boutique = {
           mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
           prixht: 24.99,
         }, {
-          id: 12,
+          id: 11,
           name: "Dragon Ball Super",
           image: "./assets/images/Dragon-Ball-Super-manga.jpg",
           categorie: "manga",
@@ -440,7 +441,7 @@ var boutique = {
           mySynopsis: "Le criminel Moro et les évadés de la prison galactique qui sont maintenant à son service sillonnent l’univers à la recherche de planètes riches en énergie vitale !! C’est ainsi que débarquent sur Terre une bande de bandits galactiques, dont Seven-Three qui possède le pouvoir de copier les aptitudes de ses adversaires. En l’absence de Goku, Piccolo et les autres doivent y faire face ! ",
           prixht: 6.90,
         }, {
-          id: 13,
+          id: 12,
           name: "My Hero Academia",
           image: "./assets/images/My-Hero-Academia-manga.jpg",
           categorie: "manga",
@@ -449,7 +450,7 @@ var boutique = {
           mySynopsis: "Confronté au test d'aptitudes d'Eraserhead, Deku échappe de justesse au renvoi en réussissant à concentrer le One for All dans un seul doigt au moment crucial ! Dernier du classement avec une seule performance surhumaine à son actif, il compte bien...",
           prixht: 6.60,
         }, {
-          id: 14,
+          id: 13,
           name: "One piece",
           image: "./assets/images/One-Piece-manga.jpg",
           categorie: "manga",
@@ -458,7 +459,7 @@ var boutique = {
           mySynopsis: "Au cours de son périple aux côtés de Barbe Blanche, Oden fait la connaissance d’un homme que le destin semble avoir placé sur sa route : le grand Roger ! Qu’apportera donc au monde la rencontre de ces deux hommes ?! Pendant ce temps, dans le pays des Wa, Orochi profite de l’absence d’Oden pour manœuvrer en coulisses…",
           prixht: 6.90,
         }, {
-          id: 15,
+          id: 14,
           name: "One Punch Man",
           image: "./assets/images/One-Punch-Man-manga.jpg",
           categorie: "manga",
@@ -467,7 +468,7 @@ var boutique = {
           mySynopsis: "Saitama est trop puissant ; tellement puissant qu'il élimine tous les monstres les plus farouches avec un simple coup de poing. Découvrez l'histoire du plus puissant des super-héros dans ce manga qui va vous mettre K.O. !! Le combat décisif de l...",
           prixht: 6.90,
         }, {
-          id: 16,
+          id: 15,
           name: "Samurai 8 - la légende de Hachimaru",
           image: "./assets/images/Samurai-8-la-legende-de-Hachimaru-manga.jpg",
           categorie: "manga",
@@ -476,7 +477,7 @@ var boutique = {
           mySynopsis: "LE RETOUR DE MASASHI KISHIMOTO, L'AUTEUR DE NARUTO !",
           prixht: 6.85,
         }, {
-          id: 17,
+          id: 16,
           name: "The Legend of Zelda - Twilight Princess",
           image: "./assets/images/The-Legend-of-Zelda-Twilight-Prince-manga.jpg",
           categorie: "manga",
@@ -485,7 +486,7 @@ var boutique = {
           mySynopsis: "Après un an et demi passé dans le paisible village de Toal, le jeune Link peut être fier de lui : sa gentillesse, son courage et sa dévotion lui ont permis d'être totalement intégré dans cette communauté. Mais Link a peur que les villageois finissent par découvrir le terrible secret de son passé, au point qu'il n'en dort plus la nuit ! Et si ses cauchemars annonçaient le retour imminent des êtres maléfiques du monde de la pénombre ? Comment faire pour les empêcher de semer à nouveau le chaos ?",
           prixht: 7.99,
         }, {
-          id: 18,
+          id: 17,
           name: "Hunter X Hunter",
           image: "./assets/images/Hunter-X-Hunter.jpg",
           categorie: "manga",
@@ -494,7 +495,7 @@ var boutique = {
           mySynopsis: "Le départ. Gon, le héros de notre histoire, décide de quitter son village natal pour aller passer le difficile examen qui l'autorisera à devenir un hunter et à marcher sur les traces de son père. En chemin, il fait la connaissance de Léolio et Kurapika qui vont rapidement devenir ses amis et compagnons de route. Tous trois parviennent sur le lieu de la première épreuve et doivent faire leurs preuves au milieu d'une horde de participants très motivés.C'est la rencontre essentielle de Gon, Léolio et Kurapika. Gon fait...",
           prixht: 6.85,
         }, {
-          id: 19,
+          id: 18,
           name: "L'Attaque des Titans",
           image: "./assets/images/L-attaque-des-titans-tome-1.jpg",
           categorie: "manga",
@@ -503,7 +504,7 @@ var boutique = {
           mySynopsis: "Désormais détenteur du pouvoir de l’Originel, Eren décide, pour le bien de l’île du Paradis, d’exterminer tout le reste de l’humanité,  et se met en marche à la tête d’une gigantesque meute de Titans. Incapables de déterminer s’il faut les considérer comme une bénédiction ou au contraire comme une calamité, Mikasa, Armin et les autres  choisissent de faire tout leur possible pour sauver le monde...",
           prixht: 6.95,
         }, {
-          id: 20,
+          id: 19,
           name: "Détective Conan",
           image: "./assets/images/Detective-Conan.jpg",
           categorie: "manga",
@@ -512,7 +513,7 @@ var boutique = {
           mySynopsis: "Victime d'une mystérieuse organisation d'hommes en noir qui l'ont empoisonné et l'ont ainsi fait redevenir un enfant, cet adolescent se retrouve contraint de retourner à l'école primaire et, tout en veillant à ce que le secret de sa nouvelle identité soit préservé, il mène des enquêtes et résout des affaires ténébreuses et...",
           prixht: 6.85,
         }, {
-          id: 21,
+          id: 20,
           name: "A La Croisée des Mondes",
           image: "./assets/images/A_la_croisee_des_mondes.jpg",
           categorie: "fantastique",
@@ -521,7 +522,7 @@ var boutique = {
           mySynopsis: "Rebecca, 12 ans, est une orpheline rebelle qui vit à Jordan College, un établissement de l'Université d'Oxford, dans un monde parallèle qui ressemble au nôtre mais qui a évolué de façon un peu différente. Elle a pour compagnon Pantalaimon, son dæmon, un être capable de prendre de nombreuses formes animales.",
           prixht: 24.99,
         }, {
-          id: 22,
+          id: 21,
           name: "Eragon: Le Cycle de l'Héritage",
           image: "./assets/images/Eragon_Le_Cycle_de_l_heritage_tome_1.png",
           categorie: "fantastique",
@@ -530,7 +531,7 @@ var boutique = {
           mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...Eragon n'a que quinze ans, mais le destin de l'Empire eEragon n'a que quinze ans, mais le destin de l'Empire est désormais entre ses mains !C'est en poursuivant une biche dans la montagne que le jeune Eragon, quinze ans, tombe sur une magnifique pierre bleue, qui s'avère être... un oeuf de dragon !",
           prixht: 12.99,
         }, {
-          id: 23,
+          id: 22,
           name: "Harry Potter",
           image: "./assets/images/Harry_Potter.jpg",
           categorie: "fantastique",
@@ -539,7 +540,7 @@ var boutique = {
           mySynopsis: "Une rentrée fracassante en voiture volante, une étrange malédiction qui s’abat sur les élèves, cette deuxième année à l’école des sorciers ne s’annonce pas de tout repos! Entre les cours de potions magiques, les matches de Quidditch et les combats de mauvais sorts, Harry et ses amis Ron et Hermione trouveront-ils le temps de percer le mystère de la Chambre des Secrets?",
           prixht: 24.99,
         }, {
-          id: 24,
+          id: 23,
           name: "Twilight",
           image: "./assets/images/Twilight.jpg",
           categorie: "fantastique",
@@ -548,7 +549,7 @@ var boutique = {
           mySynopsis: "Rejetée par celui qu'elle aime passionnément, Bella ne s'en relève pas. Fascinée par un vampire, comment pourrait-elle retrouver goût à la pâle existence humaine ? Pourtant il faut vivre. Mais Bella n'a de goût pour rien, sinon le danger : alors elle entend la voix d'Edward, et éprouve l'illusion de sa présence. Comme s'il ne l'avait pas abandonnée, comme s'il tenait encore à elle. Bella échappera-t-elle à cette obsession amoureuse qui la hante ? A quel prix ?",
           prixht: 19.99,
         }, {
-          id: 25,
+          id: 24,
           name: "L'arbre de l'été",
           image: "./assets/images/L_Arbre_de_l_ete_La_Tapisserie_de_Fionavar_tome_1.jpg",
           categorie: "fantastique",
@@ -557,7 +558,7 @@ var boutique = {
           mySynopsis: "Ils sont cinq, femmes et hommes, tous vivant à Toronto au Canada ; ils sont jeunes, étudiants ou déjà dans la vie active, tous rationnels. Or, les voici projetés dans Fionavar, le Grand Univers dont le nôtre n'est qu'une ombre bien pâle! Malgré la protection offerte par Mantel d'Argent le magicien, ils sont aussitôt pris dans les premières escarmouches de la guerre qui oppose les forces des Lumières à celles des Ténèbres.",
           prixht: 21.99,
         }, {
-          id: 26,
+          id: 25,
           name: "L'Homme Rune: Le Cycle des Démons",
           image: "./assets/images/L_Homme_Rune_Le_Cycle_des_demons_tome_1.jpg",
           categorie: "fantastique",
@@ -566,7 +567,7 @@ var boutique = {
           mySynopsis: "Parfois, il existe de très bonnes raisons d'avoir peur du noir... Arlen a onze ans et vit avec ses parents dans leur petite ferme. Lorsque la nuit tombe sur le monde d'Arlen, une brume étrange s'élève du sol ; une brume qui promet la mort aux idiots qui osent affronter les ténèbres, car des démons affamés émergent de ces vapeurs pour se nourrir des vivants.",
           prixht: 18.99,
         }, {
-          id: 27,
+          id: 26,
           name: "Le Codex de Paris",
           image: "./assets/images/Le_codex_de_Paris.jpg",
           categorie: "fantastique",
@@ -575,7 +576,7 @@ var boutique = {
           mySynopsis: "l fait profil bas pour ne pas attirer l’attention de la police ou de n’importe quel humain. Mais quand une femme en détresse vient le supplier de retrouver son époux, Germain accepte. Il ne se doute pas que cette affaire va le mettre sur la piste d’un dangereux codex et du démon qui a un jour transformé Germain en vampire.",
           prixht: 11.99,
         }, {
-          id: 28,
+          id: 27,
           name: "Le Seigneur des Anneaux",
           image: "./assets/images/Le_Seigneur_des_anneaux_Integrale.jpg",
           categorie: "fantastique",
@@ -584,7 +585,7 @@ var boutique = {
           mySynopsis: "Une contrée paisible où vivent les Hobbits. Un anneau magique à la puissance infinie. Sauron, son créateur, prêt à dévaster le monde entier pour récupérer son bien. Frodon, jeune Hobbit, détenteur de l'Anneau malgré lui. Gandalf, le Magicien, venu avertir Frodon du danger. Et voilà déjà les Cavaliers Noirs qui approchent...",
           prixht: 17.99,
         }, {
-          id: 29,
+          id: 28,
           name: "Le Monde de Narnia",
           image: "./assets/images/Le_Monde_de_Narnia.jpg",
           categorie: "fantastique",
@@ -593,7 +594,7 @@ var boutique = {
           mySynopsis: "C'est une histoire qui s'est passée il y a très longtemps, à l'époque où votre grand-père était un petit garçon. Une histoire très importante, car c'est elle qui permet de comprendre comment les échanges entre notre monde et le pays de Narnia ont commencé. A cette époque, Sherlock Holmes vivait encore à Baker Street.",
           prixht: 24.99,
         }, {
-          id: 30,
+          id: 29,
           name: "Le Prisme Noir Le Porteur de Lumière",
           image: "./assets/images/Le_Prisme_noir_Le_Porteur_de_lumiere_tome_1.jpg",
           categorie: "fantastique",
@@ -930,11 +931,12 @@ var livreOr = {
   <div class="container mjj-livreOr">
     <div class="text-center">
     <h1>Le Livre d'Or</h1><br>
+    <p class="fontForm">Veuillez laisser un appreciation ci-dessous</p>
     </div>
     <br>
     <transition class="row" name="fondu">
     <div class="col-sm mjjFormValid" v-show="!show">
-    <h2>Merci pour votre feedback! À très vite 😉</h2>
+    <h2>Merci pour votre feedback! À bientôt 😉</h2>
     </div>
     </transition>
 
@@ -1053,6 +1055,7 @@ var livreOr = {
   data:
     function () {
       return ({
+        text: "",
         isDisabled: true,
         mailShow: false,
         nameShow: false,

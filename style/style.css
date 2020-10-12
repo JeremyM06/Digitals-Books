@@ -87,16 +87,6 @@ h1{
     color: rgb(252, 225, 107);
     text-shadow: 3px 3px 3px grey;
 }
-/*p, span{
-    font-family: 'Oleo Script', cursive;
-    padding-top: 60px;
-    font-weight: bold;
-    text-align: center;
-}
-p{
-    color: white;
-    font-size: 20px;
-} */
 /*******************CARDS*****************************/
 .cards {
     text-align: center;
@@ -142,9 +132,15 @@ p{
     justify-content: center;
     padding: 10px;
     width: auto;
+    font-family: 'Oleo Script', cursive;
+    font-weight: bold;
+    font-size: 25px;
 }
 .lead{
     width: 250px !important;
+    font-family: 'Oleo Script', cursive;
+    padding-top: 60px;
+    font-weight: bold;
 }
 /****************PAGE CONTACT***************************/
 .mjjalertform{
@@ -215,8 +211,18 @@ footer{
     color: rgb(12, 206, 6);
     font-weight: bolder;
 }
+.mjjmj{
+    margin-right: 5px;
+}
 .mjjsearchBar{
     margin-bottom: 30px;
+}
+.fontForm{
+    font-family: 'Oleo Script', cursive;
+    padding-top: 30px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 3px 3px 3px grey;
 }
 .mjjPanier{
     background-color: rgba(128, 128, 128, 0.904);
@@ -245,6 +251,9 @@ footer{
     border-radius: 3px;
     margin: 5px;       
 }
+.mjjCardsBuy p{
+    font-size: 15px;
+}
 .mjjBlockPanier{
     position: fixed;    
     top: 110px;
@@ -261,6 +270,7 @@ footer{
 .fantastique{
     background-color: rgba(57, 199, 255, 0.63);
 }
+
 .thriller{
     background-color: rgba(128, 0, 0, 0.63);
 }
@@ -269,6 +279,10 @@ footer{
 }
 .mangaX{
     background-color: rgba(245, 157, 172, 0.932);
+}
+.parule{
+    color: white;
+    font-size: 15px;
 }
 
 
