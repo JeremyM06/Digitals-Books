@@ -108,8 +108,8 @@ var Formulaire = {
   <h1>Vous souhaitez un renseignement ?</h1>
   <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
   <hr>
-  <transition nom="fondu">
-  <div class="mjjFormValid" v-show="!show">
+  <transition nom="fondu" class="row">
+  <div class="col mjjFormValid" v-show="!show">
   <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
   </div>
   </transition>
@@ -118,38 +118,58 @@ var Formulaire = {
   <form @submit.prevent="show =! show" v-show="show">  
   <div class="form-row">
   <div class="form-group col-md-6">
-<label for="nom">nom</label>
-<input v-model="nom" type="text" class="form-control" placeholder="" id="nom">
+<input v-model="nom" type="text" class="form-control" @keyup="createNewReferenceDe(),verifForm()" placeholder="nom" id="nom">
+<p v-if="errors.nom" class="alert alert-danger">      
+  {{ errors.nom }}</p>                                
 </div></div>
+
 
 <div class="form-row">
   <div class="form-group col-md-6">
-  <label for="adresse">Prénom</label>
-  <input v-model="adresse" type="text" class="form-control" id="adresse" placeholder="">
+  <input v-model="adresse" type="text" @keyup="createNewReferenceDe(),verifForm()" class="form-control" id="adresse" placeholder="Adresse">
+  <p v-if="errors.adresse" class="alert alert-danger">      
+  {{ errors.adresse }}</p>                              
   </div>    
 </div>
-<div class="form-row">
+
+<div class="form-row" @click="createNewReferenceDe(),verifForm()">
+  <div class="form-group col-md-6">
+  <select class="form-control" v-model="cdpostal">
+    <option value="">x-- SELECTIONNER CODE POSTALE --x</option>
+    <option v-for="recher in rechers" :key="recher.id">
+    {{ recher.cdpostal }}
+    </option>
+  </select>
+  <p v-if="errors.cdpostal" class="alert alert-danger">      
+  {{ errors.cdpostal }}</p>                                  
+  </div>
+  </div>
+
+
+<div class="form-row"  @click="createNewReferenceDe(),verifForm()">
 <div class="form-group col-md-6">
-<label for="cdpostal">0680</label>
-<input v-model="cdpostal" type="text" class="form-control" id="cdpostal" placeholder="18">
+<select class="form-control" v-model="ville">
+      <option value="">x-- SELECTIONNER UNE VILLE --x</option>
+      <option v-for="recher in rechers" :key="recher.id">
+      {{ recher.ville }}
+      </option>
+  </select>
+<p v-if="errors.ville" class="alert alert-danger">      
+{{ errors.ville }}</p>                                  
 </div>
 </div>
 
-<div class="form-row">
-<div class="form-group col-md-6">
-<label for="ville">Nice</label>
-<input v-model="ville" type="text" class="form-control" id="ville" placeholder="Nice">
+<!--MG-D09-->
+<div >                
+ <button type="submit" class="btn btn-primary":disabled="isDisabled">Envoyer</button> 
 </div>
-</div>
-
-<div>
-<button  type="submit" @click.prevent="createNewReferenceDe()" class="btn btn-primary" >Envoyer</button>
-<button  type="submit" class="btn btn-primary" >Envoyer</button>
-</div>
+<!--MG-F09-->
 
 </form>
 
-<h3> {{ errors.nom }} <br> {{ errors.adresse }}  </h3>
+   
+
+
 
 </transition>
 </div>`,
@@ -163,39 +183,96 @@ var Formulaire = {
         return false;
       }
     },
-    createNewReferenceDe: function () {
+    createNewReferenceDe() {
       //reinitialisation du tableau des erreurs
       this.errors = {};
       this.reference = "";
+      this.Indout = true;   //MG 09
 
       //Verifier si tous les champs nécessaires sont renseignés
 
-      if (this.nom == "") {
-        this.errors.nom = "Vous avez oublié le nom !!";
-        this.Indout = false;
+      if (this.nom == "") {                                   //MG 09
+        this.errors.nom = "Nom: obligatoire !!";
+        this.Indout = false;   //MG 11
+
+      } else if ((!isNaN(this.nom))) {
+        this.errors.nom = "Nom: Erreur de saisi !!";
+        this.Indout = false;   //MG 11
+      } else {
+        this.nameOk = true;
       }
 
-      if (this.adresse == "") {
-        this.errors.adresse = "Vous avez oublié l'adresse !!";
-        this.Indout = false;
+      if (this.adresse == "") {                                   //MG 09
+        this.errors.adresse = "Adresse: obligatoire !!";
+        this.Indout = false;   //MG 11
+      } else if ((!isNaN(this.adresse))) {
+        this.errors.adresse = "adresse: Erreur de saisi !!";
+        this.Indout = false;   //MG 11
+      } else {
+        this.adressOk = true;
       }
+
+      if (this.cdpostal === null) {
+        this.errors.cdpostal = "code postale: obligatoire !!";
+        this.Indout = false;   //MG 11
+
+      } else if ((isNaN(this.cdpostal))) {
+        this.errors.cdpostal = "code postale: Erreur de saisi !!";
+        this.Indout = false;   //MG 11
+      } else {
+        this.postalOk = true;
+      }
+
+
+      if (this.ville == "") {                                   //MG 09
+        this.errors.ville = "ville: obligatoire !!";
+        this.Indout = false;   //MG 11
+
+      } else if ((!isNaN(this.ville))) {
+        this.errors.ville = "ville: Erreur de saisi !! !!";
+        this.Indout = false;   //MG 11
+      } else {
+        this.villeOk = true;
+
+      }
+
+
+
+
+      console.log(this.errors);  //MG 09
+      console.log(this.Indout);  //MG 09
     },
+    verifForm: function () {
+      if (this.nameOk && this.adressOk && this.postalOk && this.villeOk) {
+        this.isDisabled = false;
+        console.log(this.nameOk, this.adressOk, this.postalOk, this.villeOk)
+      }
+    }
   },
 
-  data:
-    function () {
-      return ({
-        indout: true,
-        show: true,
-        nom: "",
-        adresse: "",
-        cdpostal: 0,
-        ville: "",
-        errors: "",
-        reference: null,
-      })
-
+  data: function () {
+    return {
+      rechers: [
+        { id: 0, ville: "Nice", cdpostal: '06000', },
+        { id: 1, ville: "Cagnes sur mer", cdpostal: '06800', },
+      ],
+      btnOut: true,
+      nameOk: false,
+      adressOk: false,
+      postalOk: false,
+      villeOk: false,
+      Indout: false,
+      isDisabled: true,
+      show: true,
+      nom: "",
+      adresse: "",
+      cdpostal: null,
+      ville: "",
+      errors: "",
+      reference: null,
     }
+
+  }
 };
 
 
@@ -571,9 +648,9 @@ var vm = new Vue({
   methods: {
 
     addBook() {
-      if (this.isAText(this.currentName) && this.isANumber(this.currentNote)) {
-        this.classe.push({ name: this.currentName, note: this.currentNote });
-        this.notes.push(this.currentNote);
+      if (this.isAText(this.currentName) && this.isANumber(this.cdpostal)) {
+        this.classe.push({ name: this.currentName, note: this.cdpostal });
+        this.notes.push(this.cdpostal);
       }
     },
     isAText(txt) {
