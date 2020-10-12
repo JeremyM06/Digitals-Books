@@ -12,24 +12,24 @@ var acceuil = {
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="assets/images/dix-livres.png" class="d-block w-100" alt="...">
+        <img src="assets/images/dix-livres-modifs.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <router-link to="/boutique"><a class="btn btn-lg btn-dark" role="button">Plus d'info</a>
+          <router-link to="/boutique"><a class="btn btn-lg btn-dark" role="button">Accéder à la boutique</a>
           </router-link>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="assets/images/digitalBooks1.jpg" class="d-block w-100" alt="...">
+        <img src="assets/images/Commandez.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Bienôt en vente!!</h5>
-          <p>Tu as l'angoisse de la boucle infinie, HTML CSS et JavaSccript sont des mots qui ne te refilent pas de boutons? Ce bouqin est fait pour toi</p>
+        <router-link to="/boutique"><a class="btn btn-lg btn-light" role="button">Commandez maintenant!</a>
+        </router-link>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="assets/images/digitalBooks.jpg" class="d-block w-100" alt="...">
+        <img src="assets/images/livreOr.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        <router-link to="/LivreOr"><a class="btn btn-lg btn-warning" role="button">Livre d'Or</a>
+        </router-link>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@ var acceuil = {
     <transition name="jumboShow">
       <div v-show="jumboShow">
         <p><b>Nous vous apportons un service de qualité avec nos livraisons dans les 48 heures!</b></p>
-        <a @click="jumboShow =! jumboShow" class="btn btn-primary btn-lg" role="button">Qui sommes-nous?</a>
+        <a @click="jumboShow =! jumboShow" class="btn btn-primary btn-lg" role="button"><b>Qui sommes-nous?</b></a>
       </div>
     </transition>
   
@@ -107,8 +107,8 @@ var tooglecards = {
 /********  FORMULAIRE  *********/
 var Formulaire = {
   template: `<div>
-  <h1>Vous souhaitez un renseignement ?</h1>
-  <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
+  <h1>Votre commande a été bien prise en compte</h1>
+  <p class="fontForm">Veuillez saisir vos coordonnées ci-dessous</p>
   <hr>
   <transition name="fondu" class="row">
   <div class="col mjjFormValid" v-show="!show">
@@ -251,6 +251,7 @@ var Formulaire = {
       rechers: [
         { id: 0, ville: "Nice", cdpostal: '06000', },
         { id: 1, ville: "Cagnes sur mer", cdpostal: '06800', },
+        { id: 2, ville: "Antibes", cdpostal: '06600', },
       ],
       btnOut: true,
       nameOk: false,
@@ -941,21 +942,21 @@ var livreOr = {
     <form class="offset-lg-3 col-sm" @submit.prevent="show =! show" v-show="show">
     
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="name"><b>Nom</b></label>
         <input v-model="name" type="text" class="form-control" @keyup="isAName(name)" :class="{mjjalertform : nameShow}" placeholder="Dupond" id="name">
       </div>    
     </div>
     
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <label for="firstName"><b>Prénom</b></label>
         <input v-model="firstName" type="text" class="form-control" @keyup="isAFirstName(firstName)" :class="{mjjalertform : firstNameShow}" placeholder="Michel" id="firsName">
       </div>
     </div>
 
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <label for="email"><b>Email address</b> (facultatif)</label>
       <input v-model="mail" @keyup="isAMail(mail)" :class="{mjjalertform : mailShow}" class="form-control" id="email" placeholder="lecteur...@mail.com">
     </div>
@@ -963,7 +964,7 @@ var livreOr = {
   <br>
 
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <label for="exampleFormControlTextarea1"><b>Message</b></label>
       <textarea v-model="text" class="form-control" @keyup="isAText(text)" :class="{mjjalertform : textShow}" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
