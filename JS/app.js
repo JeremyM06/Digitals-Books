@@ -19,8 +19,8 @@ var acceuil = {
       <div class="carousel-item">
         <img src="assets/images/digitalBooks1.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h5>Bienôt en vente!!</h5>
+          <p>Tu as l'angoisse de la boucle infinie, HTML CSS et JavaSccript sont des mots qui ne te refilent pas de boutons? Ce bouqin est fait pour toi</p>
         </div>
       </div>
       <div class="carousel-item">
@@ -86,12 +86,13 @@ var tooglecards = {
                 <p> {{mySynopsis}} </p>
               </div> 
               <div class="d-flex justify-content-around">
+              <span> Quantité: {{myQuantite}} </span>
                 <span>prixHt: {{myPrix}}€</span>
               </div>
 
     </div>               
   `,
-  props: ["myImg", "myTitre", "myPrix", "mySynopsis"],
+  props: ["myImg", "myTitre", "myPrix", "mySynopsis", "myQuantite"],
 
   data:
     function () {
@@ -216,6 +217,7 @@ var boutique = {
             :my-titre="livre.name"
             :my-prix="livre.prixht"
             :my-synopsis="livre.mySynopsis"
+            :my-quantite="livre.quantite"
             >             
             </tooglecards>
             <button @click="addPanier(livre.id)" class="btnAchat">Buy</button> 
@@ -231,7 +233,7 @@ var boutique = {
                   <img :src="panier.image" :title="panier.name" />    
                   <p> {{panier.name}} </p>
                   <p>Prix: {{panier.prixht}}€ H.T </p>
-                  <button @click="suppr(index)">Suppr</button>
+                  <img @click="suppr(index)" src="assets/images/kisspng.png">
               </div>
               <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
                   <h4>Total:</h4>
@@ -526,6 +528,8 @@ var boutique = {
           mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
           prixht: 24.99,
         }],
+      indexTempo: "",
+      nameTempo: "",
       search: "",
       couleur: "",
       couleur1: "",
@@ -548,6 +552,16 @@ var boutique = {
     },
 
     suppr: function (index) {
+      this.nameTempo = this.paniers[index].name;
+      this.livres.forEach(element => {
+        if (element.name == this.nameTempo) {
+          element.quantite++;
+        }
+      });
+      // this.indexTempo = this.livres.findIndex(this.nameTempo);
+      //this.livres[indexTempo].quantite++;
+
+      console.log(this.nameTempo);
       this.paniers.splice(index, 1);
       this.total();
       this.saveLs();
@@ -585,9 +599,9 @@ var contacts = {
     <p>Laissez nous vos coordonnées, nous vous recontacterons le plus rapidement possible.</p>
     <hr>
     <transition name="fondu" class="row">    
-    <div class=" offset-sm-2 mjjFormValid" v-show="!show">
-    <h2>Vos informations ont bien été envoyées. À très vite 📚 😊 📚</h2>
-    <button @click="show =! show"  type="button" class="btn btn-primary" >Retour</button>
+    <div class="col-md-8 offset-sm-2 mjjFormValid" v-show="!show">
+      <h2>Vos informations ont bien été envoyées.<br> À très vite<br> 📚 😊 📚</h2>
+      <button @click="show =! show"  type="button" class="btn btn-primary" >Retour</button>
 
     </div>
     </transition>
@@ -889,7 +903,7 @@ var tooglecards2 = {
 var annexe = {
   template: `
 <div class="container-fluid boutique" v-on:mousemove.once="getLs(),total()">
-  <h1 class="text-center"><u>Nous n'avons rien vu...</u></h1>
+  <h1 class="text-center"><u>Nous n'avons rien vu...</u></h1><br>
   <div class="row">
       <div class="col-sm text-center d-flex justify-content-center flex-wrap ">
         <div class="mjjCardsBuy"  v-for="livre in livres"
