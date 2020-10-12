@@ -2,12 +2,32 @@
 .mjj-margin-page{
     margin-top: 60px;
 }
+/*Verif age utilisateur acceuil*/
+.mjjVerifAcceuil{
+    background-color: rgba(0, 0, 0, 0.966);
+    position: fixed;
+    height: 100rem;
+    width: 100%;
+    display: flex;
+    z-index: 50;
+    flex-direction: column;
+    align-items: center;
+}
+.mjjVerifAcceuil button{
+    padding: 40px;
+    margin: 10px 0;
+    border-radius: 20px;
+}
+.mjjVerifAcceuil button:hover{
+    background-color: rgb(59, 241, 35);
+}
 #app{
     min-height: 45rem;
     background: url('../assets/images/bookBackground.jpg') no-repeat;
     background-size: cover;
     background-position: center center;
 }
+/*NAVBAR*/
 .mjj-nav{
     background: url('../assets/images/book-background-3.png');
     background-position: bottom;
@@ -27,9 +47,9 @@
 .mjj-nav-box{
     margin: 0 10px;
     border: 1px solid chartreuse;
-    box-shadow: 1px 1px 1px;
-    border-radius: 100%;
-    background-color: rgba(0, 0, 0, 0.452);
+    border-radius: 50%;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.795);
 }
 .mjj-nav-box:hover{
     box-shadow: 0px 0px 10px rgb(229, 255, 0);;
@@ -39,6 +59,19 @@
 }
 .colorRouter:hover{
     text-shadow: 0px 0px 10px rgb(229, 255, 0);
+}
+/*ARRIERE BOUTIQUE*/
+.colorRouterPink{
+    color: rgb(255, 45, 244) !important;
+}
+.colorRouterPink:hover{
+    text-shadow: 0 0 10px yellow;
+}
+.pinkBorder{
+    border: solid 3px rgb(255, 45, 244) ;
+}
+.pinkBorder:hover{
+    box-shadow: 0 0 10px violet;
 }
 
 .carousel{
@@ -162,6 +195,9 @@ footer{
     color: rgb(12, 206, 6);
     font-weight: bolder;
 }
+.mjjsearchBar{
+    margin-bottom: 30px;
+}
 .mjjPanier{
     background-color: rgba(128, 128, 128, 0.904);
     border: solid black 1px;
@@ -202,7 +238,7 @@ footer{
     border-radius: 10%;
     background-color: rgb(4, 0, 255);
 }
-.blue{
+.fantastique{
     background-color: rgba(57, 199, 255, 0.63);
 }
 .thriller{
@@ -210,6 +246,9 @@ footer{
 }
 .manga{
     background-color: rgba(116, 255, 74, 0.63);
+}
+.mangaX{
+    background-color: rgba(245, 157, 172, 0.932);
 }
 
 

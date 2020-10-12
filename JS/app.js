@@ -199,15 +199,18 @@ var Formulaire = {
 /********************  BOUTIQUE  ********************/
 var boutique = {
   template: `
-<div class="container-fluid boutique" v-on:mousemove.once="getLs(), total()">
-  <h1 class="text-center"><u>Nos livres</u></h1>
-  <input v-model="search" placeholder="Rechercher">
+<div class="container-fluid boutique" v-on:mousemove.once="getLs(),total()">
+    <h1 class="text-center"><u>Nos livres</u></h1>
+  <div class="d-flex flex-column col-3 mjjsearchBar">
+    <label class="text-white " for="recherche"><b>manga - thriller - </b></label>
+    <input v-model="search" placeholder="Rechercher" id="recherche">
+  </div>
   <div class="row">
       <div class="col-sm text-center d-flex justify-content-center flex-wrap ">
         <div class="mjjCardsBuy"  v-for="livre in livres"
         :key="livre.id"
         :class="[livre.categorie]"
-        v-if=' search==livre.categorie || search=="" || search==livre.name'>
+        v-if='search==livre.categorie || search=="" || search==livre.name'>
           <div>
             <tooglecards :my-img="livre.image"
             :my-titre="livre.name"
@@ -241,7 +244,7 @@ var boutique = {
             </div>
       </div>
       <div class="mjjBlockPanier">
-        <a href="#mjjancre"><img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/></a>
+        <a href="#"><img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/></a>
         <span class="panierLgt"> {{paniers.length}} </span>
       </div>  
 
@@ -352,15 +355,6 @@ var boutique = {
           mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
           prixht: 24.99,
         }, {
-          id: 11,
-          name: "Demon Slayer",
-          image: "./assets/images/Demon-Slayer-manga.jpg",
-          categorie: "manga",
-          quantite: 5,
-          dateParution: "14/09/2020",
-          mySynopsis: "Pour la première fois depuis 113 ans, un démon de la lune supérieure a été battu. Hors de lui, Muzan convoque les autres démons de la lune supérieure afin de leur ordonner d’intensifier l’attaque contre les pourfendeurs. Lors de la bataille contre Dahi et Gyutaro, le sabre de Tanjiro a été brisé. Tandis qu’il est à la recherche d’un nouveau sabre, Tanjiro visite le village caché des forgerons où se trouve Haganezuka. ...",
-          prixht: 6.99,
-        }, {
           id: 12,
           name: "Dragon Ball Super",
           image: "./assets/images/Dragon-Ball-Super-manga.jpg",
@@ -426,7 +420,7 @@ var boutique = {
         }, {
           id: 19,
           name: "L'Attaque des Titans",
-          image: "./assets/images/L-Attaque-des-Titans.jpg",
+          image: "./assets/images/L-attaque-des-titans-tome-1.jpg",
           categorie: "manga",
           quantite: 5,
           dateParution: "25/11/2020",
@@ -443,94 +437,94 @@ var boutique = {
           prixht: 6.85,
         }, {
           id: 21,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "A La Croisée des Mondes",
+          image: "./assets/images/A_la_croisee_des_mondes.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          dateParution: "05/12/2007",
+          mySynopsis: "Rebecca, 12 ans, est une orpheline rebelle qui vit à Jordan College, un établissement de l'Université d'Oxford, dans un monde parallèle qui ressemble au nôtre mais qui a évolué de façon un peu différente. Elle a pour compagnon Pantalaimon, son dæmon, un être capable de prendre de nombreuses formes animales.",
           prixht: 24.99,
         }, {
           id: 22,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "Eragon: Le Cycle de l'Héritage",
+          image: "./assets/images/Eragon_Le_Cycle_de_l_heritage_tome_1.png",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "04/03/2010",
+          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...Eragon n'a que quinze ans, mais le destin de l'Empire eEragon n'a que quinze ans, mais le destin de l'Empire est désormais entre ses mains !C'est en poursuivant une biche dans la montagne que le jeune Eragon, quinze ans, tombe sur une magnifique pierre bleue, qui s'avère être... un oeuf de dragon !",
+          prixht: 12.99,
         }, {
           id: 23,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "Harry Potter",
+          image: "./assets/images/Harry_Potter.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          dateParution: "07/02/2019",
+          mySynopsis: "Une rentrée fracassante en voiture volante, une étrange malédiction qui s’abat sur les élèves, cette deuxième année à l’école des sorciers ne s’annonce pas de tout repos! Entre les cours de potions magiques, les matches de Quidditch et les combats de mauvais sorts, Harry et ses amis Ron et Hermione trouveront-ils le temps de percer le mystère de la Chambre des Secrets?",
           prixht: 24.99,
         }, {
           id: 24,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "Twilight",
+          image: "./assets/images/Twilight.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "02/11/2006",
+          mySynopsis: "Rejetée par celui qu'elle aime passionnément, Bella ne s'en relève pas. Fascinée par un vampire, comment pourrait-elle retrouver goût à la pâle existence humaine ? Pourtant il faut vivre. Mais Bella n'a de goût pour rien, sinon le danger : alors elle entend la voix d'Edward, et éprouve l'illusion de sa présence. Comme s'il ne l'avait pas abandonnée, comme s'il tenait encore à elle. Bella échappera-t-elle à cette obsession amoureuse qui la hante ? A quel prix ?",
+          prixht: 19.99,
         }, {
           id: 25,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "L'arbre de l'été",
+          image: "./assets/images/L_Arbre_de_l_ete_La_Tapisserie_de_Fionavar_tome_1.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "22/05/2006",
+          mySynopsis: "Ils sont cinq, femmes et hommes, tous vivant à Toronto au Canada ; ils sont jeunes, étudiants ou déjà dans la vie active, tous rationnels. Or, les voici projetés dans Fionavar, le Grand Univers dont le nôtre n'est qu'une ombre bien pâle! Malgré la protection offerte par Mantel d'Argent le magicien, ils sont aussitôt pris dans les premières escarmouches de la guerre qui oppose les forces des Lumières à celles des Ténèbres.",
+          prixht: 21.99,
         }, {
           id: 26,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "blue",
+          name: "L'Homme Rune: Le Cycle des Démons",
+          image: "./assets/images/L_Homme_Rune_Le_Cycle_des_demons_tome_1.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "02/11/2009",
+          mySynopsis: "Parfois, il existe de très bonnes raisons d'avoir peur du noir... Arlen a onze ans et vit avec ses parents dans leur petite ferme. Lorsque la nuit tombe sur le monde d'Arlen, une brume étrange s'élève du sol ; une brume qui promet la mort aux idiots qui osent affronter les ténèbres, car des démons affamés émergent de ces vapeurs pour se nourrir des vivants.",
+          prixht: 18.99,
         }, {
           id: 27,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "thriller",
+          name: "Le Codex de Paris",
+          image: "./assets/images/Le_codex_de_Paris.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "10/01/2020",
+          mySynopsis: "l fait profil bas pour ne pas attirer l’attention de la police ou de n’importe quel humain. Mais quand une femme en détresse vient le supplier de retrouver son époux, Germain accepte. Il ne se doute pas que cette affaire va le mettre sur la piste d’un dangereux codex et du démon qui a un jour transformé Germain en vampire.",
+          prixht: 11.99,
         }, {
           id: 28,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "thriller",
+          name: "Le Seigneur des Anneaux",
+          image: "./assets/images/Le_Seigneur_des_anneaux_Integrale.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "22/11/2012",
+          mySynopsis: "Une contrée paisible où vivent les Hobbits. Un anneau magique à la puissance infinie. Sauron, son créateur, prêt à dévaster le monde entier pour récupérer son bien. Frodon, jeune Hobbit, détenteur de l'Anneau malgré lui. Gandalf, le Magicien, venu avertir Frodon du danger. Et voilà déjà les Cavaliers Noirs qui approchent...",
+          prixht: 17.99,
         }, {
           id: 29,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "thriller",
+          name: "Le Monde de Narnia",
+          image: "./assets/images/Le_Monde_de_Narnia.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
+          dateParution: "09/11/2010",
+          mySynopsis: "C'est une histoire qui s'est passée il y a très longtemps, à l'époque où votre grand-père était un petit garçon. Une histoire très importante, car c'est elle qui permet de comprendre comment les échanges entre notre monde et le pays de Narnia ont commencé. A cette époque, Sherlock Holmes vivait encore à Baker Street.",
           prixht: 24.99,
         }, {
           id: 30,
-          name: "The Loop",
-          image: "./assets/images/TheLoop.jpg",
-          categorie: "thriller",
+          name: "Le Prisme Noir Le Porteur de Lumière",
+          image: "./assets/images/Le_Prisme_noir_Le_Porteur_de_lumiere_tome_1.jpg",
+          categorie: "fantastique",
           quantite: 5,
-          dateParution: "29/09/2020",
-          mySynopsis: "Une petite ville nichée dans les collines du centre de l’Oregon devient l’épicentre d’une épidémie de violence lorsque les enfants adolescents de plusieurs cadres de la société de biotechnologie locale tombent malades et agressivement meurtriers. Soudain, la ville est sur le bord, et tout le monde doit faire tout ce qu’il faut juste pour survivre ...",
-          prixht: 24.99,
+          dateParution: "21/10/2011",
+          mySynopsis: "Plus la lumière est vive, plus l'ombre est profonde. Gavin Guile est le Prisme, l'homme le plus puissant du monde. Empereur et magicien, il est le gardien d'une paix bien fragile. Et d'un terrible secret. Les Prismes ne vivent jamais vieux, et Gavin sait exactement combien de temps il lui reste : cinq ans... et cinq missions impossibles à accomplir.",
+          prixht: 25.00,
         }],
       search: "",
       couleur: "",
@@ -743,67 +737,356 @@ var livreOr = {
     <form class="offset-lg-3 col-sm" @submit.prevent="show =! show" v-show="show">
     
     <div class="form-row">
-    <div class="form-group col-md-6">
-    <label for="name"><b>Nom</b></label>
-    <input v-model="name" type="text" class="form-control" placeholder="Dupond" id="name">
-    </div>    
-  </div>
+      <div class="form-group col-md-6">
+        <label for="name"><b>Nom</b></label>
+        <input v-model="name" type="text" class="form-control" @keyup="isAName(name)" :class="{mjjalertform : nameShow}" placeholder="Dupond" id="name">
+      </div>    
+    </div>
     
     <div class="form-row">
-    <div class="form-group col-md-6">
-  <label for="firstName"><b>Prénom</b></label>
-  <input v-model="firstName" type="text" class="form-control" placeholder="Michel" id="firsName">
-  </div>
-  </div>
+      <div class="form-group col-md-6">
+        <label for="firstName"><b>Prénom</b></label>
+        <input v-model="firstName" type="text" class="form-control" @keyup="isAFirstName(firstName)" :class="{mjjalertform : firstNameShow}" placeholder="Michel" id="firsName">
+      </div>
+    </div>
 
   <div class="form-row">
     <div class="form-group col-md-6">
-    <label for="email"><b>Email address</b> (facultatif)</label>
-    <input v-model="mail" type="email" class="form-control" id="email" placeholder="lecteur...@mail.com">
+      <label for="email"><b>Email address</b> (facultatif)</label>
+      <input v-model="mail" @keyup="isAMail(mail)" :class="{mjjalertform : mailShow}" class="form-control" id="email" placeholder="lecteur...@mail.com">
     </div>
   </div>
   <br>
 
   <div class="form-row">
-  <div class="form-group col-md-6">
-  <label for="exampleFormControlTextarea1"><b>Message</b></label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <div class="form-group col-md-6">
+      <label for="exampleFormControlTextarea1"><b>Message</b></label>
+      <textarea v-model="text" class="form-control" @keyup="isAText(text)" :class="{mjjalertform : textShow}" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
   </div>
   <br>
-  <button  type="submit" class="btn btn-lg col-2 btn-outline-secondary btn-block"><b><b>Envoyer</b></b></button>
+  <button  type="submit" class="btn btn-lg col-2 btn-outline-secondary btn-block" :disabled="isDisabled"><b><b>Envoyer</b></b></button>
 </form>
 </transition>
 </div>`,
 
   methods: {
+    clear: function () {
+      this.name = "";
+      this.firstName = "";
+      this.mail = "";
+      this.text = "";
+    },
     isAText(txt) {
       if (isNaN(txt) && txt !== "null") {
+        this.textShow = false;
+        this.textOk = true;
 
-        return true;
       } else {
-
-        return false;
+        this.textShow = true;
+        this.textOk = false;
       }
-    }
+      this.verifForm();
+
+    },
+
+    isAName: function (txt) {
+      if (isNaN(txt) && txt !== "null") {
+        this.nameShow = false;
+        this.nameOk = true;
+      } else {
+        this.nameShow = true;
+        this.nameOk = false;
+      }
+      this.verifForm();
+    },
+    isAFirstName: function (txt) {
+      if (isNaN(txt) && txt !== "null") {
+        this.firstNameShow = false;
+        this.firstNameOk = true;
+      } else {
+        this.firstNameShow = true;
+        this.firstNameOk = false;
+      }
+      this.verifForm();
+
+    },
+    isAMail: function (mail) {
+      if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail) && mail != "") {
+        this.mailShow = false;
+        this.mailOk = true;
+      } else {
+        this.mailShow = true;
+        this.mailOk = false;
+      }
+      this.verifForm();
+
+    },
+    isATel: function (tel) {
+
+      if (/^(\+33|0|0033)[1-9]\d{8}$/.test(tel) && tel != "") {
+        this.telShow = false;
+        this.telOk = true;
+
+      } else {
+        this.telShow = true;
+        this.telOk = false;
+
+      }
+      this.verifForm();
+
+    },
+    verifForm: function () {
+      if (this.nameOk && this.firstNameOk && this.textOk) {
+        this.isDisabled = false;
+      } else {
+        this.isDisabled = true;
+      }
+    },
   },
 
   data:
     function () {
       return ({
+        isDisabled: true,
+        mailShow: false,
+        nameShow: false,
+        firstNameShow: false,
+        textShow: false,
         show: true,
         name: "",
         firstName: "",
         mail: "",
+        nameOk: false,
+        firstNameOk: false,
+        mailOk: false,
+        textOk: false,
       })
+    },
+}
+/************ CARDS2 *************/
+var tooglecards2 = {
+  template: `  
+    <div class="cards">
+        <img :src="myImg" title="image">
+        <h5> {{myTitre}} </h5>
+              <div class="d-flex justify-content-around">
+                <span>prixHt: {{myPrix}}€</span>
+              </div>
+
+    </div>               
+  `,
+  props: ["myImg", "myTitre", "myPrix"],
+
+  data:
+    function () {
+      return ({
+        isShow: false,
+      })
+    },
+}
+/******************ANNEXE***********************/
+var annexe = {
+  template: `
+<div class="container-fluid boutique" v-on:mousemove.once="getLs(),total()">
+  <h1 class="text-center"><u>Nous n'avons rien vu...</u></h1>
+  <div class="row">
+      <div class="col-sm text-center d-flex justify-content-center flex-wrap ">
+        <div class="mjjCardsBuy"  v-for="livre in livres"
+        :key="livre.id"
+        :class="[livre.categorie]">
+          <div>
+            <tooglecards2 :my-img="livre.image"
+            :my-titre="livre.name"
+            :my-prix="livre.prixht"
+            >             
+            </tooglecards2>
+            <button @click="addPanier(livre.id)" class="btnAchat">Buy</button> 
+          </div>
+        </div>
+      </div>
+      
+      
+      <div v-show="show" class="col-sm-4 text-center">        
+            <div >
+              <h3>Mon Panier</h3>
+              <div class="d-flex align-items-center justify-content-between mjjPanier" v-for="(panier,index) in paniers" :key="index">  
+                  <img :src="panier.image" :title="panier.name" />    
+                  <p> {{panier.name}} </p>
+                  <p>Prix: {{panier.prixht}}€ H.T </p>
+                  <button @click="suppr(index)">Suppr</button>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
+                  <h4>Total:</h4>
+                  <span>  H.T : {{ totalht }}€ </span>
+                  <span> TVA 20%: {{ tva }}€ </span>
+                  <span> {{ prixttc }} € TTC </span>
+              </div>
+                <button class="btn btn-success" @click="commandShow =! commandShow" >🤗 Commander 🤗</button>
+                <Formulaire v-show="commandShow"></Formulaire>
+            </div>
+      </div>
+      <div class="mjjBlockPanier">
+        <a href="#"><img class="iconePanier" @click="show =! show" src="./assets/images/panier.png" alt="icone panier" title="panier"/></a>
+        <span class="panierLgt"> {{paniers.length}} </span>
+      </div>  
+
+  </div>
+</div>`,
+
+  components: { tooglecards2, Formulaire },
+  data: function () {
+    return {
+      livres: [
+        {
+          id: 0,
+          name: "Baisers de sirène",
+          image: "./assets/images/arrBoutique/mangaxbaisersdesirene.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "23/08/2007",
+          prixht: 27.40,
+        }, {
+          id: 1,
+          name: "Quand un ange s'invite",
+          image: "./assets/images/arrBoutique/mangax03_39295.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 11.99,
+        }, {
+          id: 2,
+          name: "Nami S.O.S.!",
+          image: "./assets/images/arrBoutique/mangax05_77372.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 17.45,
+        }, {
+          id: 3,
+          name: "Le baiser du diable",
+          image: "./assets/images/arrBoutique/mangax06_47802.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 15.60,
+        }, {
+          id: 4,
+          name: "Lunes et petites cerises",
+          image: "./assets/images/arrBoutique/mangaxlunesetpetitescerises.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 23.00,
+        }, {
+          id: 5,
+          name: "La Vie Ordinaire de Nagi-Chan",
+          image: "./assets/images/arrBoutique/mangaxlavieordinairedenagichan.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 12.90,
+        }, {
+          id: 6,
+          name: "Le coffret de Jade",
+          image: "./assets/images/arrBoutique/mangax05_77372.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 45.00,
+        }, {
+          id: 7,
+          name: "Essayez-moi",
+          image: "./assets/images/arrBoutique/mangax10_47801.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 23.00,
+        }, {
+          id: 8,
+          name: "Kiss me kiss you",
+          image: "./assets/images/arrBoutique/mangax11_42687.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 23.00,
+        }, {
+          id: 9,
+          name: "Les copines du club de natation",
+          image: "./assets/images/arrBoutique/mangax14_47799.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 52.00,
+        }, {
+          id: 10,
+          name: "Dark Wirbel : Conflit",
+          image: "./assets/images/arrBoutique/mangax15_47798.jpg",
+          categorie: "mangaX",
+          quantite: 5,
+          dateParution: "19/02/2016",
+          prixht: 12.50,
+        },],
+
+      couleur: "",
+      couleur1: "",
+      prixttc: 0,
+      tva: 0,
+      totalht: 0,
+      show: false,
+      commandShow: false,
+      paniers: [],
+
 
     }
-}
+  },
+  methods: {
+    addPanier: function (index) {
+      this.livres[index].quantite--;
+      this.paniers.push(this.livres[index]);
+      console.log(this.paniers);
+      this.total();
+      this.saveLs();
+    },
+
+    suppr: function (index) {
+      this.paniers.splice(index, 1);
+      this.total();
+      this.saveLs();
+
+    },
+    total: function () {
+      this.prixttc = 0;
+      this.totalht = 0;
+      this.paniers.forEach(element => {
+        Math.round((this.totalht += element.prixht) * 100) / 100;
+      });
+      this.prixttc = Number(Math.round((this.totalht * 1.2) * 100) / 100);
+      this.tva = Number(Math.round((this.prixttc - this.totalht) * 100) / 100);
+    },
+    /**Recupere en local storage */
+    getLs: function () {
+      if (!window.localStorage.paniers) {
+        window.localStorage.setItem("paniers", "");
+      } else {
+        this.paniers = JSON.parse(window.localStorage.getItem('paniers'));
+      }
+    },
+    /**Enregistre en local storage */
+    saveLs: function () {
+      window.localStorage.setItem('paniers', JSON.stringify(this.paniers));
+    },
+
+  },
+};
+
 /******************ROUTES*******************/
 var routes = [
   { path: "/Acceuil", component: acceuil },
   { path: "/Boutique", component: boutique },
   { path: "/Contacts", component: contacts },
   { path: "/LivreOr", component: livreOr },
+  { path: "/ArrBoutique", component: annexe },
 ];
 const router = new VueRouter({
   routes: routes,
@@ -813,39 +1096,8 @@ var vm = new Vue({
   el: "#app",
 
   data: {
-
-  },
-
-  methods: {
-
-    addBook() {
-      if (this.isAText(this.currentName) && this.isANumber(this.currentNote)) {
-        this.classe.push({ name: this.currentName, note: this.currentNote });
-        this.notes.push(this.currentNote);
-      }
-    },
-    isAText(txt) {
-      if (isNaN(txt) && txt !== "null") {
-        this.plcHolderName = "Nom";
-        this.bool1 = false;
-        return true;
-      } else {
-        this.plcHolderName = "Entrez un nom valide";
-        this.bool1 = true;
-        return false;
-      }
-    },
-    isANumber(nb) {
-      if (!isNaN(nb) && nb >= 0 && nb <= 20 && nb !== "") {
-        this.plcHolderNote = "Note";
-        this.bool2 = false;
-        return true;
-      } else {
-        this.plcHolderNote = "Entrez votre age";
-        this.bool2 = true;
-        return false;
-      }
-    },
+    validShow: true,
+    darkBoutique: false,
   },
 
   router: router,
