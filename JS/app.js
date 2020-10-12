@@ -14,6 +14,8 @@ var acceuil = {
       <div class="carousel-item active">
         <img src="assets/images/dix-livres.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
+          <router-link to="/boutique"><a class="btn btn-lg btn-dark" role="button">Plus d'info</a>
+          </router-link>
         </div>
       </div>
       <div class="carousel-item">
@@ -45,11 +47,11 @@ var acceuil = {
   <!--Presentation jumbotron-->
   <div class="jumbotron mjjJumbo">    
     <h1 class="display-4"><b>Digital Books!</b></h1>
-    <p class="lead"><b>Un service prêt-porter</b></p>
+    <p class="lead"><b>Un service de qualité</b></p>
     <hr class="my-4">
     <transition name="jumboShow">
       <div v-show="jumboShow">
-        <p><b>Nous vous apportons un service prêts-à-porter avec nos livraisons dans les 48 heures!</b></p>
+        <p><b>Nous vous apportons un service de qualité avec nos livraisons dans les 48 heures!</b></p>
         <a @click="jumboShow =! jumboShow" class="btn btn-primary btn-lg" role="button">Qui sommes-nous?</a>
       </div>
     </transition>
@@ -202,7 +204,7 @@ var boutique = {
 <div class="container-fluid boutique" v-on:mousemove.once="getLs(),total()">
     <h1 class="text-center"><u>Nos livres</u></h1>
   <div class="d-flex flex-column col-3 mjjsearchBar">
-    <label class="text-white " for="recherche"><b>manga - thriller - </b></label>
+    <label class="text-white " for="recherche"><b>manga - thriller - fantastique</b></label>
     <input v-model="search" placeholder="Rechercher" id="recherche">
   </div>
   <div class="row">
@@ -231,7 +233,7 @@ var boutique = {
                   <img :src="panier.image" :title="panier.name" />    
                   <p> {{panier.name}} </p>
                   <p>Prix: {{panier.prixht}}€ H.T </p>
-                  <button @click="suppr(index)">Suppr</button>
+                  <img @click=suppr(index) src="./assets/images/x_en_3D.png">
               </div>
               <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
                   <h4>Total:</h4>
@@ -914,7 +916,7 @@ var annexe = {
                   <img :src="panier.image" :title="panier.name" />    
                   <p> {{panier.name}} </p>
                   <p>Prix: {{panier.prixht}}€ H.T </p>
-                  <button @click="suppr(index)">Suppr</button>
+                  <img @click=suppr(index) src="./assets/images/x_en_3D.png">
               </div>
               <div class="d-flex align-items-center justify-content-between mjjPanier" id="mjjancre"  >
                   <h4>Total:</h4>
