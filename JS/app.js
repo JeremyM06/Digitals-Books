@@ -1,5 +1,5 @@
-/*****************************ACCEUIL*****************************/
-var acceuil = {
+/*****************************ACCUEIL*****************************/
+var accueil = {
   template: `
   <div class="d-flex flex-column align-items-center">
   <!--Carousel-->    
@@ -103,194 +103,7 @@ var tooglecards = {
     },
 }
 
-/********  FORMULAIRE  *********/
-/*14/10/2020 Integration dans la boutique (n'est plus un component)=> facilite la suppression panier apres achat*/
-/*var Formulaire = {
-  template: `<div>
-  <h1>Votre commande a été bien prise en compte</h1>
-  <p class="fontForm">Veuillez saisir vos coordonnées ci-dessous</p>
-  <hr>
-  <transition name="fondu" class="row">
-  <div class="col mjjFormValid" v-show="!show">
-  <h2>Votre commande a bien été prise en compte. Merci 📚 😊 📚</h2>
-  <button @click="show =! show"  type="button" class="btn btn-primary" >Retour</button>
 
-  </div>
-  </transition>
-
-  <transition name="fondu">  
-  <form @submit.prevent="show =! show" v-show="show">  
-  <div class="form-row">
-  <div class="form-group col-md-6">
-<input v-model="nom" type="text" class="form-control" @keyup="createNewReferenceDe(),verifForm()" placeholder="nom" id="nom">
-<p v-if="errors.nom" class="alert alert-danger">      
-  {{ errors.nom }}</p>                                
-</div></div>
-
-
-<div class="form-row">
-  <div class="form-group col-md-6">
-  <input v-model="adresse" type="text" @keyup="createNewReferenceDe(),verifForm()" class="form-control" id="adresse" placeholder="Adresse">
-  <p v-if="errors.adresse" class="alert alert-danger">      
-  {{ errors.adresse }}</p>                              
-  </div>    
-</div>
-
-<div class="form-row" @click="createNewReferenceDe(),verifForm()">
-  <div class="form-group col-md-6">
-  <select class="form-control" v-model="cdpostal">
-    <option value="">x-- SELECTIONNER CODE POSTALE --x</option>
-    <option v-for="recher in rechers" :key="recher.id">
-    {{ recher.cdpostal }}
-    </option>
-  </select>
-  <p v-if="errors.cdpostal" class="alert alert-danger">      
-  {{ errors.cdpostal }}</p>                                  
-  </div>
-  </div>
-
-
-<div class="form-row"  @click="createNewReferenceDe(),verifForm()">
-<div class="form-group col-md-6">
-<select class="form-control" v-model="ville">
-      <option value="">x-- SELECTIONNER UNE VILLE --x</option>
-      <option v-for="recher in rechers" :key="recher.id">
-      {{ recher.ville }}
-      </option>
-  </select>
-<p v-if="errors.ville" class="alert alert-danger">      
-{{ errors.ville }}</p>                                  
-</div>
-</div>
-
-<!--MG-D09-->
-<div >                
- <button type="submit" @click="totalAfterBuy()" class="btn btn-primary":disabled="isDisabled">Envoyer</button> 
-</div>
-<!--MG-F09-->
-</form>
-</transition>
-</div>`,*/
-/* methods: {*/
-/**Recupere en local storage */
-/*   getLsPanier: function () {
-     if (!window.localStorage.paniers) {
-       window.localStorage.setItem("paniers", "");
-     } else {
-       this.paniers = JSON.parse(window.localStorage.getItem('paniers'));
-     }
-   },
-
-
-   createNewReferenceDe() {
-     //reinitialisation du tableau des erreurs
-     this.errors = {};
-     this.reference = "";
-     this.Indout = true;   //MG 09
-
-     //Verifier si tous les champs nécessaires sont renseignés
-
-     if (this.nom == "") {                                   //MG 09
-       this.errors.nom = "Nom: obligatoire !!";
-       this.Indout = false;   //MG 11
-
-     } else if ((!isNaN(this.nom))) {
-       this.errors.nom = "Nom: Erreur de saisi !!";
-       this.Indout = false;   //MG 11
-     } else {
-       this.nameOk = true;
-     }
-
-     if (this.adresse == "") {                                   //MG 09
-       this.errors.adresse = "Adresse: obligatoire !!";
-       this.Indout = false;   //MG 11
-     } else if ((!isNaN(this.adresse))) {
-       this.errors.adresse = "adresse: Erreur de saisi !!";
-       this.Indout = false;   //MG 11
-     } else {
-       this.adressOk = true;
-     }
-
-     if (this.cdpostal === null) {
-       this.errors.cdpostal = "code postale: obligatoire !!";
-       this.Indout = false;   //MG 11
-
-     } else if ((isNaN(this.cdpostal))) {
-       this.errors.cdpostal = "code postale: Erreur de saisi !!";
-       this.Indout = false;   //MG 11
-     } else {
-       this.postalOk = true;
-     }
-
-
-     if (this.ville == "") {                                   //MG 09
-       this.errors.ville = "ville: obligatoire !!";
-       this.Indout = false;   //MG 11
-
-     } else if ((!isNaN(this.ville))) {
-       this.errors.ville = "ville: Erreur de saisi !! !!";
-       this.Indout = false;   //MG 11
-     } else {
-       this.villeOk = true;
-
-     }
-
-
-
-
-     console.log(this.errors);  //MG 09
-     console.log(this.Indout);  //MG 09
-   },
-   verifForm: function () {
-     if (this.nameOk && this.adressOk && this.postalOk && this.villeOk) {
-       this.isDisabled = false;
-       console.log(this.nameOk, this.adressOk, this.postalOk, this.villeOk)
-     }
-   },*/
-
-/**Suppression panier après achat*/
-/*    totalAfterBuy: function () {
-
-      this.paniers.forEach(element => {
-        this.paniers.splice(element, 1);
-      });
-      this.prixttc = 0;
-      this.totalht = 0;
-      this.tva = 0;
-      this.saveLsPanier();
-    },*/
-/**Enregistre en local storage */
-/*   saveLsPanier: function () {
-     window.localStorage.setItem('paniers', JSON.stringify(this.paniers));
-   },
- },
-
- data: function () {
-   return {
-     rechers: [
-       { id: 0, ville: "Nice", cdpostal: '06000', },
-       { id: 1, ville: "Cagnes sur mer", cdpostal: '06800', },
-       { id: 2, ville: "Antibes", cdpostal: '06600', },
-     ],
-     paniers: [],
-     btnOut: true,
-     nameOk: false,
-     adressOk: false,
-     postalOk: false,
-     villeOk: false,
-     Indout: false,
-     isDisabled: true,
-     show: true,
-     nom: "",
-     adresse: "",
-     cdpostal: null,
-     ville: "",
-     errors: "",
-     reference: null,
-   }
-
- }
-};*/
 /********************  BOUTIQUE  ********************/
 var boutique = {
   template: `
@@ -1938,7 +1751,7 @@ var annexe = {
 
 /******************ROUTES*******************/
 var routes = [
-  { path: "/Acceuil", component: acceuil },
+  { path: "/Accueil", component: accueil },
   { path: "/Boutique", component: boutique },
   { path: "/Contacts", component: contacts },
   { path: "/LivreOr", component: livreOr },

@@ -18,7 +18,7 @@
             <ul class="nav justify-content-around fixed-top mjj-nav">
                 <div>
                     <li class="nav-item">
-                        <router-link class="nav-link active" to="/Acceuil"><img src="./assets/images/digitalB1.png"
+                        <router-link class="nav-link active" to="/Accueil"><img src="./assets/images/digitalB1.png"
                                 alt="">
                         </router-link>
                     </li>
@@ -43,12 +43,12 @@
         <main class="container-fluid">
             <div class=" mjjVerifAcceuil" v-show="validShow">
                 <h1 class="text-center">Nous devons vérifier votre âge pour<br>certaines categories...</h1>
-                <router-link class="nav-link active" to="/Acceuil"><button
+                <router-link class="nav-link active" to="/Accueil"><button
                         @click="validShow = false, darkBoutique=true">Je suis Majeur
                     </button>
                 </router-link>
 
-                <router-link class="nav-link active" to="/Acceuil">
+                <router-link class="nav-link active" to="/Accueil">
                     <button @click="validShow = false">Je suis Mineur</button>
                 </router-link>
             </div>
